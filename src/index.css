@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: "IBM Plex Sans Thai", sans-serif, "Urbanist", sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --bg_light_grey: #f6f6f6;
+  --bg_white: #fff;
+  --primary: #455593;
+  --secondary: #fd5c63;
+  --text_light: #f2f2f3;
+  --text_dark_grey: #3e3d3e;
+  --text_black: #232324;
+  --input_boarder: #dcdcdc;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg_light_grey);
+}
