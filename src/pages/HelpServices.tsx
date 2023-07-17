@@ -1,9 +1,7 @@
-import React from 'react'
+import PageHeader from "../components/PageHeader";
 
 const HelpServices = () => {
-  return (
-    <div>HelpServices</div>
-  )
-}
+  return <PageHeader name="ศูนย์ช่วยเหลือ" />;
+};
 
-export default HelpServices
+export default HelpServices;

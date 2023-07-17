@@ -1,46 +1,29 @@
-/* primary color button  */
-.buttonBlue {
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputBox {
   padding: 8px 10px;
-  text-align: center;
-  width: auto;
-  border: solid 2px;
   border-radius: 15px;
-  background-color: var(--primary);
-  color: var(--text_light);
+  background-color: var(--bg_white);
+  color: var(--text_black);
+  border: var(--input_boarder) solid 2px;
   cursor: pointer;
   transition: 0.3s ease;
 }
 
-.buttonBlue:hover {
-  background-color: var(--bg_white);
-  color: var(--text_black);
-  border: var(--primary) solid 2px;
-}
-
-/* primary color boarder line button  */
-.buttonBlueLine {
-  padding: 8px 10px;
-  text-align: center;
-  width: auto;
-  border-radius: 15px;
-  background-color: var(--bg_white);
-  color: var(--text_black);
-  border: var(--primary) solid 2px;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.buttonBlueLine:hover {
-  border: solid 2px;
-  background-color: var(--primary);
-  color: var(--text_light);
+.inputBox:focus {
+  border: #a8a5a5 solid 2px;
+  outline: none;
 }
 
 /* secondery color button  */
 .buttonPink {
   padding: 8px 10px;
   text-align: center;
-  width: auto;
+  width: 150px;
   border: solid 2px;
   border-radius: 15px;
   background-color: var(--secondary);
@@ -59,7 +42,7 @@
 .buttonPinkLine {
   padding: 8px 10px;
   text-align: center;
-  width: auto;
+  width: 150px;
   border-radius: 15px;
   background-color: var(--bg_white);
   color: var(--text_black);
@@ -75,18 +58,48 @@
   color: var(--text_light);
 }
 
-.buttonCancel {
+.buttonGoogle {
   padding: 8px 10px;
   text-align: center;
-  width: auto;
   border-radius: 15px;
-  background-color: var(--text_light);
+  background-color: var(--bg_white);
   color: var(--text_black);
+  border: var(--input_boarder) solid 2px;
   cursor: pointer;
   transition: 0.3s ease;
 }
 
-.buttonCancel:hover {
-  background-color: #929292;
-  color: var(--text_light);
+/* Cancel button  */
+.buttonGoogle:hover {
+  border: #a8a5a5 solid 2px;
+}
+
+.hrLines:before {
+  content: " ";
+  display: block;
+  height: 1px;
+  width: 80px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  background: #a8a5a5;
+}
+
+.hrLines {
+  position: relative;
+  /*  new lines  */
+  color: #a8a5a5;
+  max-width: 500px;
+  text-align: center;
+}
+
+.hrLines:after {
+  content: " ";
+  height: 1px;
+  width: 80px;
+  background: #a8a5a5;
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 0;
 }
