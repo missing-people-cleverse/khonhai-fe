@@ -9,13 +9,13 @@
   border-radius: 15px;
   background-color: var(--bg_white);
   color: var(--text_black);
-  border: var(--input_boarder) solid 2px;
+  border: var(--input_boarder) solid 1px;
   cursor: pointer;
   transition: 0.3s ease;
 }
 
 .inputBox:focus {
-  border: #a8a5a5 solid 2px;
+  border: var(--primary) solid 1px;
   outline: none;
 }
 

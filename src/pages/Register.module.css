@@ -1,0 +1,48 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: คpx;
+}
+
+.inputBox {
+  padding: 8px 10px;
+  border-radius: 15px;
+  background-color: var(--bg_white);
+  color: var(--text_black);
+  border: var(--input_boarder) solid 1px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.inputBox:focus {
+  border: var(--primary) solid 1px;
+  outline: none;
+}
+
+/* secondery color button  */
+.buttonPink {
+  padding: 8px 10px;
+  text-align: center;
+  width: auto;
+  border: solid 2px;
+  border-radius: 15px;
+  background-color: var(--secondary);
+  color: var(--text_light);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.buttonPink:hover {
+  background-color: var(--bg_white);
+  color: var(--text_black);
+  border: var(--secondary) solid 2px;
+}
+
+.buttonDisabled {
+  padding: 8px 10px;
+  text-align: center;
+  width: auto;
+  border-radius: 15px;
+  background-color: var(--input_boarder);
+  color: var(--text_dark_grey);
+}

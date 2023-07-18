@@ -6,7 +6,7 @@ const Login = () => {
   return (
     <>
       <PageHeader name="เข้าสู่ระบบ" />
-      <div className="bg-bg_white w-96 mx-auto mt-10">
+      <div className="bg-bg_white w-96 mx-auto mt-10 mb-20">
         <form className="flex flex-col gap-4 p-8">
           <div className={classes.form}>
             <label>ชื่อผู้ใช้</label>
@@ -15,6 +15,7 @@ const Login = () => {
               id="username"
               placeholder="ชื่อผู้ใช้"
               className={classes.inputBox}
+              required
             />
           </div>
           <div className={classes.form}>
@@ -24,6 +25,7 @@ const Login = () => {
               id="username"
               placeholder="รหัสผ่าน"
               className={classes.inputBox}
+              required
             />
           </div>
           <div className="flex flex-row justify-between">
