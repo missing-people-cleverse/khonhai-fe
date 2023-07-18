@@ -8,6 +8,7 @@ import MPall from "./pages/MPall";
 import HelpServices from "./pages/HelpServices";
 import CreateContent from "./pages/CreateContent";
 import Footer from "./components/Footer";
+import MPindividual from "./pages/MPindividual";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/all" element={<MPall />} />
+          <Route path="/content" element={<MPall />} />
+          <Route path="/content/1" element={<MPindividual />} />
           <Route path="/help" element={<HelpServices />} />
 
           <Route path="/createcontent" element={<CreateContent />} />

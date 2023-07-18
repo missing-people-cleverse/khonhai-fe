@@ -17,6 +17,7 @@ export default {
         text_black: "#232324",
         valid_green: "#0A7923",
         input_boarder: "#DCDCDC",
+        input_boarderko: "#898989",
       },
     },
   },

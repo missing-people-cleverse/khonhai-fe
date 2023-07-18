@@ -26,7 +26,7 @@ const Navbar = ({ children }: AuthProviderProps) => {
               หน้าแรก
             </NavLink>
             <NavLink
-              to="/all"
+              to="/content"
               className={({ isActive }) =>
                 isActive ? "font-bold" : "hover:font-bold"
               }

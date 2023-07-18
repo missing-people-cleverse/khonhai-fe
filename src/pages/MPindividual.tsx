@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const MPindividual = () => {
   return (
-    <div>MPindividual</div>
-  )
-}
+    <>
+      <div>MPindividual</div>
+    </>
+  );
+};
 
-export default MPindividual
+export default MPindividual;
