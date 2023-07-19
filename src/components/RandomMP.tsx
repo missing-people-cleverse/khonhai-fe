@@ -4,30 +4,37 @@ import "react-multi-carousel/lib/styles.css";
 
 const data = [
   {
+    id: 1,
     name: "จอน",
     place: "สวนลุม",
   },
   {
+    id: 2,
     name: "จิ๋ว",
     place: "สวนหลวง",
   },
   {
+    id: 3,
     name: "แดง",
     place: "สวนจตุจักร",
   },
   {
+    id: 4,
     name: "เหมียว",
     place: "พระรามไนน์",
   },
   {
+    id: 5,
     name: "เจ้าขาว",
     place: "หลังบ้าน",
   },
   {
+    id: 6,
     name: "ชิโระ",
     place: "หน้าบ้าน",
   },
   {
+    id: 7,
     name: "อ้วน",
     place: "ร้านหมูกะทะ",
   },
@@ -69,7 +76,7 @@ const RandomMP = () => {
         >
           {data.map((person) => (
             <div className="mx-3 overflow-hidden">
-              <RandomMPCard key={person.name} {...person} />
+              <RandomMPCard key={person.id} {...person} />
             </div>
           ))}
         </Carousel>

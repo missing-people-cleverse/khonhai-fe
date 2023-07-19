@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../context/AuthProvider";
 
 const Banner = () => {
-  const isLoggedIn: boolean = true;
+  const { isLoggedIn } = useAuth();
 
   return (
     <div className="flex flex-row justify-between items-center py-8 w-10/12 mx-auto">

@@ -1,10 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import { ChildProps } from "../types/auth.context";
+import { useAuth } from "../context/AuthProvider";
 
-export type AuthProviderProps = ChildProps;
+type AuthProviderProps = ChildProps;
 
 const Navbar = ({ children }: AuthProviderProps) => {
-  const isLoggedIn: boolean = false;
+  const { isLoggedIn, logout, ...userInfo } = useAuth();
+
   return (
     <>
       <header className="bg-bg_white sticky top-0 z-50">
@@ -52,8 +54,15 @@ const Navbar = ({ children }: AuthProviderProps) => {
             </nav>
           ) : (
             <nav className="flex flex-row gap-5">
-              <p>Welcome user</p>
-              <p>Logout</p>
+              <p className="font-bold pt-2">
+                ยินดีต้อนรับ{" "}
+                <span className="text-secondary_shadow">
+                  คุณ{userInfo.user}
+                </span>
+              </p>
+              <a className="btn-blue" onClick={logout}>
+                ออกจากระบบ
+              </a>
             </nav>
           )}
         </div>
