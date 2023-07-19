@@ -3,7 +3,7 @@ import classes from "./Button.module.css";
 
 const Banner = () => {
   return (
-    <div className="flex flex-row justify-between items-center py-10 w-10/12 mx-auto">
+    <div className="flex flex-row justify-between items-center py-8 w-10/12 mx-auto">
       <div className="flex flex-col gap-3">
         <h1 className="font-bold text-4xl">
           ยังมีคนที่รอคอยคนที่รักอย่างมีความหวัง

@@ -10,7 +10,7 @@ const RandomMPCard = ({ name, place }: IBriefContent) => {
     <>
       <div className={classes.card}>
         <img
-          src="/mp1.jpeg"
+          src="/mp2.jpeg"
           alt="missing people"
           className={classes.thumbnail}
         />

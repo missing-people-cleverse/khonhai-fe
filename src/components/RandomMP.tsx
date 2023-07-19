@@ -5,36 +5,32 @@ import classes from "./RandomMp.module.css";
 
 const data = [
   {
-    name: "simon",
-    place: "bangkok",
+    name: "จอน",
+    place: "สวนลุม",
   },
   {
-    name: "neo",
-    place: "rama9",
+    name: "จิ๋ว",
+    place: "สวนหลวง",
   },
   {
-    name: "morpheus",
-    place: "nan",
+    name: "แดง",
+    place: "สวนจตุจักร",
   },
   {
-    name: "neo",
-    place: "rama9",
+    name: "เหมียว",
+    place: "พระรามไนน์",
   },
   {
-    name: "morpheus",
-    place: "nan",
+    name: "เจ้าขาว",
+    place: "หลังบ้าน",
   },
   {
-    name: "morpheus",
-    place: "nan",
+    name: "ชิโระ",
+    place: "หน้าบ้าน",
   },
   {
-    name: "neo",
-    place: "rama9",
-  },
-  {
-    name: "morpheus",
-    place: "nan",
+    name: "อ้วน",
+    place: "ร้านหมูกะทะ",
   },
 ];
 
@@ -60,7 +56,7 @@ const RandomMP = () => {
   // useContentList
   return (
     <div className="bg-primary ">
-      <div className="flex flex-row gap-5 justify-between items-center py-8 w-10/12 mx-auto">
+      <div className="flex flex-row gap-5 justify-between items-center py-8 w-5/6 mx-auto">
         <Carousel
           infinite={true}
           autoPlay={true}
@@ -68,12 +64,12 @@ const RandomMP = () => {
           swipeable={true}
           containerClass={classes.carouselontainer}
           itemClass={classes.carouselItem}
-          autoPlaySpeed={5000}
+          autoPlaySpeed={6000}
           responsive={responsive}
           partialVisible={false}
         >
           {data.map((person) => (
-            <div className="mx-10 overflow-hidden">
+            <div className="mx-3 overflow-hidden">
               <RandomMPCard key={person.name} {...person} />
             </div>
           ))}
