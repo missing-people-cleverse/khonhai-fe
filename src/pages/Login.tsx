@@ -6,7 +6,7 @@ const Login = () => {
   return (
     <>
       <PageHeader name="เข้าสู่ระบบ" />
-      <div className="bg-bg_white w-96 mx-auto mt-10 mb-20">
+      <div className="bg-bg_white w-96 mx-auto mt-10 mb-[200px]">
         <form className="flex flex-col gap-4 p-8">
           <div className={classes.form}>
             <label>ชื่อผู้ใช้</label>

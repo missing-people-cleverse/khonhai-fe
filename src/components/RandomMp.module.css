@@ -1,0 +1,10 @@
+.carouselontainer {
+  padding: 20px;
+  width: 1000px;
+}
+
+.carouselItem {
+  max-width: 300px;
+  min-width: 300px;
+  width: 100%;
+}

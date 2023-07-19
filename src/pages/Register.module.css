@@ -9,7 +9,7 @@
   border-radius: 15px;
   background-color: var(--bg_white);
   color: var(--text_black);
-  border: var(--input_boarder) solid 1px;
+  border: var(--input_border) solid 1px;
   cursor: pointer;
   transition: 0.3s ease;
 }
@@ -43,6 +43,6 @@
   text-align: center;
   width: auto;
   border-radius: 15px;
-  background-color: var(--input_boarder);
+  background-color: var(--input_border);
   color: var(--text_dark_grey);
 }

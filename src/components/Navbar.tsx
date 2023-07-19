@@ -8,7 +8,7 @@ const Navbar = ({ children }: AuthProviderProps) => {
   const isLoggedIn: boolean = false;
   return (
     <>
-      <header className="bg-bg_white sticky top-0 ">
+      <header className="bg-bg_white sticky top-0 z-50">
         <div className="flex flex-row flex-wrap justify-between items-center py-2 w-10/12 mx-auto">
           <div>
             <Link to="/">
