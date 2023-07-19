@@ -156,4 +156,33 @@ body {
     border: var(--primary) solid 1px;
     outline: none;
   }
+
+  .hr-line:before {
+    content: " ";
+    display: block;
+    height: 1px;
+    width: 80px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    background: #a8a5a5;
+  }
+
+  .hr-line {
+    position: relative;
+    color: #a8a5a5;
+    max-width: 500px;
+    text-align: center;
+  }
+
+  .hr-line:after {
+    content: " ";
+    height: 1px;
+    width: 80px;
+    background: #a8a5a5;
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+  }
 }

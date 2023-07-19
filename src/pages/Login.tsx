@@ -1,5 +1,4 @@
 import PageHeader from "../components/PageHeader";
-import classes from "./Login.module.css";
 import { NavLink } from "react-router-dom";
 
 const Login = () => {
@@ -36,7 +35,7 @@ const Login = () => {
               ลงทะเบียน
             </NavLink>
           </div>
-          <p className={classes.hrLines}>เข้าสู่ระบบผ่านวิธีอื่น</p>
+          <p className="hr-line">เข้าสู่ระบบผ่านวิธีอื่น</p>
           <div className="btn-google">
             <button className="flex flex-row gap-2 items-center mx-auto">
               <img src="/google.svg" alt="google symbol" />
