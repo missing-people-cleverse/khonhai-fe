@@ -1,9 +1,11 @@
-import React from 'react'
+import PageHeader from "../components/PageHeader";
 
 const CreateContent = () => {
   return (
-    <div>CreateContent</div>
-  )
-}
+    <>
+      <PageHeader name="แจ้งคนหาย" />
+    </>
+  );
+};
 
-export default CreateContent
+export default CreateContent;

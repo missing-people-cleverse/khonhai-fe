@@ -1,6 +1,5 @@
 import { useState } from "react";
 import PageHeader from "../components/PageHeader";
-import classes from "./Register.module.css";
 import {
   Checkbox,
   FormControl,
@@ -49,64 +48,64 @@ const Register = () => {
         <section className="flex flex-row gap-20 p-10">
           <p className="text-primary font-semibold text-xl">ข้อมูลส่วนตัว</p>
           <form className="flex flex-col gap-4 ">
-            <div className={classes.form}>
+            <div className="form-user">
               <label>ชื่อผู้ใช้</label>
               <input
                 type="text"
                 id="username"
                 placeholder="ชื่อผู้ใช้"
-                className={classes.inputBox}
+                className="inputBox-user"
               />
             </div>
             <div className="flex flex-row gap-6">
-              <div className={classes.form}>
+              <div className="form-user">
                 <label>ชื่อ</label>
                 <input
                   type="text"
                   placeholder="ชื่อ"
-                  className={classes.inputBox}
+                  className="inputBox-user"
                 />
               </div>
-              <div className={classes.form}>
+              <div className="form-user">
                 <label>นามสกุล</label>
                 <input
                   type="text"
                   placeholder="นามสกุล"
-                  className={classes.inputBox}
+                  className="inputBox-user"
                 />
               </div>
             </div>
-            <div className={classes.form}>
+            <div className="form-user">
               <label>อีเมล</label>
               <input
                 type="email"
                 placeholder="อีเมล"
-                className={classes.inputBox}
+                className="inputBox-user"
               />
             </div>
-            <div className={classes.form}>
+            <div className="form-user">
               <label>เบอร์โทรศัพท์</label>
               <input
                 type="text"
                 placeholder="เบอร์โทรศัพท์"
-                className={classes.inputBox}
+                className="inputBox-user"
               />
             </div>
             <div className="flex flex-row gap-6">
-              <div className={classes.form}>
+              <div className="form-user">
                 <label>รหัสผ่าน</label>
                 <input
                   type="password"
                   placeholder="รหัสผ่าน"
-                  className={classes.inputBox}
+                  className="inputBox-user"
                 />
               </div>
-              <div className={classes.form}>
+              <div className="form-user">
                 <label>ยืนยันรหัสผ่าน</label>
                 <input
                   type="password"
                   placeholder="ยืนยันรหัสผ่าน"
-                  className={classes.inputBox}
+                  className="inputBox-user"
                 />
               </div>
             </div>
@@ -117,16 +116,16 @@ const Register = () => {
             ข้อมูลที่อยู่อาศัย
           </p>
           <form className="flex flex-col gap-4 ">
-            <div className={classes.form}>
+            <div className="form-user">
               <label>ที่อยู่</label>
               <input
                 type="text"
                 placeholder="ที่อยู่"
-                className={classes.inputBox}
+                className="inputBox-user"
               />
             </div>
             <div className="flex flex-row gap-6">
-              <div className={classes.form}>
+              <div className="form-user">
                 <label>จังหวัด</label>
                 <FormControl sx={{ m: 0, width: 200 }}>
                   <Select
@@ -142,12 +141,12 @@ const Register = () => {
                   </Select>
                 </FormControl>
               </div>
-              <div className={classes.form}>
+              <div className="form-user">
                 <label>รหัสไปรษณีย์</label>
                 <input
                   type="text"
                   placeholder="รหัสไปรษณีย์"
-                  className={classes.inputBox}
+                  className="inputBox-user"
                 />
               </div>
             </div>
@@ -170,9 +169,7 @@ const Register = () => {
           />
         </FormGroup>
         <section className="py-8 w-32 ml-[40rem]">
-          <div
-            className={!disabled ? classes.buttonPink : classes.buttonDisabled}
-          >
+          <div className={!disabled ? "btn-pink" : "btn-disabled"}>
             <button type="submit" disabled={disabled}>
               ลงทะเบียน
             </button>

@@ -1,7 +1,6 @@
 import RandomMPCard from "./RandomMPCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import classes from "./RandomMp.module.css";
 
 const data = [
   {
@@ -62,8 +61,8 @@ const RandomMP = () => {
           autoPlay={true}
           draggable={true}
           swipeable={true}
-          containerClass={classes.carouselontainer}
-          itemClass={classes.carouselItem}
+          containerClass="carouselontainer"
+          itemClass="carouselItem"
           autoPlaySpeed={6000}
           responsive={responsive}
           partialVisible={false}

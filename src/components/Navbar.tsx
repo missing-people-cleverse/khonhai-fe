@@ -1,6 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
 import { ChildProps } from "../types/auth.context";
-import classes from "./Button.module.css";
 
 export type AuthProviderProps = ChildProps;
 
@@ -44,10 +43,10 @@ const Navbar = ({ children }: AuthProviderProps) => {
           </nav>
           {!isLoggedIn ? (
             <nav className="flex flex-row gap-5">
-              <NavLink to="/login" className={classes.buttonBlue}>
+              <NavLink to="/login" className="btn-blue">
                 เข้าสู่ระบบ
               </NavLink>
-              <NavLink to="/register" className={classes.buttonBlue}>
+              <NavLink to="/register" className="btn-blue">
                 สมัครสมาชิก
               </NavLink>
             </nav>
