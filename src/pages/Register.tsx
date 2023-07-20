@@ -14,9 +14,7 @@ import {
 } from "@mui/material";
 import { host } from "../constant";
 import { useNavigate } from "react-router-dom";
-
-//TODO: identify exact province name to select
-const provinces: string[] = ["BANGKOK", "Nan", "Ratchaburi"];
+import { provinceList } from "../data/SelectableData";
 
 const StyleInput = styled(InputBase)(({ theme }) => ({
   "& .MuiInputBase-input": {
@@ -81,14 +79,16 @@ const Register = () => {
           },
         });
         const data = await res.json();
-        toast.success("ลงทะเบียนเรียบร้อยแล้ว");
+        if (data.statusCode !== 201) {
+          throw new Error(data.message);
+        }
+        toast.success("ลงทะเบียนสำเร็จ");
         navigate("/login");
         return data;
       } else {
         toast.error("ตรวจสอบรหัสผ่านอีกครั้ง");
       }
     } catch (err: any) {
-      // TODO: reconsider how to handle error
       throw new Error(err.message);
     }
   };
@@ -204,7 +204,7 @@ const Register = () => {
                     onChange={handleChange}
                     input={<StyleInput />}
                   >
-                    {provinces.map((province) => (
+                    {provinceList.map((province) => (
                       <MenuItem key={province} value={province}>
                         {province}
                       </MenuItem>

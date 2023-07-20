@@ -6,9 +6,8 @@ export interface IAuthContext {
   token: string | null;
   isLoggedIn: boolean;
   login: (username: string, password: string) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
 
-  // Optional, but if we're able to implement below function, it would be helpful :)
   // getAuthHeader: () => FetchAuthorizationHeader
   // isOwnPost: (c: ContentDto) => boolean
 }

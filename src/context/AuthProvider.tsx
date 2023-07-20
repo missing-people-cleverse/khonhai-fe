@@ -6,13 +6,20 @@ import { host } from "../constant";
 export type AuthProviderProps = ChildProps;
 type UserInfo = Pick<IAuthContext, "id" | "user" | "token">;
 
-const retrieveUserData = (token: string) =>
-  fetch(`${host}/user`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  }).then((res) => res.json());
+const retrieveUserData = async (token: string) => {
+  try {
+    const res = await fetch(`${host}/user/`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await res.json();
+    return data.user;
+  } catch (err: any) {
+    throw new Error(err.message);
+  }
+};
 
 const AuthContext = createContext<IAuthContext | null>(null);
 
@@ -46,7 +53,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       });
 
       const data = await res.json();
-      if (data.statusCode === 401) {
+      if (data.statusCode !== 201) {
         throw new Error(data.message);
       }
 
@@ -65,10 +72,25 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const logout: IAuthContext["logout"] = async () => {
     // TODO: revise logout function to remove user token by using post/user/logout
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setIsLoggedIn(false);
-    setUserInfo({ id: null, user: null, token: null });
+    try {
+      const res = await fetch(`${host}/user/logout`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      const data = await res.json();
+
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      setIsLoggedIn(false);
+      setUserInfo({ id: null, user: null, token: null });
+
+      return data;
+    } catch (err: any) {
+      throw new Error(err.message);
+    }
   };
 
   return (
