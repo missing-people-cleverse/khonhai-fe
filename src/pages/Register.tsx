@@ -16,7 +16,7 @@ import { host } from "../constant";
 import { useNavigate } from "react-router-dom";
 import { provinceList } from "../data/SelectableData";
 
-const StyleInput = styled(InputBase)(({ theme }) => ({
+export const StyleInput = styled(InputBase)(({ theme }) => ({
   "& .MuiInputBase-input": {
     borderRadius: 15,
     position: "relative",
@@ -79,7 +79,8 @@ const Register = () => {
           },
         });
         const data = await res.json();
-        if (data.statusCode !== 201) {
+        if (data.statusCode === 401 || data.statusCode === 500) {
+          toast.error("ตรวจสอบข้อมูลให้ถูกต้อง");
           throw new Error(data.message);
         }
         toast.success("ลงทะเบียนสำเร็จ");
@@ -108,7 +109,8 @@ const Register = () => {
               <input
                 type="text"
                 id="username"
-                placeholder="ชื่อผู้ใช้"
+                pattern="[A-Za-z0-9]+"
+                placeholder="ชื่อผู้ใช้ภาษาอังกฤษ"
                 className="inputBox-user"
                 onChange={(e) => setInputUsername(e.target.value)}
                 required
@@ -149,8 +151,9 @@ const Register = () => {
             <div className="form-user">
               <label>เบอร์โทรศัพท์</label>
               <input
-                type="text"
-                placeholder="เบอร์โทรศัพท์"
+                type="tel"
+                pattern="[0-9]{10}"
+                placeholder="เบอร์โทรศัพท์10หลัก"
                 className="inputBox-user"
                 onChange={(e) => setInputPhoneNum(e.target.value)}
                 required

@@ -53,7 +53,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       });
 
       const data = await res.json();
-      if (data.statusCode !== 201) {
+      if (data.statusCode === 401 || data.statusCode === 500) {
         throw new Error(data.message);
       }
 
