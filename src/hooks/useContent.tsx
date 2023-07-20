@@ -1,39 +1,74 @@
 import { useEffect, useState } from "react";
+import { IContent } from "../types/content";
+import axios from "axios";
 
-//Receive param id
-const useContent = () => {
-  const [content, setContent] = useState({});
-  const mockData = {
-    id: 1,
-    createdAt: "2023-07-17T07:37:27.496Z",
-    updatedAt: "2023-07-17T07:37:27.496Z",
-    isArchive: false,
-    name: "สุริยะ",
-    surname: "จันทร์ธา",
-    nickname: "ดาว",
-    userId: "1aa",
-    img: "123",
-    nationality: "THAI",
-    ageLastSeen: 23,
-    dateOfBirth: "2023-07-17T07:37:27.496Z",
-    gender: "MALE",
-    weight: 56,
-    height: 145,
-    skin: "WHITE",
-    remark: "แผลเป็นที่แก้มซ้าย",
-    status: "UNFOUNED",
-    province: "BANGKOK",
-    place: "cleverse",
-    missingDatetime: "2023-07-17T07:37:27.496Z",
-    missingDetail: "เสื้อแขนยาวสีดำ กางเกงขายาวสีเขียว",
-  };
+const host = "http://localhost:8000";
+
+const useContent = (id: Number) => {
+  const [content, setContent] = useState<IContent>();
+  // const mockData: IContent = {
+  //   id: 2,
+  //   userId: "44be3125-38fc-4d2e-859a-4383fa359cc3",
+  //   createdAt: "2023-07-20T04:46:12.161Z",
+  //   updatedAt: "2023-07-20T04:46:12.161Z",
+  //   isArchive: false,
+  //   name: "คนหาย4",
+  //   surname: "ไปไหน4",
+  //   nickname: "",
+  //   img: "123",
+  //   nationality: "THAI",
+  //   ageLastSeen: 23,
+  //   dateOfBirth: "12 มกราคม 2566",
+  //   gender: "MALE",
+  //   weight: 12,
+  //   height: 14,
+  //   skin: "WHITE",
+  //   remark: "แผล",
+  //   status: "UNFOUNED",
+  //   province: "BANGKOK",
+  //   place: "cleverse",
+  //   missingDatetime: "13 มกราคม 2566 เวลา 07.37 น.",
+  //   missingDetail: "หาย",
+  //   user: {
+  //     id: "44be3125-38fc-4d2e-859a-4383fa359cc3",
+  //     username: "test",
+  //     name: "test",
+  //     surname: "surtest",
+  //     email: "test@gmail.com",
+  //     phoneNumber: "0812345678",
+  //   },
+  //   comments: [
+  //     {
+  //       id: 1,
+  //       foundPlace: "BKK3333",
+  //       foundDatetime: "14 มกราคม 2566 เวลา 07.37 น.",
+  //       foundDetail: "เห็น333",
+  //       img: "string33",
+  //       isArchive: false,
+  //     },
+  //     {
+  //       id: 2,
+  //       foundPlace: "BKK3333",
+  //       foundDatetime: "14 มกราคม 2566 เวลา 07.37 น.",
+  //       foundDetail: "เห็น333",
+  //       img: "string33",
+  //       isArchive: false,
+  //     },
+  //   ],
+  // };
+
   useEffect(() => {
-    //Todo Axios
-    const fetchData = () => {
-      setContent(mockData);
+    const fetchData = async () => {
+      const data = await axios
+        .get(`${host}/content/${id}`)
+        .then((res) => res.data)
+        .catch((err) => console.log(err));
+
+      setContent(data);
     };
     fetchData();
   }, []);
+
   return { content };
 };
 

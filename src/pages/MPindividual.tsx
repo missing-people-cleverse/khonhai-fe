@@ -1,11 +1,11 @@
-import React from "react";
+import MPDetail from "../components/MPDetail";
 import PageHeader from "../components/PageHeader";
 
 const MPindividual = () => {
   return (
     <>
       <PageHeader name="ข้อมูลคนหาย" />
-      <div>MPindividual</div>
+      <MPDetail />
     </>
   );
 };

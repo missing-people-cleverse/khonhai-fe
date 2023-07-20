@@ -7,7 +7,7 @@ export interface IContent {
   surname: string;
   nickname: string;
   userId: string;
-  img: string;
+  img: string; //arr of str
   nationality: string;
   ageLastSeen: number;
   dateOfBirth: string;
@@ -21,4 +21,20 @@ export interface IContent {
   province: string;
   place: string;
   missingDatetime: string;
+  user?: {
+    id?: string;
+    username?: string;
+    name?: string;
+    surname?: string;
+    email?: string;
+    phoneNumber?: string;
+  };
+  comments?: {
+    id?: number;
+    foundPlace?: string;
+    foundDatetime?: string;
+    foundDetail?: string;
+    img?: string;
+    isArchive?: false;
+  }[];
 }

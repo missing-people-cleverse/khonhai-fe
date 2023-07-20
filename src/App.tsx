@@ -19,7 +19,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/content" element={<MPall />} />
-          <Route path="/content/1" element={<MPindividual />} />
+          <Route path="/content/:id" element={<MPindividual />} />
           <Route path="/help" element={<HelpServices />} />
 
           <Route path="/createcontent" element={<CreateContent />} />
