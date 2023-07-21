@@ -31,10 +31,23 @@ export interface IContent {
   };
   comments?: {
     id?: number;
+    name?: string;
+    surname?: string;
     foundPlace?: string;
     foundDatetime?: string;
     foundDetail?: string;
     img?: string;
     isArchive?: false;
   }[];
+}
+
+export interface ICommentDto {
+  id: number;
+  name: string;
+  surname: string;
+  foundPlace: string;
+  foundDatetime: string;
+  foundDetail: string;
+  img: string[];
+  isArchive: false;
 }

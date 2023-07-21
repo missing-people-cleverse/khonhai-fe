@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Content = (props: any) => {
   const { content } = props;
@@ -8,7 +8,7 @@ const Content = (props: any) => {
   const navigateToContent = () => {
     navigate(`/content/${content.id}`);
   };
-  const navigateToComment = (e: any) => {
+  const navigateToComment = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     navigate("/");
   };
@@ -48,24 +48,23 @@ const Content = (props: any) => {
 
         <div className="flex-col ml-[20px]">
           <p className="contenttopic-content">
-            เพศ{" "}
-            <span className="contentdetail-content">
-              {content.gender === "MALE" ? "ชาย" : "หญิง"}
-            </span>
+            เพศ <span className="contentdetail-content">{content.gender}</span>
             <span
               className="contenttopic-content"
               style={{ marginLeft: "6px" }}
             >
               สัญชาติ{" "}
               <span className="contentdetail-content">
-                {content.nationality === "THAI" ? "ไทย" : "ต่างชาติ"}
+                {content.nationality}
               </span>
             </span>
           </p>
 
           <p className="contenttopic-content">
             วันที่หาย{" "}
-            <span className="contentdetail-content">{missingDate}</span>
+            <span className="contentdetail-content">
+              {content.missingDatetime}
+            </span>
           </p>
           <p className="contenttopic-content">
             วันที่ประกาศ{" "}
