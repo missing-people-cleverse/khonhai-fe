@@ -1,14 +1,15 @@
 import { Link, NavLink } from "react-router-dom";
 import { ChildProps } from "../types/auth.context";
-import classes from "./Button.module.css";
+import { useAuth } from "../context/AuthProvider";
 
-export type AuthProviderProps = ChildProps;
+type AuthProviderProps = ChildProps;
 
 const Navbar = ({ children }: AuthProviderProps) => {
-  const isLoggedIn: boolean = false;
+  const { isLoggedIn, logout, ...userInfo } = useAuth();
+
   return (
     <>
-      <header className="bg-bg_white sticky top-0 ">
+      <header className="bg-bg_white sticky top-0 z-50">
         <div className="flex flex-row flex-wrap justify-between items-center py-2 w-10/12 mx-auto">
           <div>
             <Link to="/">
@@ -44,17 +45,24 @@ const Navbar = ({ children }: AuthProviderProps) => {
           </nav>
           {!isLoggedIn ? (
             <nav className="flex flex-row gap-5">
-              <NavLink to="/login" className={classes.buttonBlue}>
+              <NavLink to="/login" className="btn-blue">
                 เข้าสู่ระบบ
               </NavLink>
-              <NavLink to="/register" className={classes.buttonBlue}>
+              <NavLink to="/register" className="btn-blue">
                 สมัครสมาชิก
               </NavLink>
             </nav>
           ) : (
             <nav className="flex flex-row gap-5">
-              <p>Welcome user</p>
-              <p>Logout</p>
+              <p className="font-bold pt-2">
+                ยินดีต้อนรับ{" "}
+                <span className="text-secondary_shadow">
+                  คุณ{userInfo.user}
+                </span>
+              </p>
+              <a className="btn-blue" onClick={logout}>
+                ออกจากระบบ
+              </a>
             </nav>
           )}
         </div>
