@@ -12,7 +12,7 @@ const Banner = () => {
         </h1>
         <p>ร่วมกันช่วยหาคนหายพร้อมแจ้งเบาะแสด้วยกันเถอะนะนะนะ</p>
         <section className="flex flex-row gap-4">
-          <NavLink to="/all" className="btn-blue">
+          <NavLink to="/content" className="btn-blue">
             ดูคนหายทั้งหมด
           </NavLink>
           {isLoggedIn ? (
