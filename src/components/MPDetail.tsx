@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useContent from "../hooks/useContent";
 import { useState } from "react";
 import PageHeader from "./PageHeader";
@@ -7,7 +7,7 @@ const MPDetail = () => {
   const { id } = useParams();
   const { content } = useContent(Number(id));
   const [isOpen, setIsOpen] = useState<Boolean>(false);
-
+  const navigate = useNavigate();
   // function formatDateTime(dateTime: string): string {
   //   const dateDB = new Date(
   //     Number(dateTime.slice(0, 4)),
@@ -69,7 +69,12 @@ const MPDetail = () => {
                       />
                       {isOpen && (
                         <div className="w-[113px] h-[63px] bg-neutral-100 rounded-[5px] mt-[30px] ml-[-80px] z-[100] absolute flex flex-col justify-evenly">
-                          <button className="flex ml-[2px]">
+                          <button
+                            className="flex ml-[2px]"
+                            onClick={() => {
+                              navigate(`/content/${id}/edit`);
+                            }}
+                          >
                             <img src="/pencil.svg" />
                             <p className="ml-[5px]">แก้ไขข้อมูล</p>
                           </button>
