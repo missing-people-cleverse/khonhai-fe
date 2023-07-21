@@ -71,7 +71,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   const logout: IAuthContext["logout"] = async () => {
-    // TODO: revise logout function to remove user token by using post/user/logout
     try {
       const res = await fetch(`${host}/user/logout`, {
         method: "POST",

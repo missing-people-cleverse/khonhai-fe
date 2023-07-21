@@ -10,6 +10,7 @@ import {
 } from "../data/SelectableData";
 import { DatePicker } from "@mui/x-date-pickers";
 import { NavLink } from "react-router-dom";
+import dayjs from "dayjs";
 
 const EditContent = () => {
   const [contentInfo, setContentInfo] = useState({
@@ -17,17 +18,27 @@ const EditContent = () => {
     nationality: "",
     province: "",
     status: "",
-    dateOfBirth: "",
-    lastseenDate: "",
   });
 
-  function handleChange(event: { target: { name: string; value: string } }) {
+  const [dateOfBirth, setDateOfBirth] = useState(dayjs(Date.now()));
+  const [lastseenDate, setLastseenDate] = useState(dayjs(Date.now()));
+
+  const handleChange = (event: { target: { name: string; value: string } }) => {
     const value = event.target.value;
     setContentInfo({ ...contentInfo, [event.target.name]: value });
-  }
+  };
+
+  const handleChangeDob = (value: any) => {
+    setDateOfBirth(value);
+  };
+
+  const handleChangeLastseen = (value: any) => {
+    setLastseenDate(value);
+  };
+
   return (
     <>
-      <PageHeader name="แก้ไขข้อมูลคนหาย" />;
+      <PageHeader name="แก้ไขข้อมูลคนหาย" />
       <div className="bg-white w-[60rem] mx-auto mt-10 mb-10">
         <p className="text-primary font-semibold text-xl px-10 pt-10">
           ข้อมูลส่วนตัวคนหาย
@@ -131,31 +142,46 @@ const EditContent = () => {
             <section className="flex flex-row gap-6">
               <div className="form-user">
                 <label>วันเกิด</label>
-                {/* Todo add value and onchange to Date picker */}
-                <DatePicker label="วันเกิด" />
+                {/* Todo styling date picker box  */}
+                <DatePicker
+                  label="วันเกิด"
+                  value={dateOfBirth}
+                  onChange={handleChangeDob}
+                />
               </div>
               <div className="form-user">
                 <label>วันที่หาย</label>
-                <DatePicker label="วันที่หาย" />
+                <DatePicker
+                  label="วันที่หาย"
+                  value={lastseenDate}
+                  onChange={handleChangeLastseen}
+                />
               </div>
             </section>
             <div className="form-user">
               <label>จุดสังเกต</label>
               <input
                 type="text"
-                placeholder="เช่น มีรอยสักรูปมังกรที่แขน, มีปานดำไบริเวณหลังคอ, เป็นโรคความจำเสื่อม, เป็นโรคจิตเภท"
+                placeholder="จุดสังเกตของผู้สูญหาย"
                 className="inputBox-user w-[30rem]"
                 required
               />
+              <p className="text-gray-400 text-xs">
+                *เช่น มีรอยสักรูปมังกรที่แขน,มีปานดำไบริเวณหลังคอ,
+                เป็นโรคความจำเสื่อม,เป็นโรคจิตเภท
+              </p>
             </div>
             <div className="form-user">
               <label>รูปร่างและเครื่องแต่งกาย</label>
               <input
                 type="text"
-                placeholder="แจ้งข้อมูลที่เจอครั้งสุดท้าย ให้ชัดเจนที่สุด เช่น ใส่เสื้อผ้าสีแดง, กางเกงยีนส์สีดำ, รองเท้าแตะสีแดง"
+                placeholder="แจ้งข้อมูลที่เจอครั้งสุดท้าย ให้ชัดเจนที่สุด"
                 className="inputBox-user w-[30rem]"
                 required
               />
+              <p className="text-gray-400 text-xs">
+                *เช่น ใส่เสื้อผ้าสีแดง, กางเกงยีนส์สีดำ, รองเท้าแตะสีแดง
+              </p>
             </div>
             <p className="text-primary font-semibold text-xl pt-7">
               สถานที่พบเห็นล่าสุด
@@ -181,10 +207,13 @@ const EditContent = () => {
               <label>รายละเอียดสถานที่</label>
               <input
                 type="text"
-                placeholder="แจ้งพื้นที่ เช่น ชื่อหมู่บ้าน ,อำเภอ, จังหวัด ให้ชัดเจน"
+                placeholder="แจ้งพื้นที่ที่พบเห็นล่าสุด"
                 className="inputBox-user w-[30rem]"
                 required
               />
+              <p className="text-gray-400 text-xs">
+                *เช่น ชื่อหมู่บ้าน, อำเภอ, จังหวัด
+              </p>
             </div>
             <p className="text-primary font-semibold text-xl pt-7">สถานะ</p>
             <div className="form-user">
