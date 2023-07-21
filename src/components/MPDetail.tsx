@@ -100,14 +100,16 @@ const MPDetail = () => {
                   </p>
                   <ul className="subtopic-mpdetail">
                     ลักษณะ
-                    <li className="detail-mpdetail">{`ผิวสี${content.skin}`}</li>
-                    <li className="detail-mpdetail">
+                    <li className="detail-mpdetail li-mpdetail">{`ผิวสี${content.skin}`}</li>
+                    <li className="detail-mpdetail li-mpdetail">
                       {`ส่วนสูง ${content.height} เซนติเมตร`}
                     </li>
-                    <li className="detail-mpdetail">
+                    <li className="detail-mpdetail li-mpdetail">
                       {`น้ำหนัก ${content.weight} กิโลกรัม`}
                     </li>
-                    <li className="detail-mpdetail">{content.remark}</li>
+                    <li className="detail-mpdetail li-mpdetail">
+                      {content.remark}
+                    </li>
                   </ul>
                   <p className="subtopic-mpdetail">
                     {"วันที่พบเห็นล่าสุด "}

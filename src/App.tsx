@@ -15,6 +15,7 @@ import CreateContent from "./pages/CreateContent";
 import Footer from "./components/Footer";
 import AuthProvider from "./context/AuthProvider";
 import EditContent from "./pages/EditContent";
+import MPindividual from "./pages/MPindividual";
 
 function App() {
   return (
@@ -33,7 +34,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/all" element={<MPall />} />
+            <Route path="/content" element={<MPall />} />
+            <Route path="/content/:id" element={<MPindividual />} />
             <Route path="/help" element={<HelpServices />} />
 
             <Route path="/createcontent" element={<CreateContent />} />
