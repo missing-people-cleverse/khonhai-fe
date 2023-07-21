@@ -1,5 +1,10 @@
-const Comment = (props: any) => {
-  const { comment } = props;
+import { useState } from "react";
+import { IComment } from "../types/comment";
+
+const Comment = (props: IComment) => {
+  const { ...comment } = props;
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const imgs = [
     { id: "2", src: "/mp.jpg" },
@@ -24,9 +29,31 @@ const Comment = (props: any) => {
 
     return `${date} เวลา ${time}`;
   }
+
   return (
     <>
-      <div className="flex flex-col gap-[2px] bg-white">
+      <div className="flex flex-col gap-[2px] bg-white w-[800px]">
+        <div>
+          <img
+            src="/threedot.svg"
+            alt="threedt"
+            className="threedot-mpdetail z-50 absolute ml-[750px]"
+            onClick={() => setIsOpen(!isOpen)}
+          />
+          {isOpen && (
+            <div className="w-[113px] h-[63px] bg-neutral-100 rounded-[5px] mt-[30px] ml-[670px] z-[100] absolute flex flex-col justify-evenly">
+              <button className="flex ml-[2px]">
+                <img src="/pencil.svg" />
+                <p className="ml-[5px]">แก้ไขข้อมูล</p>
+              </button>
+              <hr />
+              <button className="flex ml-[2px]">
+                <img src="/trash.svg" />
+                <p className="ml-[5px]">ลบข้อมูล</p>
+              </button>
+            </div>
+          )}
+        </div>
         <p className="subtopic-mpdetail pl-[18px] pt-[18px]">
           {"ผู้พบเห็น "}
           <span className="detail-mpdetail">
@@ -45,14 +72,14 @@ const Comment = (props: any) => {
           {"รายละเอียด "}
           <span className="detail-mpdetail">{comment.foundDetail}</span>
         </p>
-        <div className="flex flex-row pl-[18px] gap-[4px]">
+        <div className="flex flex-row pl-[18px] gap-[4px] my-[10px]">
           {imgs.map((img) => {
             return (
               <img
                 src={img.src}
                 key={img.id}
                 alt=""
-                className="w-[100px] h-[100px]"
+                className="w-[100px] h-[100px] object-cover"
               />
             );
           })}

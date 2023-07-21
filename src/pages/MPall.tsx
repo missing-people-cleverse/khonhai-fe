@@ -2,14 +2,12 @@ import PageHeader from "../components/PageHeader";
 import Content from "../components/Content";
 import useContents from "../hooks/useContents";
 import { useState } from "react";
+import { IContent } from "../types/content";
 
 const MPall = () => {
   const { contents } = useContents();
   const [search, setSearch] = useState("");
 
-  // const searchFunc = () =>{
-  //   contents.
-  // }
   return (
     <>
       <PageHeader name="รายชื่อคนหายทั้งหมด" buttonName="แจ้งคนหาย" />
@@ -41,7 +39,7 @@ const MPall = () => {
       <div className="grid place-items-center">
         <div className="flexcontainer-mpall">
           {contents &&
-            contents.map((content) => {
+            contents.map((content: IContent) => {
               return <Content key={content.id} content={content} />;
             })}
         </div>

@@ -21,33 +21,22 @@ export interface IContent {
   province: string;
   place: string;
   missingDatetime: string;
-  user?: {
-    id?: string;
-    username?: string;
-    name?: string;
-    surname?: string;
-    email?: string;
-    phoneNumber?: string;
+  user: {
+    id: string;
+    username: string;
+    name: string;
+    surname: string;
+    email: string;
+    phoneNumber: string;
   };
-  comments?: {
-    id?: number;
-    name?: string;
-    surname?: string;
-    foundPlace?: string;
-    foundDatetime?: string;
-    foundDetail?: string;
-    img?: string;
-    isArchive?: false;
+  comments: {
+    id: number;
+    name: string;
+    surname: string;
+    foundPlace: string;
+    foundDatetime: string;
+    foundDetail: string;
+    img: string;
+    isArchive: false;
   }[];
-}
-
-export interface ICommentDto {
-  id: number;
-  name: string;
-  surname: string;
-  foundPlace: string;
-  foundDatetime: string;
-  foundDetail: string;
-  img: string[];
-  isArchive: false;
 }

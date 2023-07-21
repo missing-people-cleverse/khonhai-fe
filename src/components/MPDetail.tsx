@@ -8,23 +8,23 @@ const MPDetail = () => {
   const { content } = useContent(Number(id));
   const [isOpen, setIsOpen] = useState<Boolean>(false);
 
-  function formatDateTime(dateTime: string): string {
-    const dateDB = new Date(
-      Number(dateTime.slice(0, 4)),
-      Number(dateTime.slice(5, 7)) - 1,
-      Number(dateTime.slice(8, 10))
-    );
+  // function formatDateTime(dateTime: string): string {
+  //   const dateDB = new Date(
+  //     Number(dateTime.slice(0, 4)),
+  //     Number(dateTime.slice(5, 7)) - 1,
+  //     Number(dateTime.slice(8, 10))
+  //   );
 
-    const time = `${dateTime.slice(11, 13)}.${dateTime.slice(14, 16)} น.`;
+  //   const time = `${dateTime.slice(11, 13)}.${dateTime.slice(14, 16)} น.`;
 
-    const date = dateDB.toLocaleDateString("th-TH", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+  //   const date = dateDB.toLocaleDateString("th-TH", {
+  //     year: "numeric",
+  //     month: "long",
+  //     day: "numeric",
+  //   });
 
-    return `${date} เวลา ${time}`;
-  }
+  //   return `${date} เวลา ${time}`;
+  // }
 
   return (
     <>
@@ -136,11 +136,11 @@ const MPDetail = () => {
                   </p>
 
                   <p className="text-[12px]">
-                    {`ประกาศเมื่อวันที่ ${formatDateTime(content.createdAt)}`}
+                    {`ประกาศเมื่อวันที่ ${content!.createdAt!}`}
                     {content.createdAt !== content.updatedAt ? (
                       <span>
                         {`(แก้ไขข้อมูลล่าสุดวันที่
-                  ${formatDateTime(content.updatedAt)})`}
+                  ${content!.updatedAt!})`}
                       </span>
                     ) : null}
                   </p>

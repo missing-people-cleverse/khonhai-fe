@@ -11,16 +11,18 @@ const useContent = (id: Number) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await axios
-        .get(`${host}/content/${id}`)
-        .then((res) => {
-          setContent(res.data);
-          setComments(res.data.comments);
-        })
-        .catch((err) => console.log(err));
+      try {
+        const res = await axios.get(`${host}/content/${id}`);
+        setContent(res.data);
+        setComments(res.data.comments);
+      } catch (err) {
+        console.log(err);
+      }
     };
+
     fetchData();
   }, []);
+
   // console.log(content);
   // console.log(comments);
   return { content, comments };
