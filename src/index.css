@@ -20,10 +20,169 @@
   --text_light: #f2f2f3;
   --text_dark_grey: #3e3d3e;
   --text_black: #232324;
-  --input_boarder: #dcdcdc;
+  --input_border: #dcdcdc;
 }
 
 body {
   margin: 0;
   background-color: var(--bg_light_grey);
+}
+
+@layer components {
+  .btn-blue {
+    padding: 8px 10px;
+    text-align: center;
+    width: auto;
+    border: solid 2px;
+    border-radius: 15px;
+    background-color: var(--primary);
+    color: var(--text_light);
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .btn-blue:hover {
+    background-color: var(--bg_white);
+    color: var(--text_black);
+    border: var(--primary) solid 2px;
+  }
+
+  .btn-blue-line {
+    padding: 8px 10px;
+    text-align: center;
+    width: auto;
+    border-radius: 15px;
+    background-color: var(--bg_white);
+    color: var(--text_black);
+    border: var(--primary) solid 2px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .btn-blue-line:hover {
+    border: solid 2px;
+    background-color: var(--primary);
+    color: var(--text_light);
+  }
+
+  .btn-pink {
+    padding: 8px 10px;
+    text-align: center;
+    width: auto;
+    border: solid 2px;
+    border-radius: 15px;
+    background-color: var(--secondary);
+    color: var(--text_light);
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .btn-pink:hover {
+    background-color: var(--bg_white);
+    color: var(--text_black);
+    border: var(--secondary) solid 2px;
+  }
+
+  .btn-pink-line {
+    padding: 8px 10px;
+    text-align: center;
+    width: auto;
+    border-radius: 15px;
+    background-color: var(--bg_white);
+    color: var(--text_black);
+    border: var(--secondary) solid 2px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .btn-pink-line:hover {
+    border: solid 2px;
+    background-color: var(--secondary);
+    color: var(--text_light);
+  }
+
+  .btn-google {
+    padding: 8px 10px;
+    text-align: center;
+    border-radius: 15px;
+    background-color: var(--bg_white);
+    color: var(--text_black);
+    border: var(--input_border) solid 2px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .btn-google:hover {
+    border: #a8a5a5 solid 2px;
+  }
+
+  .btn-disabled {
+    padding: 8px 10px;
+    text-align: center;
+    width: auto;
+    border-radius: 15px;
+    background-color: var(--input_border);
+    color: var(--text_dark_grey);
+  }
+
+  .carouselontainer {
+    padding: 20px;
+    width: 800px;
+  }
+
+  .carouselItem {
+    max-width: 300px;
+    min-width: 300px;
+    width: 100%;
+  }
+
+  .form-user {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .inputBox-user {
+    padding: 8px 10px;
+    border-radius: 15px;
+    background-color: var(--bg_white);
+    color: var(--text_black);
+    border: var(--input_border) solid 1px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .inputBox-user:focus {
+    border: var(--primary) solid 1px;
+    outline: none;
+  }
+
+  .hr-line:before {
+    content: " ";
+    display: block;
+    height: 1px;
+    width: 80px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    background: #a8a5a5;
+  }
+
+  .hr-line {
+    position: relative;
+    color: #a8a5a5;
+    max-width: 500px;
+    text-align: center;
+  }
+
+  .hr-line:after {
+    content: " ";
+    height: 1px;
+    width: 80px;
+    background: #a8a5a5;
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+  }
 }

@@ -1,7 +1,17 @@
-import React from "react";
+import { Alert } from "@mui/material";
 
-const Error = () => {
-  return <div>Error</div>;
+interface IErrorProps {
+  message: string;
+}
+
+const Error = (props: IErrorProps) => {
+  return (
+    <>
+      <Alert severity="error">
+        <strong>Error</strong> - {props.message}
+      </Alert>
+    </>
+  );
 };
 
 export default Error;
