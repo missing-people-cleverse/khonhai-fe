@@ -36,10 +36,8 @@ const useContent = (id: Number) => {
         },
       });
       const data = await res.json();
-      console.log(data);
       if (data.statusCode === 400 || data.statusCode === 500) {
         toast.error("กรอกข้อมูลให้ครบถ้วน");
-        console.log(data.error);
         throw new Error(data.message);
       }
       return data;

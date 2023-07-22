@@ -54,7 +54,7 @@ const Navbar = ({ children }: AuthProviderProps) => {
             </nav>
           ) : (
             <nav className="flex flex-row gap-5">
-              <p className="font-bold pt-2">
+              <p className="font-bold pt-3">
                 ยินดีต้อนรับ{" "}
                 <span className="text-secondary_shadow">
                   คุณ{userInfo.user}

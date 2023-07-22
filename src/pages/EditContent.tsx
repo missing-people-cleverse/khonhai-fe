@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import PageHeader from "../components/PageHeader";
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { StyleInput } from "./Register";
@@ -39,6 +39,29 @@ const EditContent = () => {
     skin: "",
     status: "",
   });
+
+  useEffect(() => {
+    if (content) {
+      setDateOfBirth(dayjs(content.dateOfBirth));
+      setLastseenDate(dayjs(content.missingDatetime));
+      setUpdateName(content.name);
+      setUpdateSurname(content.surname);
+      setUpdateNickname(content.nickname);
+      setUpdateAgeLastSeen(`${content.ageLastSeen}`);
+      setUpdateWeight(`${content.weight}`);
+      setUpdateHeight(`${content.height}`);
+      setUpdateRemark(content.remark);
+      setUpdatePlace(content.place);
+      setUpdateMissingDetail(content.missingDetail);
+      setContentInfo({
+        gender: content.gender,
+        nationality: content.nationality,
+        province: content.province,
+        skin: content.skin,
+        status: content.status,
+      });
+    }
+  }, [content]);
 
   const handleChange = (event: { target: { name: string; value: string } }) => {
     const value = event.target.value;
@@ -101,7 +124,7 @@ const EditContent = () => {
                   type="text"
                   placeholder="ชื่อ"
                   className="inputBox-user"
-                  defaultValue={content?.name}
+                  value={updateName}
                   onChange={(e) => setUpdateName(e.target.value)}
                   required
                 />
@@ -112,7 +135,7 @@ const EditContent = () => {
                   type="text"
                   placeholder="นามสกุล"
                   className="inputBox-user"
-                  defaultValue={content?.surname}
+                  value={updateSurname}
                   onChange={(e) => setUpdateSurname(e.target.value)}
                   required
                 />
@@ -125,7 +148,7 @@ const EditContent = () => {
                   type="text"
                   placeholder="ชื่อเล่น"
                   className="inputBox-user"
-                  defaultValue={content?.nickname}
+                  value={updateNickname}
                   onChange={(e) => setUpdateNickname(e.target.value)}
                   required
                 />
@@ -135,7 +158,6 @@ const EditContent = () => {
                 <FormControl sx={{ m: 0, width: 100 }}>
                   <Select
                     value={contentInfo.gender}
-                    // defaultValue={content!.gender}
                     name="gender"
                     onChange={handleChange}
                     input={<StyleInput />}
@@ -173,7 +195,7 @@ const EditContent = () => {
                   type="number"
                   placeholder="อายุ(ปี)"
                   className="inputBox-user w-[6rem]"
-                  defaultValue={content?.ageLastSeen}
+                  value={updateAgeLastSeen}
                   onChange={(e) => setUpdateAgeLastSeen(e.target.value)}
                   required
                 />
@@ -184,7 +206,7 @@ const EditContent = () => {
                   type="number"
                   placeholder="ส่วนสูง(เซนติเมตร)"
                   className="inputBox-user w-[10rem]"
-                  defaultValue={content?.height}
+                  value={updateHeight}
                   onChange={(e) => setUpdateHeight(e.target.value)}
                   required
                 />
@@ -195,7 +217,7 @@ const EditContent = () => {
                   type="number"
                   placeholder="น้ำหนัก(กิโลกรัม)"
                   className="inputBox-user w-[10rem]"
-                  defaultValue={content?.weight}
+                  value={updateWeight}
                   onChange={(e) => setUpdateWeight(e.target.value)}
                   required
                 />
@@ -226,7 +248,7 @@ const EditContent = () => {
                 type="text"
                 placeholder="จุดสังเกตของผู้สูญหาย"
                 className="inputBox-user w-[30rem]"
-                defaultValue={content?.remark}
+                value={updateRemark}
                 onChange={(e) => setUpdateRemark(e.target.value)}
                 required
               />
@@ -241,7 +263,7 @@ const EditContent = () => {
                 type="text"
                 placeholder="แจ้งข้อมูลที่เจอครั้งสุดท้าย ให้ชัดเจนที่สุด"
                 className="inputBox-user w-[30rem]"
-                defaultValue={content?.missingDetail}
+                value={updateMissingDetail}
                 onChange={(e) => setUpdateMissingDetail(e.target.value)}
                 required
               />
@@ -296,7 +318,7 @@ const EditContent = () => {
                 type="text"
                 placeholder="แจ้งพื้นที่ที่พบเห็นล่าสุด"
                 className="inputBox-user w-[30rem]"
-                defaultValue={content?.place}
+                value={updatePlace}
                 onChange={(e) => setUpdatePlace(e.target.value)}
                 required
               />
