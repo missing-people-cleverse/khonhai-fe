@@ -1,8 +1,6 @@
-interface IBriefContent {
-  name: string;
-  place: string;
-}
-const RandomMPCard = ({ name, place }: IBriefContent) => {
+import { IContentProps } from "./Content";
+
+const RandomMPCard = ({ content }: IContentProps) => {
   return (
     // Link to content/:id
     <>
@@ -13,10 +11,10 @@ const RandomMPCard = ({ name, place }: IBriefContent) => {
           className="w-full h-48 object-cover rounded-t-[10px]"
         />
         <p className="text-black text-center text-xl not-italic font-semibold mt-2">
-          {name}
+          {content.name} {content.nickname}
         </p>
         <p className="text-black text-center text-base not-italic font-normal mt-2">
-          {place}
+          {content.place} {content.province}
         </p>
       </div>
     </>
