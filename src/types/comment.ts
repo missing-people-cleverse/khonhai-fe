@@ -7,4 +7,15 @@ export interface IComment {
   createdAt: string;
   updatedAt: string;
   id: number;
+  user: {
+    id: number;
+    username: string;
+    name: string;
+    surname: string;
+    email: string;
+    phoneNumber: string;
+    address: string;
+    province: string;
+    postcode: string;
+  };
 }

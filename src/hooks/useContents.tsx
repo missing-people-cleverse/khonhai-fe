@@ -1,28 +1,29 @@
 import { useEffect, useState } from "react";
 import { IContent } from "../types/content";
 import axios from "axios";
-
-const host = "http://localhost:8000";
+import { host } from "../constant";
 
 const useContents = () => {
   const [contents, setContents] = useState<IContent[]>([]);
+  const [searchResults, setSearchResults] = useState<IContent[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await axios
+      const rawData = await axios
         .get(`${host}/content`)
         .then((res) => res.data)
         .catch((err) => console.log(err));
 
-      const displayContents = data
+      const displayContents = rawData
         .filter((obj: IContent) => obj.isArchive === false)
         .reverse();
       setContents(displayContents);
+      setSearchResults(displayContents);
     };
     fetchData();
   }, []);
 
-  return { contents };
+  return { contents, searchResults, setSearchResults };
 };
 
 export default useContents;

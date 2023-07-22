@@ -1,16 +1,16 @@
 import { useParams } from "react-router-dom";
 import Comment from "../components/Comment";
 import MPDetail from "../components/MPDetail";
-import useContent from "../hooks/useContent";
+import useComments from "../hooks/useComments";
+import Loading from "../components/Loading";
 
 const MPindividual = () => {
   const { id } = useParams();
-  const { comments } = useContent(Number(id));
+  const { comments, isLoading } = useComments(Number(id));
 
-  // console.log(comments);
-
-  if (!comments) return <h1>Loading</h1>;
-
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <>
       <MPDetail />
@@ -23,6 +23,7 @@ const MPindividual = () => {
                 comments!.length
               } เบาะแส)`}</span>
             </p>
+
             <div className="flex flex-col gap-[10px] items-center ">
               {comments &&
                 comments.map((comment) => {

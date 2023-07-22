@@ -1,15 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { IContent } from "../types/content";
+import { formatDate } from "../utils";
 
 interface IContentProps {
   content: IContent;
 }
 
 const Content = ({ content }: IContentProps) => {
-  // const { id, nickname } = props
-  // console.log(content);
-  // console.log(content);
-
   const navigate = useNavigate();
 
   const navigateToContent = () => {
@@ -19,18 +16,6 @@ const Content = ({ content }: IContentProps) => {
     e.stopPropagation();
     navigate("/");
   };
-
-  // const createdDateDB = new Date(
-  //   Number(content.createdAt.slice(0, 4)),
-  //   Number(content.createdAt.slice(5, 7)) - 1,
-  //   Number(content.createdAt.slice(8, 10))
-  // );
-
-  // const createdDate = createdDateDB.toLocaleDateString("th-TH", {
-  //   year: "numeric",
-  //   month: "long",
-  //   day: "numeric",
-  // });
 
   return (
     <>
@@ -60,7 +45,9 @@ const Content = ({ content }: IContentProps) => {
           </p>
           <p className="contenttopic-content">
             วันที่ประกาศ{" "}
-            <span className="contentdetail-content">{content.createdAt}</span>
+            <span className="contentdetail-content">
+              {formatDate(content.createdAt)}
+            </span>
           </p>
         </div>
 
