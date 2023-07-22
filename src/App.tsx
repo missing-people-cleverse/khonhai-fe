@@ -39,7 +39,7 @@ function App() {
             <Route path="/help" element={<HelpServices />} />
 
             <Route path="/createcontent" element={<CreateContent />} />
-            <Route path="/editcontent" element={<EditContent />} />
+            <Route path="/content/:id/editcontent" element={<EditContent />} />
           </Routes>
         </Navbar>
         <Footer />

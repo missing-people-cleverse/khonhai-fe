@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { IContent } from "../types/content";
 import axios from "axios";
-
-const host = "http://localhost:8000";
+import { host } from "../constant";
 
 const useContents = () => {
   const [contents, setContents] = useState<IContent[]>([]);

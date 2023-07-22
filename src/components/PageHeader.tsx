@@ -1,6 +1,9 @@
+import { Link } from "react-router-dom";
+
 interface ITopic {
   name: string;
   buttonName?: string;
+  link?: string;
 }
 
 const PageHeader = (props: ITopic) => {
@@ -12,7 +15,9 @@ const PageHeader = (props: ITopic) => {
             {props.name}
           </div>
           {!!props.buttonName ? (
-            <button className="btn-pageheader">{props.buttonName}</button>
+            <Link to={`${props.link}`}>
+              <button className="btn-pageheader">{props.buttonName}</button>
+            </Link>
           ) : null}
         </div>
       </div>

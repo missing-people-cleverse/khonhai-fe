@@ -13,6 +13,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import { useAuth } from "../context/AuthProvider";
 import { host } from "../constant";
+import { toast } from "react-toastify";
+import WithGuard from "../guards/WithGuard";
 
 const CreateContent = () => {
   const { getAuthHeader } = useAuth();
@@ -84,6 +86,7 @@ const CreateContent = () => {
       });
 
       const data = await res.json();
+      toast.success("แจ้งคนหายสำเร็จ");
       navigate("/content");
       return data;
     } catch (err: any) {
@@ -342,4 +345,4 @@ const CreateContent = () => {
   );
 };
 
-export default CreateContent;
+export default WithGuard(CreateContent);

@@ -96,6 +96,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     Authorization: `Bearer ${userInfo.token}`,
   });
 
+  const isOwnContent: IAuthContext["isOwnContent"] = (content) => {
+    return content.userId === userInfo.id;
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -103,6 +107,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         login,
         logout,
         getAuthHeader,
+        isOwnContent,
         ...userInfo,
       }}
     >

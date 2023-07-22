@@ -1,12 +1,14 @@
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import useContent from "../hooks/useContent";
 import { useState } from "react";
 import PageHeader from "./PageHeader";
+import { useAuth } from "../context/AuthProvider";
 
 const MPDetail = () => {
   const { id } = useParams();
   const { content } = useContent(Number(id));
   const [isOpen, setIsOpen] = useState<Boolean>(false);
+  const { isOwnContent } = useAuth();
 
   // function formatDateTime(dateTime: string): string {
   //   const dateDB = new Date(
@@ -60,27 +62,32 @@ const MPDetail = () => {
                         <div className="founded-mpdetail">พบแล้ว</div>
                       )}
                     </div>
-                    <div>
-                      <img
-                        src="/threedot.svg"
-                        alt="threedt"
-                        className="threedot-mpdetail"
-                        onClick={() => setIsOpen(!isOpen)}
-                      />
-                      {isOpen && (
-                        <div className="w-[113px] h-[63px] bg-neutral-100 rounded-[5px] mt-[30px] ml-[-80px] z-[100] absolute flex flex-col justify-evenly">
-                          <button className="flex ml-[2px]">
-                            <img src="/pencil.svg" />
-                            <p className="ml-[5px]">แก้ไขข้อมูล</p>
-                          </button>
-                          <hr />
-                          <button className="flex ml-[2px]">
-                            <img src="/trash.svg" />
-                            <p className="ml-[5px]">ลบข้อมูล</p>
-                          </button>
-                        </div>
-                      )}
-                    </div>
+                    {isOwnContent(content) && (
+                      <div>
+                        <img
+                          src="/threedot.svg"
+                          alt="threedt"
+                          className="threedot-mpdetail"
+                          onClick={() => setIsOpen(!isOpen)}
+                        />
+                        {isOpen && (
+                          <div className="w-[113px] h-[63px] bg-neutral-100 rounded-[5px] mt-[30px] ml-[-80px] z-[100] absolute flex flex-col justify-evenly">
+                            <NavLink
+                              to={`/content/${id}/editcontent`}
+                              className="flex ml-[2px]"
+                            >
+                              <img src="/pencil.svg" />
+                              <p className="ml-[5px]">แก้ไขข้อมูล</p>
+                            </NavLink>
+                            <hr />
+                            <button className="flex ml-[2px]">
+                              <img src="/trash.svg" />
+                              <p className="ml-[5px]">ลบข้อมูล</p>
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                   <p className="subtopic-mpdetail">
                     {"ชื่อเล่น "}
