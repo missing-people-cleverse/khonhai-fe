@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { IContent } from "../types/content";
 import { formatDate } from "../utils";
 
@@ -7,6 +7,7 @@ interface IContentProps {
 }
 
 const Content = ({ content }: IContentProps) => {
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const navigateToContent = () => {
@@ -14,7 +15,7 @@ const Content = ({ content }: IContentProps) => {
   };
   const navigateToComment = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    navigate("/");
+    navigate(`/createcomment`);
   };
 
   return (
@@ -51,6 +52,7 @@ const Content = ({ content }: IContentProps) => {
           </p>
         </div>
 
+        {/* Todo overlay createcomment */}
         <button className="commentbtn-content" onClick={navigateToComment}>
           แจ้งเบาะแส
         </button>

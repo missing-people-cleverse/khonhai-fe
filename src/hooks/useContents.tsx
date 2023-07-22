@@ -5,7 +5,6 @@ import { host } from "../constant";
 
 const useContents = () => {
   const [contents, setContents] = useState<IContent[]>([]);
-  const [searchResults, setSearchResults] = useState<IContent[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,12 +17,11 @@ const useContents = () => {
         .filter((obj: IContent) => obj.isArchive === false)
         .reverse();
       setContents(displayContents);
-      setSearchResults(displayContents);
     };
     fetchData();
   }, []);
 
-  return { contents, searchResults, setSearchResults };
+  return { contents };
 };
 
 export default useContents;

@@ -2,20 +2,62 @@ import PageHeader from "../components/PageHeader";
 import Content from "../components/Content";
 import useContents from "../hooks/useContents";
 import { IContent } from "../types/content";
+import { FormControl, MenuItem, Select, InputLabel } from "@mui/material";
+import { StyleInput } from "./Register";
+import {
+  genderList,
+  genderListTest,
+  provinceList,
+  provinceListTest,
+} from "../data/SelectableData";
+import { useEffect, useState } from "react";
 
 const MPall = () => {
-  const { contents, setSearchResults, searchResults } = useContents();
+  const { contents } = useContents();
+  const [filterName, setFilterName] = useState("");
+  const [filterProvince, setFilterProvince] = useState("");
+  const [filterGender, setFilterGender] = useState("");
+  const [list, setList] = useState(contents);
 
-  const handleSearchChange = (e: { target: HTMLInputElement }) => {
-    if (!e.target.value) return setSearchResults(contents);
+  const applyFilter = () => {
+    let updatedContents = contents;
 
-    const resultsArr = contents.filter(
-      (content) =>
-        content.name.includes(e.target.value) ||
-        content.surname.includes(e.target.value)
-    );
-    setSearchResults(resultsArr);
+    if (filterName) {
+      updatedContents = updatedContents.filter(
+        (content) =>
+          content.name.includes(filterName) ||
+          content.surname.includes(filterName)
+      );
+    }
+    if (filterGender) {
+      updatedContents = updatedContents.filter((content) =>
+        content.gender.includes(filterGender)
+      );
+    }
+    if (filterProvince) {
+      updatedContents = updatedContents.filter((content) =>
+        content.province.includes(filterProvince)
+      );
+    }
+
+    setList(updatedContents);
   };
+
+  useEffect(
+    () => applyFilter(),
+    [filterName, filterGender, filterProvince, list, contents]
+  );
+
+  // const handleSearchChange = (e: { target: { value: string; id: string } }) => {
+  //   if (!e.target.value) return setSearchResults(contents);
+
+  //   const resultsArr = contents.filter(
+  //     (content) =>
+  //       content.name.includes(e.target.value) ||
+  //       content.surname.includes(e.target.value)
+  //   );
+  //   setSearchResults(resultsArr);
+  // };
 
   return (
     <>
@@ -27,14 +69,54 @@ const MPall = () => {
         </p>
 
         <input
+          id="name"
           type="text"
           placeholder="ค้นหาชื่อ"
           className="inputBox-user h-[38px] w-[350px]"
           onSubmit={(e) => e.preventDefault()}
-          onChange={handleSearchChange}
+          onChange={(e) => setFilterName(e.target.value)}
+          value={filterName}
         />
+        <FormControl sx={{ m: 0, width: 100 }}>
+          <InputLabel>เพศ</InputLabel>
 
-        <img src="/search.svg" alt="search icon" className="ml-[-7px]" />
+          <Select
+            value={filterGender}
+            id="gender"
+            name="gender"
+            onSubmit={(e) => e.preventDefault()}
+            onChange={(e) => setFilterGender(e.target.value)}
+            input={<StyleInput />}
+            label="hi"
+          >
+            {genderListTest.map((gender) => (
+              <MenuItem key={gender} value={gender}>
+                {gender}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        <FormControl sx={{ m: 0, width: 100 }}>
+          <InputLabel>จังหวัด</InputLabel>
+
+          <Select
+            value={filterProvince}
+            id="province"
+            name="province"
+            onSubmit={(e) => e.preventDefault()}
+            onChange={(e) => setFilterProvince(e.target.value)}
+            input={<StyleInput />}
+            label="hi"
+          >
+            {provinceListTest.map((province) => (
+              <MenuItem key={province} value={province}>
+                {province}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
         <input
           className="w-[153px] h-[28px] rounded-[13px] pl-[48px] pt-[4px] border-input_boarderko border-solid border-[0.5px]"
           placeholder="จังหวัด"
@@ -50,8 +132,8 @@ const MPall = () => {
       </div>
       <div className="grid place-items-center">
         <div className="flexcontainer-mpall mb-[20px]">
-          {searchResults &&
-            searchResults.map((content: IContent) => {
+          {list &&
+            list.map((content: IContent) => {
               return <Content key={content.id} content={content} />;
             })}
         </div>

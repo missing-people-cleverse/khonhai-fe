@@ -16,6 +16,8 @@ import Footer from "./components/Footer";
 import AuthProvider from "./context/AuthProvider";
 import EditContent from "./pages/EditContent";
 import MPindividual from "./pages/MPindividual";
+import CreateComment from "./pages/CreateComment";
+import EditComment from "./pages/EditComment";
 
 function App() {
   return (
@@ -40,6 +42,9 @@ function App() {
 
             <Route path="/createcontent" element={<CreateContent />} />
             <Route path="/content/:id/edit" element={<EditContent />} />
+
+            <Route path="/createcomment" element={<CreateComment />} />
+            <Route path="/comment/:id/edit" element={<EditComment />} />
           </Routes>
         </Navbar>
         <Footer />
