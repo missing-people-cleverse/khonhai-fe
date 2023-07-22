@@ -1,5 +1,9 @@
 import { ReactNode } from "react";
 
+type FetchAuthorizationHeader = {
+  Authorization: `Bearer ${string}`;
+};
+
 export interface IAuthContext {
   id: string | null;
   user: string | null;
@@ -8,7 +12,7 @@ export interface IAuthContext {
   login: (username: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
 
-  // getAuthHeader: () => FetchAuthorizationHeader
+  getAuthHeader: () => FetchAuthorizationHeader;
   // isOwnPost: (c: ContentDto) => boolean
 }
 

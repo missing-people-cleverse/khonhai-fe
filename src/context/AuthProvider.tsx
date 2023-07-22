@@ -92,12 +92,17 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
+  const getAuthHeader: IAuthContext["getAuthHeader"] = () => ({
+    Authorization: `Bearer ${userInfo.token}`,
+  });
+
   return (
     <AuthContext.Provider
       value={{
         isLoggedIn,
         login,
         logout,
+        getAuthHeader,
         ...userInfo,
       }}
     >

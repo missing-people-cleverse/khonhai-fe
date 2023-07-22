@@ -206,6 +206,7 @@ const Register = () => {
                     value={selectedProvince}
                     onChange={handleChange}
                     input={<StyleInput />}
+                    required
                   >
                     {provinceList.map((province) => (
                       <MenuItem key={province} value={province}>
