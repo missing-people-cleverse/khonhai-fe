@@ -4,12 +4,7 @@ import useContents from "../hooks/useContents";
 import { IContent } from "../types/content";
 import { FormControl, MenuItem, Select, InputLabel } from "@mui/material";
 import { StyleInput } from "./Register";
-import {
-  genderList,
-  genderListTest,
-  provinceList,
-  provinceListTest,
-} from "../data/SelectableData";
+import { genderListTest, provinceListTest } from "../data/SelectableData";
 import { useEffect, useState } from "react";
 
 const MPall = () => {
@@ -45,19 +40,8 @@ const MPall = () => {
 
   useEffect(
     () => applyFilter(),
-    [filterName, filterGender, filterProvince, list, contents]
+    [filterName, filterGender, filterProvince, contents]
   );
-
-  // const handleSearchChange = (e: { target: { value: string; id: string } }) => {
-  //   if (!e.target.value) return setSearchResults(contents);
-
-  //   const resultsArr = contents.filter(
-  //     (content) =>
-  //       content.name.includes(e.target.value) ||
-  //       content.surname.includes(e.target.value)
-  //   );
-  //   setSearchResults(resultsArr);
-  // };
 
   return (
     <>
@@ -131,7 +115,7 @@ const MPall = () => {
         ></input>
       </div>
       <div className="grid place-items-center">
-        <div className="flexcontainer-mpall mb-[20px]">
+        <div className="flexcontainer-mpall mb-[20px] items-stretch">
           {list &&
             list.map((content: IContent) => {
               return <Content key={content.id} content={content} />;

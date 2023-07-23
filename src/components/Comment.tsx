@@ -3,12 +3,16 @@ import { IComment } from "../types/comment";
 import { formatDateTime } from "../utils/index";
 import OutsideClickHandler from "react-outside-click-handler";
 import { useAuth } from "../context/AuthProvider";
+import EditComment from "./EditComment";
+import { host } from "../constant";
 
 const Comment = (props: IComment) => {
   const { ...comment } = props;
   const { ...userInfo } = useAuth();
-
+  const [openComment, setOpenComment] = useState(false);
   const [isHidden, setIsHidden] = useState(true);
+
+  const token = localStorage.getItem("token");
 
   const imgs = [
     { id: "2", src: "/mp.jpg" },
@@ -16,6 +20,30 @@ const Comment = (props: IComment) => {
     { id: "3", src: "/mp.jpg" },
     { id: "4", src: "/mp.jpg" },
   ];
+  const handleComment = (e: any) => {
+    e.stopPropagation();
+    setOpenComment(true);
+  };
+
+  const handleDeleteComment = async (e: any) => {
+    e.stopPropagation();
+    try {
+      await fetch(`${host}/comment/delete/${comment.id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          isArchive: true,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log("eiei");
+      return window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -36,12 +64,15 @@ const Comment = (props: IComment) => {
 
               {!isHidden && (
                 <div className="w-[113px] h-[63px] bg-neutral-100 rounded-[5px] mt-[30px] ml-[670px] z-[100] absolute flex flex-col justify-evenly">
-                  <button className="flex ml-[2px]">
+                  <button className="flex ml-[2px]" onClick={handleComment}>
                     <img src="/pencil.svg" />
                     <p className="ml-[5px]">แก้ไขข้อมูล</p>
                   </button>
                   <hr />
-                  <button className="flex ml-[2px]">
+                  <button
+                    className="flex ml-[2px]"
+                    onClick={handleDeleteComment}
+                  >
                     <img src="/trash.svg" />
                     <p className="ml-[5px]">ลบข้อมูล</p>
                   </button>
@@ -90,6 +121,11 @@ const Comment = (props: IComment) => {
           )}
         </p>
       </div>
+      <EditComment
+        openComment={openComment}
+        onClose={() => setOpenComment(false)}
+        comment={comment}
+      />
     </>
   );
 };

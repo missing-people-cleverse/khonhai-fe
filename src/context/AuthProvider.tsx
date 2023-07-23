@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { ChildProps, IAuthContext } from "../types/auth.context";
 import { host } from "../constant";
+import { IUserProfile } from "../types/user";
 
 // Identify types
 export type AuthProviderProps = ChildProps;

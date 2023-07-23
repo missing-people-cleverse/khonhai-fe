@@ -5,6 +5,8 @@ import PageHeader from "./PageHeader";
 import OutsideClickHandler from "react-outside-click-handler";
 import { formatDateTime } from "../utils/index";
 import { useAuth } from "../context/AuthProvider";
+import CreateComment from "./CreateComment";
+import { host } from "../constant";
 
 const MPDetail = () => {
   const { id } = useParams();
@@ -12,6 +14,39 @@ const MPDetail = () => {
   const [isHidden, setIsHidden] = useState<Boolean>(true);
   const navigate = useNavigate();
   const { ...userInfo } = useAuth();
+  const [openComment, setOpenComment] = useState(false);
+  const { isLoggedIn } = useAuth();
+
+  const handleComment = (e: any) => {
+    e.stopPropagation();
+    if (isLoggedIn) {
+      setOpenComment(true);
+    } else {
+      navigate("/login");
+    }
+  };
+
+  const token = localStorage.getItem("token");
+  const handleDeleteContent = async (e: any) => {
+    e.stopPropagation();
+    try {
+      if (content?.id)
+        await fetch(`${host}/content/delete/${content.id}`, {
+          method: "PATCH",
+          body: JSON.stringify({
+            isArchive: true,
+            status: content.status,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      navigate("/content");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -66,7 +101,10 @@ const MPDetail = () => {
                               <p className="ml-[5px]">แก้ไขข้อมูล</p>
                             </button>
                             <hr />
-                            <button className="flex ml-[2px]">
+                            <button
+                              className="flex ml-[2px]"
+                              onClick={handleDeleteContent}
+                            >
                               <img src="/trash.svg" />
                               <p className="ml-[5px]">ลบข้อมูล</p>
                             </button>
@@ -138,12 +176,19 @@ const MPDetail = () => {
                     </span>
                   ) : null}
                 </p>
-                <button className="btn-pink w-[38%] ml-[auto] mr-[10px] mb-[10px]">
+                <button
+                  className="btn-pink w-[38%] ml-[auto] mr-[10px] mb-[10px]"
+                  onClick={handleComment}
+                >
                   แจ้งเบาะแส
                 </button>
               </div>
             </div>
           </div>
+          <CreateComment
+            openComment={openComment}
+            onClose={() => setOpenComment(false)}
+          />
         </div>
       )}
     </>

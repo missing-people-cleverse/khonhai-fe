@@ -22,7 +22,7 @@ const useComments = (id: Number) => {
         setIsLoading(false);
       }
     };
-    console.log(comments);
+
     fetchData();
   }, []);
   return { comments, isLoading };

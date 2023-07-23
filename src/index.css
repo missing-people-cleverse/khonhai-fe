@@ -231,6 +231,7 @@ body {
     border-radius: 10px;
     background: #fff;
     border-bottom: 5px solid #fff;
+    justify-content: space-between;
   }
   .card-content:hover {
     cursor: pointer;
@@ -250,7 +251,7 @@ body {
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
-    margin-top: 8px;
+    margin-top: 5px;
   }
 
   .commentcount-content {
@@ -290,7 +291,6 @@ body {
     transition: 0.3s ease;
     margin: auto;
     margin-top: 5px;
-    margin-bottom: 0px;
   }
 
   .commentbtn-content:hover {
@@ -299,7 +299,6 @@ body {
     border: var(--secondary) solid 1px;
     margin: auto;
     margin-top: 5px;
-    margin-bottom: 0px;
   }
 
   .thumbnail-mpdetail {
@@ -375,5 +374,23 @@ body {
     list-style-type: disc;
     list-style-position: inside;
     margin-left: 8px;
+  }
+
+  .btn-grey {
+    padding: 8px 10px;
+    text-align: center;
+    width: auto;
+    border: solid 1px #d8d8d8;
+    border-radius: 15px;
+    background-color: #fff;
+    color: var(--text_black);
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .btn-grey:hover {
+    background-color: #929292;
+    color: var(--text_light);
+    border: #929292 solid 1px;
   }
 }

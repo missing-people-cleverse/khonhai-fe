@@ -19,8 +19,6 @@ const useContent = (id: Number) => {
     fetchData();
   }, []);
 
-  // console.log(content);
-  // console.log(comments);
   return { content };
 };
 

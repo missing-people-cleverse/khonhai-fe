@@ -3,10 +3,10 @@ import { useState } from "react";
 import dayjs from "dayjs";
 
 const CreateComment = () => {
-  const [dateOfBirth, setDateOfBirth] = useState(dayjs(Date.now()));
+  const [foundDate, setfoundDate] = useState(dayjs(Date.now()));
 
-  const handleChangeDob = (value: any) => {
-    setDateOfBirth(value);
+  const handleChangeFoundDate = (value: any) => {
+    setfoundDate(value);
   };
 
   return (
@@ -24,33 +24,44 @@ const CreateComment = () => {
               />
             </div>
           </div>
-          <p>ผู้พบเห็น</p>
 
-          <div className="form-user">
-            <label>วันที่พบ</label>
-            <DatePicker
-              label="วันที่พบ"
-              value={dateOfBirth}
-              onChange={handleChangeDob}
-            />
+          <div className="flex flex-col ml-[40px] mr-[40px] mt-[26px] gap-[12px]">
+            <p className="subtopic-mpdetail text-black">ผู้พบเห็น</p>
+
+            <div className="form-user">
+              <label>วันที่พบ</label>
+              <DatePicker
+                label="วันที่พบ"
+                value={foundDate}
+                onChange={handleChangeFoundDate}
+                className="w-[30%]"
+              />
+            </div>
+            <div className="form-user">
+              <label>สถานที่ที่พบ</label>
+              <input
+                type="text"
+                placeholder="สถานที่ที่พบ"
+                className="inputBox-user w-[90%]"
+                required
+              />
+            </div>
+            <div className="form-user">
+              <label>รายละเอียดเพิ่มเติม</label>
+              <input
+                type="text"
+                placeholder="รายละเอียดเพิ่มเติม"
+                className="inputBox-user w-[90%]"
+                required
+              />
+            </div>
+            <button className="bg-zinc-300 rounded-[5px] text-center text-xs pt-[4px] pb-[4px] pl-[4px] pr-[4px] hover:bg-zinc-500 hover:text-white w-[15%]">
+              อัพโหลดรูปภาพ
+            </button>
           </div>
-          <div className="form-user">
-            <label>สถานที่ที่พบ</label>
-            <input
-              type="text"
-              placeholder="สถานที่ที่พบ"
-              className="inputBox-user"
-              required
-            />
-          </div>
-          <div className="form-user">
-            <label>รายละเอียดเพิ่มเติม</label>
-            <input
-              type="text"
-              placeholder="รายละเอียดเพิ่มเติม"
-              className="inputBox-user"
-              required
-            />
+          <div className="flex flex-row justify-center gap-[50px]">
+            <button className="btn-pink w-[80px]">ตกลง</button>
+            <button className="btn-grey w-[80px]">ยกเลิก</button>
           </div>
         </div>
       </div>
