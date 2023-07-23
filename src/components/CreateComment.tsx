@@ -1,16 +1,16 @@
 import { DatePicker } from "@mui/x-date-pickers";
 import { useState } from "react";
 import dayjs from "dayjs";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { host } from "../constant";
 import useUserProfile from "../hooks/useUserProfile";
 
-const CreateComment = ({ openComment, onClose }: any) => {
+const CreateComment = ({ openComment, onClose, content }: any) => {
   const [foundDate, setfoundDate] = useState(dayjs(Date.now()));
   const [foundDetail, setFoundDetail] = useState("");
   const [foundPlace, setFoundPlace] = useState("");
   const { userProfile } = useUserProfile();
-  const { id } = useParams();
+  // const { id } = useParams();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const handleChangeFoundDate = (value: any) => {
@@ -20,7 +20,7 @@ const CreateComment = ({ openComment, onClose }: any) => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      await fetch(`${host}/comment/${id}`, {
+      await fetch(`${host}/comment/${content.id}`, {
         method: "POST",
         body: JSON.stringify({
           foundPlace: foundPlace,
@@ -38,7 +38,7 @@ const CreateComment = ({ openComment, onClose }: any) => {
     } catch (err) {
       console.log(err);
     } finally {
-      navigate(`/content/${id}`);
+      navigate(`/content/${content.id}`);
     }
   };
 

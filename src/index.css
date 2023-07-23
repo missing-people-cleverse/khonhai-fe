@@ -190,12 +190,9 @@ body {
   .flexcontainer-mpall {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    justify-content: flex-start;
     max-width: 1060px;
-    margin-top: 16px;
-    margin-bottom: 24px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 16px auto 24px;
     gap: 20px;
   }
 

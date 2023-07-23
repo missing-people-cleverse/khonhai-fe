@@ -188,6 +188,7 @@ const MPDetail = () => {
           <CreateComment
             openComment={openComment}
             onClose={() => setOpenComment(false)}
+            content={content}
           />
         </div>
       )}

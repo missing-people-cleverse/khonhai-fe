@@ -4,14 +4,11 @@ import dayjs from "dayjs";
 import { useNavigate, useParams } from "react-router-dom";
 import { host } from "../constant";
 import useUserProfile from "../hooks/useUserProfile";
-import useComments from "../hooks/useComments";
-import { useAuth } from "../context/AuthProvider";
 
 const EditComment = ({ openComment, onClose, comment }: any) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { comments } = useComments(Number(id));
-  const { ...userInfo } = useAuth();
+
   const { userProfile } = useUserProfile();
   const token = localStorage.getItem("token");
 

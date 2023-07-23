@@ -114,13 +114,12 @@ const MPall = () => {
           placeholder="ช่วงเวลาที่หาย"
         ></input>
       </div>
-      <div className="grid place-items-center">
-        <div className="flexcontainer-mpall mb-[20px] items-stretch">
-          {list &&
-            list.map((content: IContent) => {
-              return <Content key={content.id} content={content} />;
-            })}
-        </div>
+
+      <div className="flexcontainer-mpall mb-[20px] items-stretch">
+        {list &&
+          list.map((content: IContent) => {
+            return <Content key={content.id} content={content} />;
+          })}
       </div>
     </>
   );

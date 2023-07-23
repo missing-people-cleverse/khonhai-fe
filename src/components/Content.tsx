@@ -19,9 +19,9 @@ const Content = ({ content }: IContentProps) => {
 
   const handleComment = (e: any) => {
     e.stopPropagation();
-    // setOpenComment(true);
+    setOpenComment(true);
 
-    navigate(`/content/${content.id}`);
+    // navigate(`/content/${content.id}`);
     // history.push("/route-link");
     // window.opener.location = `/content/${content.id}`;
     // navigate(`/content/${content.id}`);
@@ -32,6 +32,7 @@ const Content = ({ content }: IContentProps) => {
       <CreateComment
         openComment={openComment}
         onClose={() => setOpenComment(false)}
+        content={content}
       />
       <div className="card-content h-[auto]" onClick={navigateToContent}>
         <div>
@@ -54,7 +55,7 @@ const Content = ({ content }: IContentProps) => {
             <p className="contenttopic-content">
               วันที่หาย{" "}
               <span className="contentdetail-content">
-                {content.missingDatetime}
+                {formatDate(content.missingDatetime)}
               </span>
             </p>
             <p className="contenttopic-content">
