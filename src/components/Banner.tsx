@@ -5,12 +5,14 @@ const Banner = () => {
   const { isLoggedIn } = useAuth();
 
   return (
-    <div className="flex flex-row justify-between items-center py-8 w-10/12 mx-auto">
+    <div className="flex flex-row justify-between items-center py-5 w-10/12 mx-auto">
       <div className="flex flex-col gap-3">
-        <h1 className="font-bold text-4xl">
+        <h1 className="font-bold text-3xl">
           ยังมีคนที่รอคอยคนที่รักอย่างมีความหวัง
         </h1>
-        <p>ร่วมกันช่วยหาคนหายพร้อมแจ้งเบาะแสด้วยกันเถอะนะนะนะ</p>
+        <p className="text-lg">
+          ร่วมกันช่วยหาคนหายพร้อมแจ้งเบาะแสในเว็บไซท์ของเรา
+        </p>
         <section className="flex flex-row gap-4">
           <NavLink to="/content" className="btn-blue">
             ดูคนหายทั้งหมด
@@ -26,7 +28,11 @@ const Banner = () => {
           )}
         </section>
       </div>
-      <img src="/girlWaiting.svg" alt="a girl is waiting for someone" />
+      <img
+        src="/girlWaiting.svg"
+        alt="a girl is waiting for someone"
+        className="w-[17rem] h-[17rem]"
+      />
     </div>
   );
 };

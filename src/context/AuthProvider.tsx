@@ -83,6 +83,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+      localStorage.removeItem("id");
       setIsLoggedIn(false);
       setUserInfo({ id: null, user: null, token: null });
 

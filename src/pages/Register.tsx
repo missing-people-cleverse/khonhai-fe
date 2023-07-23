@@ -94,6 +94,9 @@ const Register = () => {
     }
   };
 
+  // TODO: validate unique username
+  const isValid: boolean = true;
+
   return (
     <>
       <PageHeader name="ลงทะเบียน" />
@@ -115,6 +118,21 @@ const Register = () => {
                 onChange={(e) => setInputUsername(e.target.value)}
                 required
               />
+              {!isValid ? (
+                <div className="flex flex-row gap-2 items-center">
+                  <img src="./validUser.svg" className="w-6 h-6" />
+                  <p className="text-sm text-valid_green">
+                    สามารถใช้งานชื่อผู้ใช้นี้ได้
+                  </p>
+                </div>
+              ) : (
+                <div className="flex flex-row gap-2 items-center">
+                  <img src="./invalidUser.svg" className="w-7 h-7" />
+                  <p className="text-sm text-secondary">
+                    ชื่อผู้ใช้นี้มีผู้่อื่นใช้่แล้ว ลองใช้ชื่ออื่น
+                  </p>
+                </div>
+              )}
             </div>
             <div className="flex flex-row gap-6">
               <div className="form-user">
