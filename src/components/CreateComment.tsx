@@ -4,15 +4,19 @@ import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 import { host } from "../constant";
 import useUserProfile from "../hooks/useUserProfile";
+import timezone from "dayjs/plugin/timezone";
+dayjs.extend(timezone);
+dayjs.tz.setDefault("Asia/Bangkok");
 
 const CreateComment = ({ openComment, onClose, content }: any) => {
   const [foundDate, setfoundDate] = useState(dayjs(Date.now()));
   const [foundDetail, setFoundDetail] = useState("");
   const [foundPlace, setFoundPlace] = useState("");
   const { userProfile } = useUserProfile();
-  // const { id } = useParams();
+
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+
   const handleChangeFoundDate = (value: any) => {
     setfoundDate(value);
   };
@@ -47,7 +51,7 @@ const CreateComment = ({ openComment, onClose, content }: any) => {
     <>
       {openComment && userProfile && userProfile.user && (
         <div
-          className="z-[800] w-screen h-screen flex justify-center fixed "
+          className="z-[800] flex justify-center fixed mt-[-50px]"
           onClick={(e) => {
             e.stopPropagation();
             onClose;

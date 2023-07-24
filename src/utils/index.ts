@@ -1,4 +1,11 @@
-export const formatDateTime = (dateTime: string): string => {
+import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+dayjs.extend(timezone);
+dayjs.tz.setDefault("Asia/Bangkok");
+
+export const formatDateTime = (dateTimeDB: string): string => {
+  const dateTime = dayjs(dateTimeDB).format("YYYY-MM-DDTHH:mm:ssZ[Z]");
+
   const dateDB = new Date(
     Number(dateTime.slice(0, 4)),
     Number(dateTime.slice(5, 7)) - 1,
@@ -15,14 +22,17 @@ export const formatDateTime = (dateTime: string): string => {
 
   return `${date} เวลา ${time}`;
 };
-export const formatDate = (date: string): string => {
-  const dateDB = new Date(
+
+export const formatDate = (dateDB: string): string => {
+  const date = dayjs(dateDB).format("YYYY-MM-DDTHH:mm:ssZ[Z]");
+
+  const dateSlice = new Date(
     Number(date.slice(0, 4)),
     Number(date.slice(5, 7)) - 1,
     Number(date.slice(8, 10))
   );
 
-  const formatDate = dateDB.toLocaleDateString("th-TH", {
+  const formatDate = dateSlice.toLocaleDateString("th-TH", {
     year: "numeric",
     month: "long",
     day: "numeric",

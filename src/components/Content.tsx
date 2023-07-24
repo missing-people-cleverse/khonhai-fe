@@ -3,6 +3,7 @@ import { IContent } from "../types/content";
 import { formatDate } from "../utils";
 import { useState } from "react";
 import CreateComment from "./CreateComment";
+import useComments from "../hooks/useComments";
 
 interface IContentProps {
   content: IContent;
@@ -10,6 +11,7 @@ interface IContentProps {
 
 const Content = ({ content }: IContentProps) => {
   const [openComment, setOpenComment] = useState(false);
+  const { comments } = useComments(Number(content.id));
 
   const navigate = useNavigate();
 
@@ -73,10 +75,10 @@ const Content = ({ content }: IContentProps) => {
             แจ้งเบาะแส
           </button>
 
-          {content.comments.length === 0 ? (
+          {comments.length === 0 ? (
             <div className="commentcount-content">{`ยังไม่มีเบาะแส`}</div>
           ) : (
-            <div className="commentcount-content">{`${content.comments.length} เบาะแส`}</div>
+            <div className="commentcount-content">{`${comments.length} เบาะแส`}</div>
           )}
         </div>
       </div>

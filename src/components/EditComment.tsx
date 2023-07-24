@@ -16,11 +16,6 @@ const EditComment = ({ openComment, onClose, comment }: any) => {
   const [foundDetail, setFoundDetail] = useState<string>("");
   const [foundPlace, setFoundPlace] = useState<string>("");
 
-  //   const getSomeComment: IComment[] = comments.filter(
-  //     (comment) => comment.userId === userInfo.id
-  //   );
-  //   const comment = getSomeComment[0];
-
   useEffect(() => {
     if (comment) {
       setFoundDetail(comment.foundDetail);
@@ -49,7 +44,7 @@ const EditComment = ({ openComment, onClose, comment }: any) => {
         method: "PATCH",
         body: JSON.stringify({
           foundPlace: foundPlace,
-          foundDatetime: foundDate.toISOString(),
+          foundDatetime: foundDate,
           foundDetail: foundDetail,
           img: "mp123",
         }),
@@ -72,7 +67,7 @@ const EditComment = ({ openComment, onClose, comment }: any) => {
     <>
       {openComment && (
         <div
-          className="z-[800] w-screen h-screen flex justify-center fixed mt-[-400px]"
+          className="z-[800] w-screen h-screen flex justify-center fixed mt-[-600px]"
           onClick={(e) => {
             e.stopPropagation();
             onClose;

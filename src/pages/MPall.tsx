@@ -4,7 +4,7 @@ import useContents from "../hooks/useContents";
 import { IContent } from "../types/content";
 import { FormControl, MenuItem, Select, InputLabel } from "@mui/material";
 import { StyleInput } from "./Register";
-import { genderListTest, provinceListTest } from "../data/SelectableData";
+import { genderList, provinceList } from "../data/SelectableData";
 import { useEffect, useState } from "react";
 
 const MPall = () => {
@@ -73,7 +73,11 @@ const MPall = () => {
             input={<StyleInput />}
             label="hi"
           >
-            {genderListTest.map((gender) => (
+            <MenuItem key={""} value={""}>
+              {"-"}
+            </MenuItem>
+            <MenuItem></MenuItem>
+            {genderList.map((gender) => (
               <MenuItem key={gender} value={gender}>
                 {gender}
               </MenuItem>
@@ -93,7 +97,10 @@ const MPall = () => {
             input={<StyleInput />}
             label="hi"
           >
-            {provinceListTest.map((province) => (
+            <MenuItem key={""} value={""}>
+              {"-"}
+            </MenuItem>
+            {provinceList.map((province) => (
               <MenuItem key={province} value={province}>
                 {province}
               </MenuItem>

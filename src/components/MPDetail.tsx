@@ -3,7 +3,7 @@ import useContent from "../hooks/useContent";
 import { useState } from "react";
 import PageHeader from "./PageHeader";
 import OutsideClickHandler from "react-outside-click-handler";
-import { formatDateTime } from "../utils/index";
+import { formatDateTime, formatDate } from "../utils/index";
 import { useAuth } from "../context/AuthProvider";
 import CreateComment from "./CreateComment";
 import { host } from "../constant";
@@ -69,7 +69,8 @@ const MPDetail = () => {
                     <p className="name-mpdetail">
                       {content.name} {content.surname}
                     </p>
-                    {content.status !== "FOUNDED" ? (
+
+                    {content.status !== "พบแล้ว" ? (
                       <div className="unfounded-mpdetail">ยังตามหาอยู่</div>
                     ) : (
                       <div className="founded-mpdetail">พบแล้ว</div>
@@ -144,7 +145,7 @@ const MPDetail = () => {
                 <p className="subtopic-mpdetail">
                   {"วันที่พบเห็นล่าสุด "}
                   <span className="detail-mpdetail">
-                    {content.missingDatetime}
+                    {formatDate(content.missingDatetime)}
                   </span>
                 </p>
                 <p className="subtopic-mpdetail">
@@ -168,11 +169,13 @@ const MPDetail = () => {
                 </p>
 
                 <p className="text-[12px]">
-                  {`ประกาศเมื่อวันที่ ${formatDateTime(content.createdAt)}`}
+                  {`ประกาศเมื่อวันที่ ${formatDateTime(
+                    content.createdAt
+                  )} (GMT)`}
                   {content.createdAt !== content.updatedAt ? (
                     <span>
-                      {`(แก้ไขข้อมูลล่าสุดวันที่
-                  ${formatDateTime(content.updatedAt)})`}
+                      {` (แก้ไขข้อมูลล่าสุดวันที่
+                  ${formatDateTime(content.updatedAt)} (GMT))`}
                     </span>
                   ) : null}
                 </p>

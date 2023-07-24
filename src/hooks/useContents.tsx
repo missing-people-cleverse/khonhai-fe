@@ -19,7 +19,7 @@ const useContents = () => {
       setContents(displayContents);
     };
     fetchData();
-  }, []);
+  }, [contents]);
 
   return { contents };
 };

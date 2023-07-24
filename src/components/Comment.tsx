@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { IComment } from "../types/comment";
-import { formatDateTime } from "../utils/index";
+import { formatDateTime, formatDate } from "../utils/index";
 import OutsideClickHandler from "react-outside-click-handler";
 import { useAuth } from "../context/AuthProvider";
 import EditComment from "./EditComment";
 import { host } from "../constant";
+import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+dayjs.extend(timezone);
+dayjs.tz.setDefault("Asia/Bangkok");
 
 const Comment = (props: IComment) => {
   const { ...comment } = props;
@@ -38,7 +42,7 @@ const Comment = (props: IComment) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("eiei");
+
       return window.location.reload();
     } catch (err) {
       console.log(err);
@@ -90,7 +94,9 @@ const Comment = (props: IComment) => {
         </p>
         <p className="subtopic-mpdetail pl-[18px]">
           {"วันที่พบเห็น "}
-          <span className="detail-mpdetail">{comment.foundDatetime}</span>
+          <span className="detail-mpdetail">
+            {formatDate(comment.foundDatetime)}
+          </span>
         </p>
         <p className="subtopic-mpdetail pl-[18px]">
           {"สถานที่ "}
@@ -113,11 +119,11 @@ const Comment = (props: IComment) => {
           })}
         </div>
         <p className="text-[12px] pl-[18px]">
-          {`แจ้งเบาะแสเมื่อวันที่ ${formatDateTime(comment.createdAt)}`}
+          {`แจ้งเบาะแสเมื่อวันที่ ${formatDateTime(comment.createdAt)} (GMT)`}
           {comment.createdAt === comment.updatedAt ? null : (
-            <span>{`(แก้ไขข้อมูลล่าสุดวันที่ ${formatDateTime(
+            <span>{` (แก้ไขข้อมูลล่าสุดวันที่ ${formatDateTime(
               comment.updatedAt
-            )})`}</span>
+            )} (GMT))`}</span>
           )}
         </p>
       </div>
