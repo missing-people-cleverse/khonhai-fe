@@ -4,7 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 import useContents from "../hooks/useContents";
 import { IContent } from "../types/content";
 
-const responsive = {
+export const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 3,
@@ -33,7 +33,7 @@ const RandomMP = () => {
           autoPlay={true}
           draggable={true}
           swipeable={true}
-          containerClass="carouselontainer"
+          containerClass="carouselContainer"
           itemClass="carouselItem"
           autoPlaySpeed={6000}
           responsive={responsive}

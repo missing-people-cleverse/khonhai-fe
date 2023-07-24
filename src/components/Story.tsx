@@ -47,7 +47,7 @@ const Story = () => {
           />
         </div>
 
-        <div className="flex flex-row justify-between items-center pt-[7rem] pb-[8rem] w-11/12 ">
+        <div className="flex flex-row justify-between items-center pt-[5rem] pb-[7rem] w-11/12 ">
           <figure className="w-3/5">
             <img
               src="./group2.svg"
@@ -90,8 +90,10 @@ const Story = () => {
             >
               {start ? "หยุด" : "เล่นซ้ำ"}
             </button>
-
-            <p className="text-2xl pt-[3rem]">
+            <p className="font-semibold text-3xl pt-[3rem]">
+              ตลอด 10 ปีที่ผ่านมา
+            </p>
+            <p className="text-2xl ">
               <strong>35%</strong> สมัครใจหนีออกจากบ้าน
             </p>
             <p className="text-2xl pl-10">

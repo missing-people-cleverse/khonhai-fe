@@ -34,6 +34,9 @@ export const StyleInput = styled(InputBase)(({ theme }) => ({
 const Register = () => {
   const [selectedProvince, setSelectedProvince] = useState<string>("");
   const [disabled, setDisabled] = useState(true);
+  const [isUserValid, setIsUserValid] = useState<boolean>(true);
+  const [isEmailValid, setIsEmailValid] = useState<boolean>(true);
+  const [isPhoneValid, setIsPhoneValid] = useState<boolean>(true);
   const navigate = useNavigate();
   const [inputUsername, setInputUsername] = useState<string>("");
   const [inputPassword, setInputPassword] = useState<string>("");
@@ -55,9 +58,6 @@ const Register = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    //TODO: Validate username, email, phonenumber uniqeness, --> or it should be on BE
-    //TODO: eg send error status code to throw
 
     try {
       if (inputPassword === inputConfirmPassword) {
@@ -94,8 +94,65 @@ const Register = () => {
     }
   };
 
-  // TODO: validate unique username
-  const isValid: boolean = true;
+  // Validate unique username
+  const handleChangeValidUsername = async () => {
+    try {
+      const res = await fetch(`${host}/user/register/checkusername`, {
+        method: "POST",
+        body: JSON.stringify({
+          username: inputUsername,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      const data = await res.json();
+      setIsUserValid(!data.isBlacklistedUsername);
+      return data;
+    } catch (err: any) {
+      throw new Error(err.message);
+    }
+  };
+
+  // Validate unique email
+  const handleChangeValidEmail = async () => {
+    try {
+      const res = await fetch(`${host}/user/register/checkemail`, {
+        method: "POST",
+        body: JSON.stringify({
+          email: inputEmail,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      const data = await res.json();
+      setIsEmailValid(!data.isBlacklistedEmail);
+      return data;
+    } catch (err: any) {
+      throw new Error(err.message);
+    }
+  };
+
+  // Validate unique phone number
+  const handleChangeValidPhone = async () => {
+    try {
+      const res = await fetch(`${host}/user/register/checkphonenumber`, {
+        method: "POST",
+        body: JSON.stringify({
+          phoneNumber: inputPhoneNum,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+      const data = await res.json();
+      setIsPhoneValid(!data.isBlacklistedPhoneNumber);
+      return data;
+    } catch (err: any) {
+      throw new Error(err.message);
+    }
+  };
 
   return (
     <>
@@ -116,16 +173,10 @@ const Register = () => {
                 placeholder="ชื่อผู้ใช้ภาษาอังกฤษ"
                 className="inputBox-user"
                 onChange={(e) => setInputUsername(e.target.value)}
+                onKeyUp={handleChangeValidUsername}
                 required
               />
-              {!isValid ? (
-                <div className="flex flex-row gap-2 items-center">
-                  <img src="./validUser.svg" className="w-6 h-6" />
-                  <p className="text-sm text-valid_green">
-                    สามารถใช้งานชื่อผู้ใช้นี้ได้
-                  </p>
-                </div>
-              ) : (
+              {!isUserValid && (
                 <div className="flex flex-row gap-2 items-center">
                   <img src="./invalidUser.svg" className="w-7 h-7" />
                   <p className="text-sm text-secondary">
@@ -163,8 +214,17 @@ const Register = () => {
                 placeholder="อีเมล"
                 className="inputBox-user"
                 onChange={(e) => setInputEmail(e.target.value)}
+                onKeyUp={handleChangeValidEmail}
                 required
               />
+              {!isEmailValid && (
+                <div className="flex flex-row gap-2 items-center">
+                  <img src="./invalidUser.svg" className="w-7 h-7" />
+                  <p className="text-sm text-secondary">
+                    อีเมลนี้ถูกใช้ลงทะเบียนแล้ว
+                  </p>
+                </div>
+              )}
             </div>
             <div className="form-user">
               <label>เบอร์โทรศัพท์</label>
@@ -174,8 +234,17 @@ const Register = () => {
                 placeholder="เบอร์โทรศัพท์10หลัก"
                 className="inputBox-user"
                 onChange={(e) => setInputPhoneNum(e.target.value)}
+                onKeyUp={handleChangeValidPhone}
                 required
               />
+              {!isPhoneValid && (
+                <div className="flex flex-row gap-2 items-center">
+                  <img src="./invalidUser.svg" className="w-7 h-7" />
+                  <p className="text-sm text-secondary">
+                    เบอร์โทรศัพท์ถูกใช้ลงทะเบียนแล้ว
+                  </p>
+                </div>
+              )}
             </div>
             <div className="flex flex-row gap-6">
               <div className="form-user">

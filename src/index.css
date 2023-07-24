@@ -126,7 +126,7 @@ body {
     color: var(--text_dark_grey);
   }
 
-  .carouselontainer {
+  .carouselContainer {
     padding: 20px;
     width: 800px;
   }

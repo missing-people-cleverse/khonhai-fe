@@ -3,7 +3,7 @@ import useContent from "../hooks/useContent";
 import { useState } from "react";
 import PageHeader from "./PageHeader";
 import { useAuth } from "../context/AuthProvider";
-
+import "react-multi-carousel/lib/styles.css";
 const MPDetail = () => {
   const { id } = useParams();
   const { content } = useContent(Number(id));
@@ -42,11 +42,11 @@ const MPDetail = () => {
           <div className="flex justify-center mt-10 mb-[15px]">
             <div className="w-[60%] bg-white ">
               <div className="flex flex-row justify-between gap-[20px]">
-                <div className="h-[300px] w-[auto] ml-[auto] mr-[auto] mt-[20px]">
+                <div className=" ml-[auto] mr-[auto] mt-[20px]">
                   <img
-                    src="/mp.jpg"
+                    src="/mp2.jpeg"
                     alt="missing people"
-                    className="thumbnail-mpdetail"
+                    className="thumbnail-mpdetail h-[400px] w-[300px]"
                   />
                 </div>
 
@@ -56,7 +56,7 @@ const MPDetail = () => {
                       <p className="name-mpdetail">
                         {content.name} {content.surname}
                       </p>
-                      {content.status !== "FOUNDED" ? (
+                      {content.status !== "พบแล้ว" ? (
                         <div className="unfounded-mpdetail">ยังตามหาอยู่</div>
                       ) : (
                         <div className="founded-mpdetail">พบแล้ว</div>
