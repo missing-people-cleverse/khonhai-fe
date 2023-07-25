@@ -10,14 +10,12 @@ const Navbar = ({ children }: AuthProviderProps) => {
   return (
     <>
       <header className="bg-bg_white sticky top-0 z-50">
-        <div className="flex flex-row flex-wrap justify-between items-center py-2 w-10/12 mx-auto">
-          <div>
-            <Link to="/">
-              {" "}
-              <img src="/logo.svg" alt="Khonhai logo" />
-            </Link>
-          </div>
-          <nav className="flex flex-row gap-10">
+        <div className="flex flex-row justify-between items-center py-2 w-10/12 mx-auto max-md:justify-center max-md:gap-32 max-md:ml-[4rem]">
+          <Link to="/">
+            <img src="/logo.svg" alt="Khonhai logo" />
+          </Link>
+
+          <nav className="flex flex-row gap-10  max-md:hidden">
             <NavLink
               to="/"
               className={({ isActive }) =>
@@ -43,24 +41,25 @@ const Navbar = ({ children }: AuthProviderProps) => {
               ศูนย์ช่วยเหลือ
             </NavLink>
           </nav>
+
           {!isLoggedIn ? (
             <nav className="flex flex-row gap-5">
-              <NavLink to="/login" className="btn-blue">
+              <NavLink to="/login" className="btn-blue max-md:text-xs">
                 เข้าสู่ระบบ
               </NavLink>
-              <NavLink to="/register" className="btn-blue">
+              <NavLink to="/register" className="btn-blue max-md:text-xs">
                 สมัครสมาชิก
               </NavLink>
             </nav>
           ) : (
             <nav className="flex flex-row gap-5">
-              <p className="font-bold pt-2">
+              <p className="font-bold pt-3 max-md:text-xs">
                 ยินดีต้อนรับ{" "}
-                <span className="text-secondary_shadow">
+                <span className="text-secondary_shadow max-md:text-xs">
                   คุณ{userInfo.user}
                 </span>
               </p>
-              <a className="btn-blue" onClick={logout}>
+              <a className="btn-blue max-md:text-xs" onClick={logout}>
                 ออกจากระบบ
               </a>
             </nav>

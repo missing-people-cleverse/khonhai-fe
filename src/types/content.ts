@@ -1,12 +1,8 @@
-export interface IContent {
-  id: number;
-  createdAt: string;
-  updatedAt: string;
+export interface IContentDto {
   isArchive: boolean;
   name: string;
   surname: string;
   nickname: string;
-  userId: string;
   img: string; //arr of str
   nationality: string;
   ageLastSeen: number;
@@ -21,6 +17,13 @@ export interface IContent {
   province: string;
   place: string;
   missingDatetime: string;
+}
+
+export interface IContent extends IContentDto {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  userId: string;
   user: {
     id: string;
     username: string;

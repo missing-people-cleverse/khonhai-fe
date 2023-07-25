@@ -5,7 +5,7 @@ import { useState } from "react";
 import CreateComment from "./CreateComment";
 import useComments from "../hooks/useComments";
 
-interface IContentProps {
+export interface IContentProps {
   content: IContent;
 }
 

@@ -1,26 +1,43 @@
 import { FormControl, MenuItem, Select } from "@mui/material";
 import PageHeader from "../components/PageHeader";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { StyleInput } from "./Register";
 import {
   genderList,
   nationalityList,
   provinceList,
+  skinList,
 } from "../data/SelectableData";
 import { DatePicker } from "@mui/x-date-pickers";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+import { useAuth } from "../context/AuthProvider";
+import { host } from "../constant";
+import { toast } from "react-toastify";
+import WithGuard from "../guards/WithGuard";
 
 const CreateContent = () => {
+  const { getAuthHeader } = useAuth();
+  const navigate = useNavigate();
+
+  const [dateOfBirth, setDateOfBirth] = useState(dayjs(Date.now()));
+  const [lastseenDate, setLastseenDate] = useState(dayjs(Date.now()));
+  const [inputName, setInputName] = useState<string>("");
+  const [inputSurname, setInputSurname] = useState<string>("");
+  const [inputNickname, setInputNickname] = useState<string>("");
+  const [inputAgeLastSeen, setInputAgeLastSeen] = useState<string>("");
+  const [inputWeight, setInputWeight] = useState<string>("");
+  const [inputHeight, setInputHeight] = useState<string>("");
+  const [inputRemark, setInputRemark] = useState<string>("");
+  const [inputPlace, setInputPlace] = useState<string>("");
+  const [inputMissingDetail, setInputMissingDetail] = useState<string>("");
+
   const [contentInfo, setContentInfo] = useState({
     gender: "",
     nationality: "",
     province: "",
-    lastseenDate: "",
+    skin: "",
   });
-
-  const [dateOfBirth, setDateOfBirth] = useState(dayjs(Date.now()));
-  const [lastseenDate, setLastseenDate] = useState(dayjs(Date.now()));
 
   const handleChange = (event: { target: { name: string; value: string } }) => {
     const value = event.target.value;
@@ -35,6 +52,48 @@ const CreateContent = () => {
     setLastseenDate(value);
   };
 
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    // TODO: edit image in body to be actual img url
+    try {
+      const res = await fetch(`${host}/content/create`, {
+        method: "POST",
+        body: JSON.stringify({
+          isArchive: false,
+          name: inputName,
+          surname: inputSurname,
+          nickname: inputNickname,
+          img: "image",
+          nationality: contentInfo.nationality,
+          ageLastSeen: Number(inputAgeLastSeen),
+          dateOfBirth: `${dateOfBirth}`,
+          gender: contentInfo.gender,
+          weight: Number(inputWeight),
+          height: Number(inputHeight),
+          skin: contentInfo.skin,
+          remark: inputRemark,
+          status: "ยังไม่พบ",
+          province: contentInfo.province,
+          place: inputPlace,
+          missingDatetime: `${lastseenDate}`,
+          missingDetail: inputMissingDetail,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          ...getAuthHeader(),
+        },
+      });
+
+      const data = await res.json();
+      toast.success("แจ้งคนหายสำเร็จ");
+      navigate("/content");
+      return data;
+    } catch (err: any) {
+      throw new Error(err.message);
+    }
+  };
+
   return (
     <>
       <PageHeader name="แจ้งคนหาย" />
@@ -42,7 +101,7 @@ const CreateContent = () => {
         <p className="text-primary font-semibold text-xl px-10 pt-10">
           ข้อมูลส่วนตัวคนหาย
         </p>
-        <form className="flex flex-row gap-20 p-10">
+        <form className="flex flex-row gap-20 p-10" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-3 w-1/2">
             <section className="flex flex-row gap-6">
               <div className="form-user">
@@ -51,6 +110,7 @@ const CreateContent = () => {
                   type="text"
                   placeholder="ชื่อ"
                   className="inputBox-user"
+                  onChange={(e) => setInputName(e.target.value)}
                   required
                 />
               </div>
@@ -60,6 +120,7 @@ const CreateContent = () => {
                   type="text"
                   placeholder="นามสกุล"
                   className="inputBox-user"
+                  onChange={(e) => setInputSurname(e.target.value)}
                   required
                 />
               </div>
@@ -71,6 +132,7 @@ const CreateContent = () => {
                   type="text"
                   placeholder="ชื่อเล่น"
                   className="inputBox-user"
+                  onChange={(e) => setInputNickname(e.target.value)}
                   required
                 />
               </div>
@@ -82,6 +144,7 @@ const CreateContent = () => {
                     name="gender"
                     onChange={handleChange}
                     input={<StyleInput />}
+                    required
                   >
                     {genderList.map((gender) => (
                       <MenuItem key={gender} value={gender}>
@@ -99,6 +162,7 @@ const CreateContent = () => {
                     name="nationality"
                     onChange={handleChange}
                     input={<StyleInput />}
+                    required
                   >
                     {nationalityList.map((nation) => (
                       <MenuItem key={nation} value={nation}>
@@ -116,6 +180,7 @@ const CreateContent = () => {
                   type="number"
                   placeholder="อายุ(ปี)"
                   className="inputBox-user w-[6rem]"
+                  onChange={(e) => setInputAgeLastSeen(e.target.value)}
                   required
                 />
               </div>
@@ -125,6 +190,7 @@ const CreateContent = () => {
                   type="number"
                   placeholder="ส่วนสูง(เซนติเมตร)"
                   className="inputBox-user w-[10rem]"
+                  onChange={(e) => setInputHeight(e.target.value)}
                   required
                 />
               </div>
@@ -134,6 +200,7 @@ const CreateContent = () => {
                   type="number"
                   placeholder="น้ำหนัก(กิโลกรัม)"
                   className="inputBox-user w-[10rem]"
+                  onChange={(e) => setInputWeight(e.target.value)}
                   required
                 />
               </div>
@@ -141,7 +208,6 @@ const CreateContent = () => {
             <section className="flex flex-row gap-6">
               <div className="form-user">
                 <label>วันเกิด</label>
-                {/* Todo styling date picker box  */}
                 <DatePicker
                   label="วันเกิด"
                   value={dateOfBirth}
@@ -163,6 +229,7 @@ const CreateContent = () => {
                 type="text"
                 placeholder="จุดสังเกตของผู้สูญหาย"
                 className="inputBox-user w-[30rem]"
+                onChange={(e) => setInputRemark(e.target.value)}
                 required
               />
               <p className="text-gray-400 text-xs">
@@ -176,10 +243,32 @@ const CreateContent = () => {
                 type="text"
                 placeholder="แจ้งข้อมูลที่เจอครั้งสุดท้าย ให้ชัดเจนที่สุด"
                 className="inputBox-user w-[30rem]"
+                onChange={(e) => setInputMissingDetail(e.target.value)}
                 required
               />
               <p className="text-gray-400 text-xs">
                 *เช่น ใส่เสื้อผ้าสีแดง, กางเกงยีนส์สีดำ, รองเท้าแตะสีแดง
+              </p>
+            </div>
+            <div className="form-user">
+              <label>สีผิว</label>
+              <FormControl sx={{ m: 0, width: 200 }}>
+                <Select
+                  value={contentInfo.skin}
+                  name="skin"
+                  onChange={handleChange}
+                  input={<StyleInput />}
+                  required
+                >
+                  {skinList.map((skin) => (
+                    <MenuItem key={skin} value={skin}>
+                      {skin}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <p className="text-gray-400 text-xs">
+                *เลือกสีผิวที่ใกล้เคียงที่สุดของผู้สูญหาย
               </p>
             </div>
             <p className="text-primary font-semibold text-xl pt-10">
@@ -193,6 +282,7 @@ const CreateContent = () => {
                   name="province"
                   onChange={handleChange}
                   input={<StyleInput />}
+                  required
                 >
                   {provinceList.map((province) => (
                     <MenuItem key={province} value={province}>
@@ -208,6 +298,7 @@ const CreateContent = () => {
                 type="text"
                 placeholder="แจ้งพื้นที่ที่พบเห็นล่าสุด"
                 className="inputBox-user w-[30rem]"
+                onChange={(e) => setInputPlace(e.target.value)}
                 required
               />
               <p className="text-gray-400 text-xs">
@@ -253,4 +344,4 @@ const CreateContent = () => {
   );
 };
 
-export default CreateContent;
+export default WithGuard(CreateContent);

@@ -18,11 +18,14 @@ import EditContent from "./pages/EditContent";
 import MPindividual from "./pages/MPindividual";
 import CreateComment from "./pages/CreateComment";
 import EditComment from "./pages/EditComment";
+import NavbarMobile from "./components/NavbarMobile";
+import "./styles.css";
 
 function App() {
   return (
     <AuthProvider>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <NavbarMobile />
         <Navbar>
           <ToastContainer
             position="top-center"
@@ -41,10 +44,7 @@ function App() {
             <Route path="/help" element={<HelpServices />} />
 
             <Route path="/createcontent" element={<CreateContent />} />
-            <Route path="/content/:id/edit" element={<EditContent />} />
-
-            <Route path="/createcomment" element={<CreateComment />} />
-            <Route path="/comment/:id/edit" element={<EditComment />} />
+            <Route path="/content/:id/editcontent" element={<EditContent />} />
           </Routes>
         </Navbar>
         <Footer />
