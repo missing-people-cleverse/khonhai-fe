@@ -22,10 +22,12 @@ const MPall = () => {
   const [filterAge, setFilterAge] = useState("");
   const [list, setList] = useState(contents);
   const [page, setPage] = useState(1);
+  const [pageCount, setPageCount] = useState(0);
   const contentPerPage = 12;
 
   const applyFilter = () => {
     let updatedContents = contents;
+    let counting = updatedContents.length;
 
     if (filterName) {
       updatedContents = updatedContents.filter(
@@ -33,44 +35,56 @@ const MPall = () => {
           content.name.includes(filterName) ||
           content.surname.includes(filterName)
       );
+      counting = updatedContents.length;
     }
+
     if (filterGender) {
       updatedContents = updatedContents.filter((content) =>
         content.gender.includes(filterGender)
       );
+      counting = updatedContents.length;
     }
+
     if (filterProvince) {
       updatedContents = updatedContents.filter((content) =>
         content.province.includes(filterProvince)
       );
+      counting = updatedContents.length;
     }
 
     if (filterAge) {
-      if (filterAge === "") return;
-      if (filterAge === "เด็ก (น้อยกว่า 10 ปี)") {
+      if (!filterAge) {
+        updatedContents = updatedContents;
+      } else if (filterAge === "เด็ก (น้อยกว่า 10 ปี)") {
         updatedContents = updatedContents.filter(
           (content) => content.ageLastSeen >= 0 && content.ageLastSeen <= 10
         );
+        counting = updatedContents.length;
       } else if (filterAge === "วัยรุ่น (11 - 25 ปี)") {
         updatedContents = updatedContents.filter(
           (content) => content.ageLastSeen >= 11 && content.ageLastSeen <= 25
         );
+        counting = updatedContents.length;
       } else if (filterAge === "ผู้ใหญ่ (26 - 60 ปี)") {
         updatedContents = updatedContents.filter(
           (content) => content.ageLastSeen >= 26 && content.ageLastSeen <= 60
         );
+        counting = updatedContents.length;
       } else {
         updatedContents = updatedContents.filter(
           (content) => content.ageLastSeen >= 61 && content.ageLastSeen <= 200
         );
+        counting = updatedContents.length;
       }
     }
+
     updatedContents = updatedContents.slice(
       contentPerPage * page - 12,
       contentPerPage * page
     );
 
     setList(updatedContents);
+    setPageCount(counting);
   };
 
   useEffect(
@@ -104,7 +118,11 @@ const MPall = () => {
             id="gender"
             name="gender"
             onSubmit={(e) => e.preventDefault()}
-            onChange={(e) => setFilterGender(e.target.value)}
+            onChange={(e) => {
+              {
+                setFilterGender(e.target.value);
+              }
+            }}
             input={<StyleInput />}
             label="hi"
           >
@@ -159,7 +177,7 @@ const MPall = () => {
             input={<StyleInput />}
             label="hi"
           >
-            <MenuItem key={""} value={[""]}>
+            <MenuItem key={""} value={""}>
               {"-"}
             </MenuItem>
             {ageList.map((list) => (
@@ -184,7 +202,7 @@ const MPall = () => {
         sx={{ margin: "20px 0px" }}
       >
         <Pagination
-          count={Math.ceil(contents.length / 12)}
+          count={Math.ceil(pageCount / 12)}
           onChange={(_, value) => setPage(value)}
         />
       </Box>
