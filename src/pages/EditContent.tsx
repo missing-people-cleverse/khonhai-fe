@@ -226,7 +226,6 @@ const EditContent = () => {
             <section className="flex flex-row gap-6">
               <div className="form-user">
                 <label>วันเกิด</label>
-                {/* Todo styling date picker box  */}
                 <DatePicker
                   label="วันเกิด"
                   value={dateOfBirth}

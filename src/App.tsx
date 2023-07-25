@@ -16,11 +16,14 @@ import Footer from "./components/Footer";
 import AuthProvider from "./context/AuthProvider";
 import EditContent from "./pages/EditContent";
 import MPindividual from "./pages/MPindividual";
+import NavbarMobile from "./components/NavbarMobile";
+import "./styles.css";
 
 function App() {
   return (
     <AuthProvider>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <NavbarMobile />
         <Navbar>
           <ToastContainer
             position="top-center"
