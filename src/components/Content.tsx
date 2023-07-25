@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { IContent } from "../types/content";
 
-interface IContentProps {
+export interface IContentProps {
   content: IContent;
 }
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import PageHeader from "../components/PageHeader";
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { StyleInput } from "./Register";
@@ -6,22 +6,62 @@ import {
   genderList,
   nationalityList,
   provinceList,
+  skinList,
   statusList,
 } from "../data/SelectableData";
 import { DatePicker } from "@mui/x-date-pickers";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
+import useContent from "../hooks/useContent";
+import { toast } from "react-toastify";
+import WithGuard from "../guards/WithGuard";
 
 const EditContent = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { content, editContent } = useContent(Number(id));
+
+  const [dateOfBirth, setDateOfBirth] = useState(dayjs(Date.now()));
+  const [lastseenDate, setLastseenDate] = useState(dayjs(Date.now()));
+  const [updateName, setUpdateName] = useState<string>("");
+  const [updateSurname, setUpdateSurname] = useState<string>("");
+  const [updateNickname, setUpdateNickname] = useState<string>("");
+  const [updateAgeLastSeen, setUpdateAgeLastSeen] = useState<string>("");
+  const [updateWeight, setUpdateWeight] = useState<string>("");
+  const [updateHeight, setUpdateHeight] = useState<string>("");
+  const [updateRemark, setUpdateRemark] = useState<string>("");
+  const [updatePlace, setUpdatePlace] = useState<string>("");
+  const [updateMissingDetail, setUpdateMissingDetail] = useState<string>("");
   const [contentInfo, setContentInfo] = useState({
     gender: "",
     nationality: "",
     province: "",
+    skin: "",
     status: "",
   });
 
-  const [dateOfBirth, setDateOfBirth] = useState(dayjs(Date.now()));
-  const [lastseenDate, setLastseenDate] = useState(dayjs(Date.now()));
+  useEffect(() => {
+    if (content) {
+      setDateOfBirth(dayjs(content.dateOfBirth));
+      setLastseenDate(dayjs(content.missingDatetime));
+      setUpdateName(content.name);
+      setUpdateSurname(content.surname);
+      setUpdateNickname(content.nickname);
+      setUpdateAgeLastSeen(`${content.ageLastSeen}`);
+      setUpdateWeight(`${content.weight}`);
+      setUpdateHeight(`${content.height}`);
+      setUpdateRemark(content.remark);
+      setUpdatePlace(content.place);
+      setUpdateMissingDetail(content.missingDetail);
+      setContentInfo({
+        gender: content.gender,
+        nationality: content.nationality,
+        province: content.province,
+        skin: content.skin,
+        status: content.status,
+      });
+    }
+  }, [content]);
 
   const handleChange = (event: { target: { name: string; value: string } }) => {
     const value = event.target.value;
@@ -36,6 +76,38 @@ const EditContent = () => {
     setLastseenDate(value);
   };
 
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    // TODO: edit image in body to be actual img url
+    try {
+      await editContent({
+        isArchive: false,
+        name: updateName,
+        surname: updateSurname,
+        nickname: updateNickname,
+        img: "image",
+        nationality: contentInfo.nationality,
+        ageLastSeen: Number(updateAgeLastSeen),
+        dateOfBirth: `${dateOfBirth}`,
+        gender: contentInfo.gender,
+        weight: Number(updateWeight),
+        height: Number(updateHeight),
+        skin: contentInfo.skin,
+        remark: updateRemark,
+        status: contentInfo.status,
+        province: contentInfo.province,
+        place: updatePlace,
+        missingDatetime: `${lastseenDate}`,
+        missingDetail: updateMissingDetail,
+      });
+      toast.success("แก้ไขข้อมูลสำเร็จ");
+      navigate(`/content/${id}`);
+    } catch (err: any) {
+      throw new Error(err.message);
+    }
+  };
+
   return (
     <>
       <PageHeader name="แก้ไขข้อมูลคนหาย" />
@@ -43,7 +115,7 @@ const EditContent = () => {
         <p className="text-primary font-semibold text-xl px-10 pt-10">
           ข้อมูลส่วนตัวคนหาย
         </p>
-        <form className="flex flex-row gap-20 p-10">
+        <form className="flex flex-row gap-20 p-10" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-3 w-1/2">
             <section className="flex flex-row gap-6">
               <div className="form-user">
@@ -52,6 +124,8 @@ const EditContent = () => {
                   type="text"
                   placeholder="ชื่อ"
                   className="inputBox-user"
+                  value={updateName}
+                  onChange={(e) => setUpdateName(e.target.value)}
                   required
                 />
               </div>
@@ -61,6 +135,8 @@ const EditContent = () => {
                   type="text"
                   placeholder="นามสกุล"
                   className="inputBox-user"
+                  value={updateSurname}
+                  onChange={(e) => setUpdateSurname(e.target.value)}
                   required
                 />
               </div>
@@ -72,6 +148,8 @@ const EditContent = () => {
                   type="text"
                   placeholder="ชื่อเล่น"
                   className="inputBox-user"
+                  value={updateNickname}
+                  onChange={(e) => setUpdateNickname(e.target.value)}
                   required
                 />
               </div>
@@ -117,6 +195,8 @@ const EditContent = () => {
                   type="number"
                   placeholder="อายุ(ปี)"
                   className="inputBox-user w-[6rem]"
+                  value={updateAgeLastSeen}
+                  onChange={(e) => setUpdateAgeLastSeen(e.target.value)}
                   required
                 />
               </div>
@@ -126,6 +206,8 @@ const EditContent = () => {
                   type="number"
                   placeholder="ส่วนสูง(เซนติเมตร)"
                   className="inputBox-user w-[10rem]"
+                  value={updateHeight}
+                  onChange={(e) => setUpdateHeight(e.target.value)}
                   required
                 />
               </div>
@@ -135,6 +217,8 @@ const EditContent = () => {
                   type="number"
                   placeholder="น้ำหนัก(กิโลกรัม)"
                   className="inputBox-user w-[10rem]"
+                  value={updateWeight}
+                  onChange={(e) => setUpdateWeight(e.target.value)}
                   required
                 />
               </div>
@@ -142,7 +226,6 @@ const EditContent = () => {
             <section className="flex flex-row gap-6">
               <div className="form-user">
                 <label>วันเกิด</label>
-                {/* Todo styling date picker box  */}
                 <DatePicker
                   label="วันเกิด"
                   value={dateOfBirth}
@@ -164,6 +247,8 @@ const EditContent = () => {
                 type="text"
                 placeholder="จุดสังเกตของผู้สูญหาย"
                 className="inputBox-user w-[30rem]"
+                value={updateRemark}
+                onChange={(e) => setUpdateRemark(e.target.value)}
                 required
               />
               <p className="text-gray-400 text-xs">
@@ -177,10 +262,33 @@ const EditContent = () => {
                 type="text"
                 placeholder="แจ้งข้อมูลที่เจอครั้งสุดท้าย ให้ชัดเจนที่สุด"
                 className="inputBox-user w-[30rem]"
+                value={updateMissingDetail}
+                onChange={(e) => setUpdateMissingDetail(e.target.value)}
                 required
               />
               <p className="text-gray-400 text-xs">
                 *เช่น ใส่เสื้อผ้าสีแดง, กางเกงยีนส์สีดำ, รองเท้าแตะสีแดง
+              </p>
+            </div>
+            <div className="form-user">
+              <label>สีผิว</label>
+              <FormControl sx={{ m: 0, width: 200 }}>
+                <Select
+                  value={contentInfo.skin}
+                  name="skin"
+                  onChange={handleChange}
+                  input={<StyleInput />}
+                  required
+                >
+                  {skinList.map((skin) => (
+                    <MenuItem key={skin} value={skin}>
+                      {skin}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <p className="text-gray-400 text-xs">
+                *เลือกสีผิวที่ใกล้เคียงที่สุดของผู้สูญหาย
               </p>
             </div>
             <p className="text-primary font-semibold text-xl pt-7">
@@ -209,6 +317,8 @@ const EditContent = () => {
                 type="text"
                 placeholder="แจ้งพื้นที่ที่พบเห็นล่าสุด"
                 className="inputBox-user w-[30rem]"
+                value={updatePlace}
+                onChange={(e) => setUpdatePlace(e.target.value)}
                 required
               />
               <p className="text-gray-400 text-xs">
@@ -271,4 +381,4 @@ const EditContent = () => {
   );
 };
 
-export default EditContent;
+export default WithGuard(EditContent);

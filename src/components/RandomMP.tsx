@@ -1,46 +1,10 @@
 import RandomMPCard from "./RandomMPCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import useContents from "../hooks/useContents";
+import { IContent } from "../types/content";
 
-const data = [
-  {
-    id: 1,
-    name: "จอน",
-    place: "สวนลุม",
-  },
-  {
-    id: 2,
-    name: "จิ๋ว",
-    place: "สวนหลวง",
-  },
-  {
-    id: 3,
-    name: "แดง",
-    place: "สวนจตุจักร",
-  },
-  {
-    id: 4,
-    name: "เหมียว",
-    place: "พระรามไนน์",
-  },
-  {
-    id: 5,
-    name: "เจ้าขาว",
-    place: "หลังบ้าน",
-  },
-  {
-    id: 6,
-    name: "ชิโระ",
-    place: "หน้าบ้าน",
-  },
-  {
-    id: 7,
-    name: "อ้วน",
-    place: "ร้านหมูกะทะ",
-  },
-];
-
-const responsive = {
+export const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 3,
@@ -59,6 +23,7 @@ const responsive = {
 };
 
 const RandomMP = () => {
+  const { contents } = useContents();
   // useContentList
   return (
     <div className="bg-primary ">
@@ -68,15 +33,15 @@ const RandomMP = () => {
           autoPlay={true}
           draggable={true}
           swipeable={true}
-          containerClass="carouselontainer"
+          containerClass="carouselContainer"
           itemClass="carouselItem"
           autoPlaySpeed={6000}
           responsive={responsive}
           partialVisible={false}
         >
-          {data.map((person) => (
+          {contents.map((content: IContent) => (
             <div className="mx-3 overflow-hidden">
-              <RandomMPCard key={person.id} {...person} />
+              <RandomMPCard key={content.id} content={content} />
             </div>
           ))}
         </Carousel>

@@ -10,7 +10,11 @@ const MPall = () => {
 
   return (
     <>
-      <PageHeader name="รายชื่อคนหายทั้งหมด" buttonName="แจ้งคนหาย" />
+      <PageHeader
+        name="รายชื่อคนหายทั้งหมด"
+        buttonName="แจ้งคนหาย"
+        link="/createcontent"
+      />
 
       <div className="flex gap-[12px] mt-[12px] flex-wrap items-center justify-center">
         <p className="text-center text-neutral-700 text-xl font-semibold leading-loose">
