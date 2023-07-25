@@ -16,6 +16,8 @@ import Footer from "./components/Footer";
 import AuthProvider from "./context/AuthProvider";
 import EditContent from "./pages/EditContent";
 import MPindividual from "./pages/MPindividual";
+import CreateComment from "./pages/CreateComment";
+import EditComment from "./pages/EditComment";
 import NavbarMobile from "./components/NavbarMobile";
 import "./styles.css";
 

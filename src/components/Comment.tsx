@@ -1,82 +1,121 @@
 import { useState } from "react";
 import { IComment } from "../types/comment";
+import { formatDateTime, formatDate } from "../utils/index";
+import OutsideClickHandler from "react-outside-click-handler";
+import { useAuth } from "../context/AuthProvider";
+import EditComment from "./EditComment";
+import { host } from "../constant";
+import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+import { RModalImages } from "react-modal-images";
+dayjs.extend(timezone);
+dayjs.tz.setDefault("Asia/Bangkok");
 
 const Comment = (props: IComment) => {
   const { ...comment } = props;
+  const { ...userInfo } = useAuth();
+  const [openComment, setOpenComment] = useState(false);
+  const [isHidden, setIsHidden] = useState(true);
 
-  const [isOpen, setIsOpen] = useState(false);
+  const token = localStorage.getItem("token");
 
   const imgs = [
-    { id: "2", src: "/mp.jpg" },
     { id: "1", src: "/mp.jpg" },
-    { id: "3", src: "/mp.jpg" },
-    { id: "4", src: "/mp.jpg" },
+    { id: "3", src: "/mp3.jpg" },
+    { id: "2", src: "/mp4.jpg" },
+    { id: "4", src: "/mp2.jpeg" },
   ];
-  function formatDateTime(dateTime: string): string {
-    const dateDB = new Date(
-      Number(dateTime.slice(0, 4)),
-      Number(dateTime.slice(5, 7)) - 1,
-      Number(dateTime.slice(8, 10))
-    );
 
-    const time = `${dateTime.slice(11, 13)}.${dateTime.slice(14, 16)} น.`;
+  const handleComment = (e: any) => {
+    e.stopPropagation();
+    setOpenComment(true);
+  };
 
-    const date = dateDB.toLocaleDateString("th-TH", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+  const handleDeleteComment = async (e: any) => {
+    e.stopPropagation();
+    try {
+      await fetch(`${host}/comment/delete/${comment.id}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          isArchive: true,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    return `${date} เวลา ${time}`;
-  }
+      return window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
-      <div className="flex flex-col gap-[2px] bg-white w-[800px]">
+      <div className="w-[53%] bg-white mx-[auto]">
         <div>
-          <img
-            src="/threedot.svg"
-            alt="threedt"
-            className="threedot-mpdetail z-50 absolute ml-[750px]"
-            onClick={() => setIsOpen(!isOpen)}
-          />
-          {isOpen && (
-            <div className="w-[113px] h-[63px] bg-neutral-100 rounded-[5px] mt-[30px] ml-[670px] z-[100] absolute flex flex-col justify-evenly">
-              <button className="flex ml-[2px]">
-                <img src="/pencil.svg" />
-                <p className="ml-[5px]">แก้ไขข้อมูล</p>
-              </button>
-              <hr />
-              <button className="flex ml-[2px]">
-                <img src="/trash.svg" />
-                <p className="ml-[5px]">ลบข้อมูล</p>
-              </button>
-            </div>
-          )}
+          <div className="flex flex-row justify-between">
+            <p className="subtopic-mpdetail pl-[18px] pt-[18px]">
+              {"ผู้พบเห็น "}
+              <span className="detail-mpdetail">
+                {comment.user.name} {comment.user.surname}
+              </span>
+            </p>
+            {userInfo.id !== comment.userId ? null : (
+              <OutsideClickHandler
+                onOutsideClick={() => {
+                  setIsHidden(true);
+                }}
+              >
+                <img
+                  src="/threedot.svg"
+                  alt="threedt"
+                  className="threedot-mpdetail z-50 absolute  ml-[-43px]"
+                  onClick={() => setIsHidden(!isHidden)}
+                />
+
+                {!isHidden && (
+                  <div className="w-[113px] h-[63px] bg-neutral-100 rounded-[5px] mt-[30px] ml-[-120px] z-[100] absolute flex flex-col justify-evenly">
+                    <button className="flex ml-[2px]" onClick={handleComment}>
+                      <img src="/pencil.svg" />
+                      <p className="ml-[5px]">แก้ไขข้อมูล</p>
+                    </button>
+                    <hr />
+                    <button
+                      className="flex ml-[2px]"
+                      onClick={handleDeleteComment}
+                    >
+                      <img src="/trash.svg" />
+                      <p className="ml-[5px]">ลบข้อมูล</p>
+                    </button>
+                  </div>
+                )}
+              </OutsideClickHandler>
+            )}
+          </div>
+
+          <p className="subtopic-mpdetail pl-[18px]">
+            {"วันที่พบเห็น "}
+            <span className="detail-mpdetail">
+              {formatDate(comment.foundDatetime)}
+            </span>
+          </p>
+          <p className="subtopic-mpdetail pl-[18px]">
+            {"สถานที่ "}
+            <span className="detail-mpdetail">{comment.foundPlace}</span>
+          </p>
+          <p className="subtopic-mpdetail pl-[18px]">
+            {"รายละเอียด "}
+            <span className="detail-mpdetail">{comment.foundDetail}</span>
+          </p>
         </div>
-        <p className="subtopic-mpdetail pl-[18px] pt-[18px]">
-          {"ผู้พบเห็น "}
-          <span className="detail-mpdetail">
-            {/* {comment.user.name} {comment.user.surname} */}
-          </span>
-        </p>
-        <p className="subtopic-mpdetail pl-[18px]">
-          {"วันที่พบเห็น "}
-          <span className="detail-mpdetail">{comment.foundDatetime}</span>
-        </p>
-        <p className="subtopic-mpdetail pl-[18px]">
-          {"สถานที่ "}
-          <span className="detail-mpdetail">{comment.foundPlace}</span>
-        </p>
-        <p className="subtopic-mpdetail pl-[18px]">
-          {"รายละเอียด "}
-          <span className="detail-mpdetail">{comment.foundDetail}</span>
-        </p>
         <div className="flex flex-row pl-[18px] gap-[4px] my-[10px]">
           {imgs.map((img) => {
             return (
-              <img
-                src={img.src}
+              <RModalImages
+                small={img.src}
+                large={img.src}
                 key={img.id}
                 alt=""
                 className="w-[100px] h-[100px] object-cover"
@@ -85,14 +124,19 @@ const Comment = (props: IComment) => {
           })}
         </div>
         <p className="text-[12px] pl-[18px]">
-          {`แจ้งเบาะแสเมื่อวันที่ {formatDateTime(comment.createdAt)}`}
+          {`แจ้งเบาะแสเมื่อวันที่ ${formatDateTime(comment.createdAt)} (GMT)`}
           {comment.createdAt === comment.updatedAt ? null : (
-            <span>{`(แก้ไขข้อมูลล่าสุดวันที่ {formatDateTime(
-            comment.updatedAt
-          )})`}</span>
+            <span>{` (แก้ไขข้อมูลล่าสุดวันที่ ${formatDateTime(
+              comment.updatedAt
+            )} (GMT))`}</span>
           )}
         </p>
       </div>
+      <EditComment
+        openComment={openComment}
+        onClose={() => setOpenComment(false)}
+        comment={comment}
+      />
     </>
   );
 };

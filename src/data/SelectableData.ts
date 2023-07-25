@@ -92,3 +92,10 @@ export const skinList: string[] = [
 ];
 
 export const statusList: string[] = ["พบแล้ว", "ยังไม่พบ"];
+
+export const ageList: string[] = [
+  "เด็ก (น้อยกว่า 10 ปี)",
+  "วัยรุ่น (11 - 25 ปี)",
+  "ผู้ใหญ่ (26 - 60 ปี)",
+  "ผู้สูงอายุ (61 ปี ขึ้นไป)",
+];
