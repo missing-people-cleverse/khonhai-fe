@@ -1,37 +1,39 @@
 import { useParams } from "react-router-dom";
 import Comment from "../components/Comment";
 import MPDetail from "../components/MPDetail";
-import useContent from "../hooks/useContent";
+import useComments from "../hooks/useComments";
+import Loading from "../components/Loading";
 
 const MPindividual = () => {
   const { id } = useParams();
-  const { comments } = useContent(Number(id));
+  const { comments, isLoading } = useComments(Number(id));
 
-  // console.log(comments);
-
-  if (!comments) return <h1>Loading</h1>;
-
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <>
-      <MPDetail />
-      <div className="flex flex-col">
-        {comments!.length === 0 ? null : (
-          <div className="mx-[auto] ">
-            <p className="name-mpdetail mt-[-8px]">
-              เบาะแส{" "}
-              <span className="detail-mpdetail">{`(${
-                comments!.length
-              } เบาะแส)`}</span>
-            </p>
-            <div className="flex flex-col gap-[10px] items-center ">
-              {comments &&
-                comments.map((comment) => {
-                  return <Comment key={comment.id} {...comment} />;
-                })}
-            </div>
-          </div>
-        )}
+      <div className={comments.length === 0 ? "mb-[40px]" : ""}>
+        <MPDetail />
       </div>
+
+      {comments!.length === 0 ? null : (
+        <div className="flex flex-col ">
+          <p className="name-mpdetail pl-[23%]">
+            เบาะแส{" "}
+            <span className="detail-mpdetail">{`(${
+              comments!.length
+            } เบาะแส)`}</span>
+          </p>
+
+          <div className="flex flex-col gap-[10px]">
+            {comments &&
+              comments.map((comment) => {
+                return <Comment key={comment.id} {...comment} />;
+              })}
+          </div>
+        </div>
+      )}
     </>
   );
 };

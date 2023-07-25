@@ -11,3 +11,18 @@ export interface IUser {
   registeredAt: string;
   updatedAt: string;
 }
+export interface IUserProfile {
+  user: {
+    id: string;
+    username: string;
+    name: string;
+    surname: string;
+    email: string;
+    phoneNumber: string;
+    address: string;
+    province: string;
+    postcode: string;
+    registeredAt: string;
+    updatedAt: string;
+  };
+}

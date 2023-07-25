@@ -16,7 +16,6 @@ const useContent = (id: Number) => {
       try {
         const res = await axios.get(`${host}/content/${id}`);
         setContent(res.data);
-        setComments(res.data.comments);
       } catch (err) {
         console.log(err);
       }

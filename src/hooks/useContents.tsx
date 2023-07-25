@@ -8,18 +8,18 @@ const useContents = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await axios
+      const rawData = await axios
         .get(`${host}/content`)
         .then((res) => res.data)
         .catch((err) => console.log(err));
 
-      const displayContents = data
+      const displayContents = rawData
         .filter((obj: IContent) => obj.isArchive === false)
         .reverse();
       setContents(displayContents);
     };
     fetchData();
-  }, []);
+  }, [contents]);
 
   return { contents };
 };
