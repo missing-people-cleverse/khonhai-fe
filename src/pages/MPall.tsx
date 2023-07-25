@@ -2,9 +2,16 @@ import PageHeader from "../components/PageHeader";
 import Content from "../components/Content";
 import useContents from "../hooks/useContents";
 import { IContent } from "../types/content";
-import { FormControl, MenuItem, Select, InputLabel } from "@mui/material";
+import {
+  FormControl,
+  MenuItem,
+  Select,
+  InputLabel,
+  Pagination,
+  Box,
+} from "@mui/material";
 import { StyleInput } from "./Register";
-import { genderList, provinceList } from "../data/SelectableData";
+import { ageList, genderList, provinceList } from "../data/SelectableData";
 import { useEffect, useState } from "react";
 
 const MPall = () => {
@@ -12,7 +19,10 @@ const MPall = () => {
   const [filterName, setFilterName] = useState("");
   const [filterProvince, setFilterProvince] = useState("");
   const [filterGender, setFilterGender] = useState("");
+  const [filterAge, setFilterAge] = useState("");
   const [list, setList] = useState(contents);
+  const [page, setPage] = useState(1);
+  const contentPerPage = 12;
 
   const applyFilter = () => {
     let updatedContents = contents;
@@ -35,6 +45,31 @@ const MPall = () => {
       );
     }
 
+    if (filterAge) {
+      if (filterAge === "") return;
+      if (filterAge === "เด็ก (น้อยกว่า 10 ปี)") {
+        updatedContents = updatedContents.filter(
+          (content) => content.ageLastSeen >= 0 && content.ageLastSeen <= 10
+        );
+      } else if (filterAge === "วัยรุ่น (11 - 25 ปี)") {
+        updatedContents = updatedContents.filter(
+          (content) => content.ageLastSeen >= 11 && content.ageLastSeen <= 25
+        );
+      } else if (filterAge === "ผู้ใหญ่ (26 - 60 ปี)") {
+        updatedContents = updatedContents.filter(
+          (content) => content.ageLastSeen >= 26 && content.ageLastSeen <= 60
+        );
+      } else {
+        updatedContents = updatedContents.filter(
+          (content) => content.ageLastSeen >= 61 && content.ageLastSeen <= 200
+        );
+      }
+    }
+    updatedContents = updatedContents.slice(
+      contentPerPage * page - 12,
+      contentPerPage * page
+    );
+
     setList(updatedContents);
   };
 
@@ -56,13 +91,13 @@ const MPall = () => {
           id="name"
           type="text"
           placeholder="ค้นหาชื่อ"
-          className="inputBox-user h-[38px] w-[350px]"
+          className="inputBox-user h-[42px] w-[350px]"
           onSubmit={(e) => e.preventDefault()}
           onChange={(e) => setFilterName(e.target.value)}
           value={filterName}
         />
-        <FormControl sx={{ m: 0, width: 100 }}>
-          <InputLabel>เพศ</InputLabel>
+        <FormControl sx={{ m: 0, width: 80 }}>
+          <InputLabel sx={{ marginLeft: 0.2, marginY: -0.7 }}>เพศ</InputLabel>
 
           <Select
             value={filterGender}
@@ -85,8 +120,10 @@ const MPall = () => {
           </Select>
         </FormControl>
 
-        <FormControl sx={{ m: 0, width: 100 }}>
-          <InputLabel>จังหวัด</InputLabel>
+        <FormControl sx={{ m: 0, width: 180 }}>
+          <InputLabel sx={{ marginLeft: 0.2, marginY: -0.7 }}>
+            จังหวัด
+          </InputLabel>
 
           <Select
             value={filterProvince}
@@ -108,18 +145,30 @@ const MPall = () => {
           </Select>
         </FormControl>
 
-        <input
-          className="w-[153px] h-[28px] rounded-[13px] pl-[48px] pt-[4px] border-input_boarderko border-solid border-[0.5px]"
-          placeholder="จังหวัด"
-        ></input>
-        <input
-          className="w-[153px] h-[28px] rounded-[13px] pl-[48px] pt-[4px] border-input_boarderko border-solid border-[0.5px]"
-          placeholder="ช่วงอายุ"
-        ></input>
-        <input
-          className="w-[153px] h-[28px] rounded-[13px] pl-[32px] pt-[4px] border-input_boarderko border-solid border-[0.5px]"
-          placeholder="ช่วงเวลาที่หาย"
-        ></input>
+        <FormControl sx={{ m: 0, width: 200 }}>
+          <InputLabel sx={{ marginLeft: 0.2, marginY: -0.7 }}>
+            ช่วงอายุ(ปี)
+          </InputLabel>
+
+          <Select
+            value={filterAge}
+            id="age"
+            name="age"
+            onSubmit={(e) => e.preventDefault()}
+            onChange={(e) => setFilterAge(e.target.value)}
+            input={<StyleInput />}
+            label="hi"
+          >
+            <MenuItem key={""} value={[""]}>
+              {"-"}
+            </MenuItem>
+            {ageList.map((list) => (
+              <MenuItem key={list} value={list}>
+                {list}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </div>
 
       <div className="flexcontainer-mpall mb-[20px] items-stretch">
@@ -128,6 +177,17 @@ const MPall = () => {
             return <Content key={content.id} content={content} />;
           })}
       </div>
+      <Box
+        justifyContent={"center"}
+        alignItems={"center"}
+        display={"flex"}
+        sx={{ margin: "20px 0px" }}
+      >
+        <Pagination
+          count={Math.ceil(contents.length / 12)}
+          onChange={(_, value) => setPage(value)}
+        />
+      </Box>
     </>
   );
 };

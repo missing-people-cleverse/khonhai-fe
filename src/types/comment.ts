@@ -1,5 +1,6 @@
 export interface IComment {
   foundDatetime: string;
+  userId: string;
   foundDetail: string;
   img: string[];
   isArchive: boolean;

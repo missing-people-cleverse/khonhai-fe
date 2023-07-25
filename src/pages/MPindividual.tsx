@@ -13,26 +13,27 @@ const MPindividual = () => {
   }
   return (
     <>
-      <MPDetail />
-      <div className="flex flex-col">
-        {comments!.length === 0 ? null : (
-          <div className="mx-[auto] ">
-            <p className="name-mpdetail mt-[-8px]">
-              เบาะแส{" "}
-              <span className="detail-mpdetail">{`(${
-                comments!.length
-              } เบาะแส)`}</span>
-            </p>
-
-            <div className="flex flex-col gap-[10px] items-center ">
-              {comments &&
-                comments.map((comment) => {
-                  return <Comment key={comment.id} {...comment} />;
-                })}
-            </div>
-          </div>
-        )}
+      <div className={comments.length === 0 ? "mb-[40px]" : ""}>
+        <MPDetail />
       </div>
+
+      {comments!.length === 0 ? null : (
+        <div className="flex flex-col ">
+          <p className="name-mpdetail pl-[23%]">
+            เบาะแส{" "}
+            <span className="detail-mpdetail">{`(${
+              comments!.length
+            } เบาะแส)`}</span>
+          </p>
+
+          <div>
+            {comments &&
+              comments.map((comment) => {
+                return <Comment key={comment.id} {...comment} />;
+              })}
+          </div>
+        </div>
+      )}
     </>
   );
 };

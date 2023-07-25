@@ -7,6 +7,7 @@ import EditComment from "./EditComment";
 import { host } from "../constant";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
+import { RModalImages } from "react-modal-images";
 dayjs.extend(timezone);
 dayjs.tz.setDefault("Asia/Bangkok");
 
@@ -19,11 +20,12 @@ const Comment = (props: IComment) => {
   const token = localStorage.getItem("token");
 
   const imgs = [
-    { id: "2", src: "/mp.jpg" },
     { id: "1", src: "/mp.jpg" },
-    { id: "3", src: "/mp.jpg" },
-    { id: "4", src: "/mp.jpg" },
+    { id: "3", src: "/mp3.jpg" },
+    { id: "2", src: "/mp4.jpg" },
+    { id: "4", src: "/mp2.jpeg" },
   ];
+
   const handleComment = (e: any) => {
     e.stopPropagation();
     setOpenComment(true);
@@ -51,66 +53,69 @@ const Comment = (props: IComment) => {
 
   return (
     <>
-      <div className="flex flex-col gap-[2px] bg-white w-[800px]">
-        {userInfo.id !== comment.userId ? null : (
-          <OutsideClickHandler
-            onOutsideClick={() => {
-              setIsHidden(true);
-            }}
-          >
-            <div>
-              <img
-                src="/threedot.svg"
-                alt="threedt"
-                className="threedot-mpdetail z-50 absolute ml-[750px]"
-                onClick={() => setIsHidden(!isHidden)}
-              />
+      <div className="w-[53%] bg-white mx-[auto]">
+        <div>
+          <div className="flex flex-row justify-between">
+            <p className="subtopic-mpdetail pl-[18px] pt-[18px]">
+              {"ผู้พบเห็น "}
+              <span className="detail-mpdetail">
+                {comment.user.name} {comment.user.surname}
+              </span>
+            </p>
+            {userInfo.id !== comment.userId ? null : (
+              <OutsideClickHandler
+                onOutsideClick={() => {
+                  setIsHidden(true);
+                }}
+              >
+                <img
+                  src="/threedot.svg"
+                  alt="threedt"
+                  className="threedot-mpdetail z-50 absolute  ml-[-43px]"
+                  onClick={() => setIsHidden(!isHidden)}
+                />
 
-              {!isHidden && (
-                <div className="w-[113px] h-[63px] bg-neutral-100 rounded-[5px] mt-[30px] ml-[670px] z-[100] absolute flex flex-col justify-evenly">
-                  <button className="flex ml-[2px]" onClick={handleComment}>
-                    <img src="/pencil.svg" />
-                    <p className="ml-[5px]">แก้ไขข้อมูล</p>
-                  </button>
-                  <hr />
-                  <button
-                    className="flex ml-[2px]"
-                    onClick={handleDeleteComment}
-                  >
-                    <img src="/trash.svg" />
-                    <p className="ml-[5px]">ลบข้อมูล</p>
-                  </button>
-                </div>
-              )}
-            </div>
-          </OutsideClickHandler>
-        )}
+                {!isHidden && (
+                  <div className="w-[113px] h-[63px] bg-neutral-100 rounded-[5px] mt-[30px] ml-[-120px] z-[100] absolute flex flex-col justify-evenly">
+                    <button className="flex ml-[2px]" onClick={handleComment}>
+                      <img src="/pencil.svg" />
+                      <p className="ml-[5px]">แก้ไขข้อมูล</p>
+                    </button>
+                    <hr />
+                    <button
+                      className="flex ml-[2px]"
+                      onClick={handleDeleteComment}
+                    >
+                      <img src="/trash.svg" />
+                      <p className="ml-[5px]">ลบข้อมูล</p>
+                    </button>
+                  </div>
+                )}
+              </OutsideClickHandler>
+            )}
+          </div>
 
-        <p className="subtopic-mpdetail pl-[18px] pt-[18px]">
-          {"ผู้พบเห็น "}
-          <span className="detail-mpdetail">
-            {comment.user.name} {comment.user.surname}
-          </span>
-        </p>
-        <p className="subtopic-mpdetail pl-[18px]">
-          {"วันที่พบเห็น "}
-          <span className="detail-mpdetail">
-            {formatDate(comment.foundDatetime)}
-          </span>
-        </p>
-        <p className="subtopic-mpdetail pl-[18px]">
-          {"สถานที่ "}
-          <span className="detail-mpdetail">{comment.foundPlace}</span>
-        </p>
-        <p className="subtopic-mpdetail pl-[18px]">
-          {"รายละเอียด "}
-          <span className="detail-mpdetail">{comment.foundDetail}</span>
-        </p>
+          <p className="subtopic-mpdetail pl-[18px]">
+            {"วันที่พบเห็น "}
+            <span className="detail-mpdetail">
+              {formatDate(comment.foundDatetime)}
+            </span>
+          </p>
+          <p className="subtopic-mpdetail pl-[18px]">
+            {"สถานที่ "}
+            <span className="detail-mpdetail">{comment.foundPlace}</span>
+          </p>
+          <p className="subtopic-mpdetail pl-[18px]">
+            {"รายละเอียด "}
+            <span className="detail-mpdetail">{comment.foundDetail}</span>
+          </p>
+        </div>
         <div className="flex flex-row pl-[18px] gap-[4px] my-[10px]">
           {imgs.map((img) => {
             return (
-              <img
-                src={img.src}
+              <RModalImages
+                small={img.src}
+                large={img.src}
                 key={img.id}
                 alt=""
                 className="w-[100px] h-[100px] object-cover"

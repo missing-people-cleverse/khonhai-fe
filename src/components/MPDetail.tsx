@@ -7,6 +7,15 @@ import { formatDateTime, formatDate } from "../utils/index";
 import { useAuth } from "../context/AuthProvider";
 import CreateComment from "./CreateComment";
 import { host } from "../constant";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { RModalImages } from "react-modal-images";
+
+const imgs = [
+  { id: "1", src: "/mp.jpg" },
+  { id: "3", src: "/mp3.jpg" },
+  { id: "2", src: "/mp4.jpg" },
+  { id: "4", src: "/mp2.jpeg" },
+];
 
 const MPDetail = () => {
   const { id } = useParams();
@@ -16,6 +25,7 @@ const MPDetail = () => {
   const { ...userInfo } = useAuth();
   const [openComment, setOpenComment] = useState(false);
   const { isLoggedIn } = useAuth();
+  const [slide, setSlide] = useState(0);
 
   const handleComment = (e: any) => {
     e.stopPropagation();
@@ -48,28 +58,64 @@ const MPDetail = () => {
     }
   };
 
+  const handleNextSlide = () => {
+    setSlide(slide === imgs.length - 1 ? 0 : slide + 1);
+  };
+  const handlePrevSlide = () => {
+    setSlide(slide === 0 ? imgs.length - 1 : slide - 1);
+  };
+
   return (
     <>
       <PageHeader name="ข้อมูลคนหาย" />
       {content && (
-        <div className="flex justify-center mt-10 mb-[15px]">
-          <div className="w-[60%] bg-white ">
-            <div className="flex flex-row justify-between gap-[20px]">
-              <div className="h-[300px] w-[auto] ml-[auto] mr-[auto] mt-[20px]">
-                <img
-                  src="/mp.jpg"
-                  alt="missing people"
-                  className="thumbnail-mpdetail"
+        <div className="flex justify-center ">
+          <div className="w-[auto] bg-white mt-10 ">
+            <div className="flex flex-row justify-evenly gap-[10px] ">
+              <div className="flex relative object-cover">
+                <IoIosArrowBack
+                  className="arrow left-1 top-[230px]"
+                  onClick={handlePrevSlide}
                 />
+                {imgs.map((img, i) => (
+                  <RModalImages
+                    // src={img.src}
+                    small={img.src}
+                    className={
+                      slide === i
+                        ? "thumbnail-mpdetail"
+                        : "thumbnail-mpdetail-hidden"
+                    }
+                    large={img.src}
+                    key={i}
+                  />
+                ))}
+                <IoIosArrowForward
+                  className="arrow right-1 top-[230px]"
+                  onClick={handleNextSlide}
+                />
+                <span className="flex absolute bottom-3 left-[42%]">
+                  {imgs.map((_, i) => {
+                    return (
+                      <button
+                        key={i}
+                        className={
+                          slide === i ? "indicator" : "indicator bg-slate-600"
+                        }
+                        onClick={() => setSlide(i)}
+                      ></button>
+                    );
+                  })}
+                </span>
               </div>
 
-              <div className="flex flex-col gap-[2px] w-[50%] mr-[10px]">
-                <div className="flex flex-row items-center  justify-between">
-                  <div className="flex flex-row items-center">
+              <div className="flex flex-col gap-[2px] m-[16px]">
+                <div className="flex justify-between">
+                  <div className="flex items-center">
                     <p className="name-mpdetail">
-                      {content.name} {content.surname}
+                      {`${content.name}`}
+                      {"\n"} {`${content.surname}`}
                     </p>
-
                     {content.status !== "พบแล้ว" ? (
                       <div className="unfounded-mpdetail">ยังตามหาอยู่</div>
                     ) : (
@@ -87,7 +133,7 @@ const MPDetail = () => {
                         <img
                           src="/threedot.svg"
                           alt="threedt"
-                          className="threedot-mpdetail"
+                          className="threedot-mpdetail ml-[10px]"
                           onClick={() => setIsHidden(!isHidden)}
                         />
                         {!isHidden && (
@@ -115,6 +161,7 @@ const MPDetail = () => {
                     </OutsideClickHandler>
                   )}
                 </div>
+
                 <p className="subtopic-mpdetail">
                   {"ชื่อเล่น "}
                   <span className="detail-mpdetail">{content.nickname}</span>

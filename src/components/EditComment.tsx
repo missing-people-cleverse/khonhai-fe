@@ -63,11 +63,10 @@ const EditComment = ({ openComment, onClose, comment }: any) => {
   };
 
   return (
-    // bg-neutral-200 bg-opacity-50
     <>
       {openComment && (
         <div
-          className="z-[800] w-screen h-screen flex justify-center fixed mt-[-600px]"
+          className="z-[800] w-screen h-screen flex justify-center fixed mt-[-890px]"
           onClick={(e) => {
             e.stopPropagation();
             onClose;
