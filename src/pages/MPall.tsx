@@ -24,6 +24,7 @@ const MPall = () => {
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
   const contentPerPage = 12;
+  // const height = screen.height.toString();
 
   const applyFilter = () => {
     let updatedContents = contents;
@@ -100,7 +101,7 @@ const MPall = () => {
         link="/createcontent"
       />
 
-      <div className="flex gap-[12px] mt-[12px] flex-wrap items-center justify-center">
+      <div className="flex gap-[12px] mt-[16px] flex-wrap items-center justify-center">
         <p className="text-center text-neutral-700 text-xl font-semibold leading-loose">
           ค้นหา
         </p>
@@ -193,23 +194,37 @@ const MPall = () => {
         </FormControl>
       </div>
 
-      <div className="flexcontainer-mpall mb-[20px] items-stretch">
-        {list &&
-          list.map((content: IContent) => {
-            return <Content key={content.id} content={content} />;
-          })}
-      </div>
-      <Box
-        justifyContent={"center"}
-        alignItems={"center"}
-        display={"flex"}
-        sx={{ margin: "20px 0px" }}
-      >
-        <Pagination
-          count={Math.ceil(pageCount / 12)}
-          onChange={(_, value) => setPage(value)}
-        />
-      </Box>
+      {list.length === 0 ? (
+        <div
+          className="pt-[40px] text-center mb-[565px]"
+          // {`text-center pt-[40px] mb-[${height}px]`}
+        >
+          ไม่พบข้อมูล
+        </div>
+      ) : (
+        <>
+          <div className="flexcontainer-mpall mb-[20px] items-stretch">
+            {list &&
+              list.map((content: IContent) => {
+                return <Content key={content.id} content={content} />;
+              })}
+          </div>
+
+          <div className={list.length <= 4 ? "mb-[190px]" : ""}>
+            <Box
+              justifyContent={"center"}
+              alignItems={"center"}
+              display={"flex"}
+              sx={{ margin: "20px 0px" }}
+            >
+              <Pagination
+                count={Math.ceil(pageCount / 12)}
+                onChange={(_, value) => setPage(value)}
+              />
+            </Box>
+          </div>
+        </>
+      )}
     </>
   );
 };
