@@ -99,9 +99,9 @@ const CreateComment = ({ openComment, onClose, content }: any) => {
                   type="text"
                   placeholder="สถานที่ที่พบ"
                   className="inputBox-user w-[90%]"
-                  required
                   value={foundPlace}
                   onChange={(e) => setFoundPlace(e.target.value)}
+                  required
                 />
               </div>
               <div className="form-user">
@@ -110,9 +110,9 @@ const CreateComment = ({ openComment, onClose, content }: any) => {
                   type="text"
                   placeholder="รายละเอียดเพิ่มเติม"
                   className="inputBox-user w-[90%]"
-                  required
                   value={foundDetail}
                   onChange={(e) => setFoundDetail(e.target.value)}
+                  required
                 />
               </div>
               <button className="bg-zinc-300 rounded-[5px] text-center text-xs pt-[4px] pb-[4px] pl-[4px] pr-[4px] hover:bg-zinc-500 hover:text-white w-[15%]">

@@ -7,7 +7,6 @@ import {
   FormControlLabel,
   FormGroup,
   InputBase,
-  InputLabel,
   MenuItem,
   Select,
   Typography,
@@ -159,10 +158,10 @@ const Register = () => {
     <>
       <PageHeader name="ลงทะเบียน" />
       <form
-        className="bg-bg_white w-[50rem] mx-auto mt-10 mb-10"
+        className="bg-bg_white w-[50rem] mx-auto mt-10 mb-10 max-lg:w-10/12"
         onSubmit={handleSubmit}
       >
-        <section className="flex flex-row gap-20 p-10">
+        <section className="flex flex-row gap-20 p-10 max-lg:flex-col max-lg:gap-10">
           <p className="text-primary font-semibold text-xl">ข้อมูลส่วนตัว</p>
           <div className="flex flex-col gap-4 ">
             <div className="form-user">
@@ -202,7 +201,7 @@ const Register = () => {
                 <input
                   type="text"
                   placeholder="นามสกุล"
-                  className="inputBox-user"
+                  className="inputBox-user max-lg:w-[8rem]"
                   onChange={(e) => setInputSurname(e.target.value)}
                   required
                 />
@@ -263,7 +262,7 @@ const Register = () => {
                 <input
                   type="password"
                   placeholder="ยืนยันรหัสผ่าน"
-                  className="inputBox-user"
+                  className="inputBox-user max-lg:w-[8rem]"
                   onChange={(e) => setInputConfirmPassword(e.target.value)}
                   required
                 />
@@ -271,7 +270,7 @@ const Register = () => {
             </div>
           </div>
         </section>
-        <section className="flex flex-row gap-14 p-10">
+        <section className="flex flex-row gap-14 p-10 max-lg:flex-col max-lg:gap-10">
           <p className="text-primary font-semibold text-xl">
             ข้อมูลที่อยู่อาศัย
           </p>
@@ -309,7 +308,7 @@ const Register = () => {
                 <input
                   type="text"
                   placeholder="รหัสไปรษณีย์"
-                  className="inputBox-user"
+                  className="inputBox-user max-lg:w-[8rem]"
                   onChange={(e) => setInputPostcode(e.target.value)}
                   required
                 />
@@ -317,7 +316,7 @@ const Register = () => {
             </div>
           </div>
         </section>
-        <FormGroup className="ml-[14rem]">
+        <FormGroup className="ml-[14rem] max-lg:ml-0 max-lg:items-center">
           <FormControlLabel
             required
             control={
@@ -333,7 +332,7 @@ const Register = () => {
             }
           />
         </FormGroup>
-        <section className="py-8 w-32 ml-[40rem]">
+        <section className="py-8 w-32 ml-[40rem] max-lg:mx-auto ">
           <div className={!disabled ? "btn-pink" : "btn-disabled"}>
             <button type="submit" disabled={disabled}>
               ลงทะเบียน
