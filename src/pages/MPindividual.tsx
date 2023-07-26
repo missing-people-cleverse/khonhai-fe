@@ -19,7 +19,7 @@ const MPindividual = () => {
 
       {comments!.length === 0 ? null : (
         <div className="flex flex-col ">
-          <p className="name-mpdetail pl-[23%]">
+          <p className="name-mpdetail pl-[24%] max-md:pl-[5%]">
             เบาะแส{" "}
             <span className="detail-mpdetail">{`(${
               comments!.length

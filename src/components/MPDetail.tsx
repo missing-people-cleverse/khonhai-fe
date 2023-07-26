@@ -71,7 +71,7 @@ const MPDetail = () => {
       {content && (
         <div className="flex justify-center ">
           <div className="w-[auto] bg-white mt-10 ">
-            <div className="flex flex-row justify-evenly gap-[10px] ">
+            <div className="flex flex-row justify-evenly gap-[10px] max-md:flex-col">
               <div className="flex relative object-cover">
                 <IoIosArrowBack
                   className="arrow left-1 top-[230px]"
@@ -82,7 +82,7 @@ const MPDetail = () => {
                     small={img.src}
                     className={
                       slide === i
-                        ? "thumbnail-mpdetail"
+                        ? "thumbnail-mpdetail max-md:h-[30rem] max-md:w-[30rem]"
                         : "thumbnail-mpdetail-hidden"
                     }
                     large={img.src}
