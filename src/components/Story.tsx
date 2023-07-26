@@ -25,7 +25,7 @@ const Story = () => {
       );
       setIteration(iteration + 1);
     }
-  }, 1000);
+  }, 500);
 
   const handleClick = () => {
     setStart(!start);
@@ -36,34 +36,37 @@ const Story = () => {
     <>
       <section className="flex flex-col justify-center items-center">
         <div className="relative w-[50rem]">
-          <p className="text-4xl pt-16 text-center">
+          <p className="text-4xl pt-16 text-center max-md:text-2xl">
             ผู้สูญหายต่อปี&nbsp; <strong>นับพัน</strong>{" "}
             &nbsp;ในช่วงทศวรรษที่ผ่านมา
           </p>
           <img
             src="/circle.svg"
             alt="circle"
-            className="absolute top-14 left-[17rem] w-[7.5rem] "
+            className="absolute top-14 left-[17rem] w-[7.5rem] max-md:w-[5rem] max-md:left-[19.7rem] max-md:top-[3.8rem]"
           />
         </div>
 
-        <div className="flex flex-row justify-between items-center pt-[5rem] pb-[7rem] w-11/12 ">
-          <figure className="w-3/5">
+        <div className="flex flex-row justify-between items-center pt-[5rem] pb-[7rem] w-11/12 max-lg:flex-col-reverse">
+          <figure className="w-3/5 max-lg:w-11/12">
             <img
               src="./group2.svg"
               alt="infographic shows the difference between the amount of missing people over 10 years"
             />
           </figure>
-          <figcaption className="flex flex-col gap-6 pb-[10rem]">
+          <figcaption className="flex flex-col gap-6 pb-[10rem] max-lg:pb-10">
             <div>
               <p className="text-2xl">
-                จากสถิติรับแจ้งคนหาย จากมูลนิธิกระจกเงา
+                จากสถิติรับแจ้งคนหาย{" "}
+                <span className="inline-block">จากมูลนิธิกระจกเงา</span>
               </p>
             </div>
             <p className="font-bold text-3xl">
               คนหายเพิ่มขึ้นกว่า <span className="text-5xl">7</span> เท่า...
             </p>
-            <p className="font-bold text-3xl pl-[10rem]">ตลอด 10 ปีที่ผ่านมา</p>
+            <p className="font-bold text-3xl pl-[10rem]">
+              ตลอด 10 ปี<span className="inline-block">ที่ผ่านมา</span>
+            </p>
           </figcaption>
         </div>
       </section>
@@ -75,14 +78,14 @@ const Story = () => {
           <img
             src="/question.svg"
             alt="question mark"
-            className="w-[5rem] h-[5rem] mt-[4rem]"
+            className="w-[5rem] h-[5rem] mt-[4rem] max-md:hidden"
           />
         </div>
-        <div className="flex flex-row justify-between items-center pt-24 pb-24 w-11/12 ">
+        <div className="flex flex-row gap-5 justify-between items-center pt-24 pb-24 w-11/12 max-lg:flex-col ">
           <figure>
             <RacingBarChart data={data} />
           </figure>
-          <figcaption className="flex flex-col gap-5">
+          <figcaption className="flex flex-col gap-5 max-lg:items-center">
             <p className="text-4xl">ปีพ.ศ. {iteration + 2554}</p>
             <button
               onClick={handleClick}
@@ -96,16 +99,19 @@ const Story = () => {
             <p className="text-2xl ">
               <strong>35%</strong> สมัครใจหนีออกจากบ้าน
             </p>
-            <p className="text-2xl pl-10">
-              <strong>36%</strong> จากสาเหตุทางสุขภาพ ทางร่างกายและจิตใจ
+            <p className="text-2xl pl-10 max-md:text-center">
+              <strong>36%</strong> จากสาเหตุทางสุขภาพ{" "}
+              <span className="inline-block">ทางร่างกายและจิตใจ</span>
             </p>
           </figcaption>
         </div>
       </section>
       <section className="flex flex-col justify-center items-center">
         <div className="flex flex-row gap-2">
-          <img src="./hashtag.svg" className="pt-7" />
-          <p className="text-5xl font-medium pt-16">ต้องการความช่วยเหลือ</p>
+          <img src="./hashtag.svg" className="pt-7 max-md:w-10 max-md:pt-14" />
+          <p className="text-5xl font-medium pt-16 max-md:text-4xl">
+            ต้องการความช่วยเหลือ
+          </p>
         </div>
         <motion.img
           animate={{ y: 10 }}

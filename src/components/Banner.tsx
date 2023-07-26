@@ -5,9 +5,9 @@ const Banner = () => {
   const { isLoggedIn } = useAuth();
 
   return (
-    <div className="flex flex-row justify-between items-center py-5 w-10/12 mx-auto">
-      <div className="flex flex-col gap-3">
-        <h1 className="font-bold text-3xl">
+    <div className="flex flex-row justify-between items-center py-5 w-10/12 mx-auto ">
+      <div className="flex flex-col gap-3 max-lg:py-10 max-lg:mx-0">
+        <h1 className="font-bold text-3xl max-md:text-2xl">
           ยังมีคนที่รอคอยคนที่รักอย่างมีความหวัง
         </h1>
         <p className="text-lg">
@@ -31,7 +31,7 @@ const Banner = () => {
       <img
         src="/girlWaiting.svg"
         alt="a girl is waiting for someone"
-        className="w-[17rem] h-[17rem]"
+        className="w-[17rem] h-[17rem] max-lg:hidden"
       />
     </div>
   );

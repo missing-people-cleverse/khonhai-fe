@@ -27,7 +27,7 @@ const RandomMP = () => {
   // useContentList
   return (
     <div className="bg-primary ">
-      <div className="flex flex-row gap-5 justify-between items-center py-8 w-5/6 mx-auto">
+      <div className="flex flex-row gap-5 justify-between items-center py-8 w-5/6 mx-auto max-md:flex-col-reverse max-md:w-5/6">
         <Carousel
           infinite={true}
           autoPlay={true}
@@ -46,8 +46,8 @@ const RandomMP = () => {
           ))}
         </Carousel>
         <div>
-          <p className="font-bold text-3xl text-text_light">
-            คุณเคยเห็นคนเหล่านี้ไหม?
+          <p className="font-bold text-3xl text-text_light max-lg:text-2xl">
+            คุณเคยเห็น<span className="inline-block">คนเหล่านี้ไหม?</span>
           </p>
         </div>
       </div>
