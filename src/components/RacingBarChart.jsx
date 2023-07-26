@@ -60,7 +60,7 @@ const RacingBarChart = ({ data }) => {
 
   return (
     <div ref={wrapperRef}>
-      <svg ref={svgRef} width="700" height="400"></svg>
+      <svg ref={svgRef} width="600" height="400" viewBox="0 0 600 400"></svg>
     </div>
   );
 };

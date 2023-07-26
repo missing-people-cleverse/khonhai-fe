@@ -29,6 +29,13 @@ body {
   background-color: var(--bg_light_grey);
 }
 
+@media screen and (max-width: 768px) {
+  svg {
+    width: 550px;
+    height: 300px;
+  }
+}
+
 @layer components {
   .btn-blue {
     padding: 8px 10px;
@@ -120,6 +127,7 @@ body {
   .btn-disabled {
     padding: 8px 10px;
     text-align: center;
+    border: var(--input_border) solid 2px;
     width: auto;
     border-radius: 15px;
     background-color: var(--input_border);
@@ -129,6 +137,12 @@ body {
   .carouselContainer {
     padding: 20px;
     width: 800px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .carouselContainer {
+      width: 90%;
+    }
   }
 
   .carouselItem {

@@ -2,8 +2,8 @@ import { NavLink } from "react-router-dom";
 
 const HelpCard = () => {
   return (
-    <div className="flex flex-row w-10/12 mt-[5rem] justify-around">
-      <section className="border-2 border-secondary rounded-lg w-1/4 h-[23rem]">
+    <div className="flex flex-row flex-wrap gap-5 w-10/12 mt-[3rem] justify-around">
+      <section className="border-2 border-secondary rounded-lg w-[20rem] h-[23rem]">
         <div className="flex flex-col gap-3 justify-center items-center pt-7 px-5">
           <p className="text-3xl font-semibold">กำลังเดือดร้อน</p>
           <p className="text-xl font-medium text-center pb-6">
@@ -29,7 +29,7 @@ const HelpCard = () => {
           </a>
         </div>
       </section>
-      <section className="border-2 border-secondary rounded-lg w-1/4 h-[23rem]">
+      <section className="border-2 border-secondary rounded-lg w-[20rem] h-[23rem]">
         <div className="flex flex-col gap-3 justify-center items-center pt-7 px-5">
           <p className="text-3xl font-semibold">ตามหาคนหาย</p>
           <p className="text-xl font-medium text-center pb-6">
@@ -55,7 +55,7 @@ const HelpCard = () => {
           </a>
         </div>
       </section>
-      <section className="border-2 border-secondary rounded-lg w-1/4 h-[23rem]">
+      <section className="border-2 border-secondary rounded-lg w-[20rem] h-[23rem]">
         <div className="flex flex-col gap-3 justify-center items-center pt-7 px-5">
           <p className="text-3xl font-semibold">วิธีการแจ้งความ</p>
           <p className="text-xl font-medium text-center pb-6">
