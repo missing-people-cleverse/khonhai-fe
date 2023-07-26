@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import { useNavigate, useParams } from "react-router-dom";
 import { host } from "../constant";
 import useUserProfile from "../hooks/useUserProfile";
+import { toast } from "react-toastify";
 
 const EditComment = ({ openComment, onClose, comment }: any) => {
   const { id } = useParams();
@@ -53,12 +54,13 @@ const EditComment = ({ openComment, onClose, comment }: any) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("eiei");
-      return window.location.reload();
+      toast.success("แก้ไขเบาะแสสำเร็จ");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1300);
     } catch (err) {
+      toast.error("แก้ไขเบาะแสไม่สำเร็จ");
       console.log(err);
-    } finally {
-      navigate(`/content/${id}`);
     }
   };
 
@@ -85,63 +87,64 @@ const EditComment = ({ openComment, onClose, comment }: any) => {
                 />
               </div>
             </div>
+            <form onSubmit={handleEdit}>
+              <div className="flex flex-col ml-[40px] mr-[40px] mt-[26px] gap-[12px]">
+                <p className="subtopic-mpdetail text-black">
+                  {"ผู้พบเห็น "}
+                  <span>
+                    {userProfile!.user.name} {userProfile!.user.surname}
+                  </span>
+                </p>
 
-            <div className="flex flex-col ml-[40px] mr-[40px] mt-[26px] gap-[12px]">
-              <p className="subtopic-mpdetail text-black">
-                {"ผู้พบเห็น "}
-                <span>
-                  {userProfile!.user.name} {userProfile!.user.surname}
-                </span>
-              </p>
-
-              <div
-                className="form-user"
-                onClick={(e) => {
-                  e.stopPropagation();
-                }}
-              >
-                <label>วันที่พบ</label>
-                <DatePicker
-                  label="วันที่พบ"
-                  value={foundDate}
-                  onChange={handleChangeFoundDate}
-                  className="w-[30%] z-[9000]"
-                />
+                <div
+                  className="form-user"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                >
+                  <label>วันที่พบ</label>
+                  <DatePicker
+                    label="วันที่พบ"
+                    value={foundDate}
+                    onChange={handleChangeFoundDate}
+                    className="w-[30%] z-[9000]"
+                  />
+                </div>
+                <div className="form-user">
+                  <label>สถานที่ที่พบ</label>
+                  <input
+                    type="text"
+                    placeholder="สถานที่ที่พบ"
+                    className="inputBox-user w-[90%]"
+                    required
+                    value={foundPlace}
+                    onChange={handleChangeFoundPlace}
+                  />
+                </div>
+                <div className="form-user">
+                  <label>รายละเอียดเพิ่มเติม</label>
+                  <input
+                    type="text"
+                    placeholder="รายละเอียดเพิ่มเติม"
+                    className="inputBox-user w-[90%]"
+                    required
+                    value={foundDetail}
+                    onChange={handleChangeFoundDetail}
+                  />
+                </div>
+                <button className="bg-zinc-300 rounded-[5px] text-center text-xs pt-[4px] pb-[4px] pl-[4px] pr-[4px] hover:bg-zinc-500 hover:text-white w-[15%]">
+                  อัพโหลดรูปภาพ
+                </button>
               </div>
-              <div className="form-user">
-                <label>สถานที่ที่พบ</label>
-                <input
-                  type="text"
-                  placeholder="สถานที่ที่พบ"
-                  className="inputBox-user w-[90%]"
-                  required
-                  value={foundPlace}
-                  onChange={handleChangeFoundPlace}
-                />
+              <div className="flex flex-row justify-center gap-[50px]">
+                <button className="btn-pink w-[80px]" type="submit">
+                  แก้ไข
+                </button>
+                <button className="btn-grey w-[80px]" onClick={onClose}>
+                  ยกเลิก
+                </button>
               </div>
-              <div className="form-user">
-                <label>รายละเอียดเพิ่มเติม</label>
-                <input
-                  type="text"
-                  placeholder="รายละเอียดเพิ่มเติม"
-                  className="inputBox-user w-[90%]"
-                  required
-                  value={foundDetail}
-                  onChange={handleChangeFoundDetail}
-                />
-              </div>
-              <button className="bg-zinc-300 rounded-[5px] text-center text-xs pt-[4px] pb-[4px] pl-[4px] pr-[4px] hover:bg-zinc-500 hover:text-white w-[15%]">
-                อัพโหลดรูปภาพ
-              </button>
-            </div>
-            <div className="flex flex-row justify-center gap-[50px]">
-              <button className="btn-pink w-[80px]" onClick={handleEdit}>
-                แก้ไข
-              </button>
-              <button className="btn-grey w-[80px]" onClick={onClose}>
-                ยกเลิก
-              </button>
-            </div>
+            </form>
           </div>
         </div>
       )}

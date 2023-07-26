@@ -26,7 +26,7 @@ const MPindividual = () => {
             } เบาะแส)`}</span>
           </p>
 
-          <div className="flex flex-col gap-[10px]">
+          <div className="flex flex-col gap-[10px] mb-[12px]">
             {comments &&
               comments.map((comment) => {
                 return <Comment key={comment.id} {...comment} />;

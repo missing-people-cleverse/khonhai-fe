@@ -76,7 +76,7 @@ const Comment = (props: IComment) => {
                 />
 
                 {!isHidden && (
-                  <div className="w-[113px] h-[63px] bg-neutral-100 rounded-[5px] mt-[30px] ml-[-120px] z-[100] absolute flex flex-col justify-evenly">
+                  <div className="w-[113px] h-[63px] bg-neutral-100 rounded-[5px] mt-[35px] ml-[-120px] z-[100] absolute flex flex-col justify-evenly">
                     <button className="flex ml-[2px]" onClick={handleComment}>
                       <img src="/pencil.svg" />
                       <p className="ml-[5px]">แก้ไขข้อมูล</p>

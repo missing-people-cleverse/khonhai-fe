@@ -79,7 +79,6 @@ const MPDetail = () => {
                 />
                 {imgs.map((img, i) => (
                   <RModalImages
-                    // src={img.src}
                     small={img.src}
                     className={
                       slide === i
@@ -137,7 +136,7 @@ const MPDetail = () => {
                           onClick={() => setIsHidden(!isHidden)}
                         />
                         {!isHidden && (
-                          <div className="w-[113px] h-[63px] bg-neutral-100 rounded-[5px] mt-[30px] ml-[-80px] z-[100] absolute flex flex-col justify-evenly">
+                          <div className="w-[113px] h-[63px] bg-neutral-100 rounded-[-3px] mt-[0px] ml-[-68px] z-[100] absolute flex flex-col justify-evenly">
                             <button
                               className="flex ml-[2px]"
                               onClick={() => {
@@ -215,19 +214,19 @@ const MPDetail = () => {
                   </span>
                 </p>
 
-                <p className="text-[12px]">
+                <div className="text-[12px] pt-[8px]">
                   {`ประกาศเมื่อวันที่ ${formatDateTime(
                     content.createdAt
                   )} (GMT)`}
                   {content.createdAt !== content.updatedAt ? (
-                    <span>
+                    <p>
                       {` (แก้ไขข้อมูลล่าสุดวันที่
                   ${formatDateTime(content.updatedAt)} (GMT))`}
-                    </span>
+                    </p>
                   ) : null}
-                </p>
+                </div>
                 <button
-                  className="btn-pink w-[38%] ml-[auto] mr-[10px] mb-[10px]"
+                  className="btn-pink w-[38%] ml-[auto] mr-[10px] mb-[10px] mt-[10px]"
                   onClick={handleComment}
                 >
                   แจ้งเบาะแส
