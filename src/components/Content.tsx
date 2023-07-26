@@ -4,6 +4,7 @@ import { formatDate } from "../utils";
 import { useState } from "react";
 import CreateComment from "./CreateComment";
 import useComments from "../hooks/useComments";
+import { useAuth } from "../context/AuthProvider";
 
 export interface IContentProps {
   content: IContent;
@@ -12,6 +13,7 @@ export interface IContentProps {
 const Content = ({ content }: IContentProps) => {
   const [openComment, setOpenComment] = useState(false);
   const { comments } = useComments(Number(content.id));
+  const { isLoggedIn } = useAuth();
 
   const navigate = useNavigate();
 
@@ -21,12 +23,11 @@ const Content = ({ content }: IContentProps) => {
 
   const handleComment = (e: any) => {
     e.stopPropagation();
-    setOpenComment(true);
-
-    // navigate(`/content/${content.id}`);
-    // history.push("/route-link");
-    // window.opener.location = `/content/${content.id}`;
-    // navigate(`/content/${content.id}`);
+    if (isLoggedIn) {
+      setOpenComment(true);
+    } else {
+      navigate("/login");
+    }
   };
 
   return (
