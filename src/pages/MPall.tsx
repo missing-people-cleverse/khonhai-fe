@@ -24,6 +24,7 @@ const MPall = () => {
   const [list, setList] = useState(contents);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
+  const [isShown, setIsShown] = useState(false);
   const contentPerPage = 12;
   // const height = screen.height.toString();
   //style footer min-height : 100vh - footer height
@@ -95,8 +96,10 @@ const MPall = () => {
     () => applyFilter(),
     [filterName, filterGender, filterProvince, filterAge, contents]
   );
-  console.log(isLoading);
-  if (isLoading) return <Loading />;
+
+  setTimeout(() => {
+    setIsShown(true);
+  }, 2000);
 
   return (
     <>
@@ -106,124 +109,132 @@ const MPall = () => {
         link="/createcontent"
       />
 
-      <div className="flex gap-[12px] mt-[16px] flex-wrap items-center justify-center">
-        <p className="text-center text-neutral-700 text-xl font-semibold leading-loose">
-          ค้นหา
-        </p>
-
-        <input
-          id="name"
-          type="text"
-          placeholder="ค้นหาชื่อ"
-          className="inputBox-user h-[42px] w-[350px]"
-          onSubmit={(e) => e.preventDefault()}
-          onChange={(e) => setFilterName(e.target.value)}
-          value={filterName}
-        />
-        <FormControl sx={{ m: 0, width: 80 }}>
-          <InputLabel sx={{ marginLeft: 0.2, marginY: -0.7 }}>เพศ</InputLabel>
-
-          <Select
-            value={filterGender}
-            id="gender"
-            name="gender"
-            onSubmit={(e) => e.preventDefault()}
-            onChange={(e) => {
-              {
-                setFilterGender(e.target.value);
-              }
-            }}
-            input={<StyleInput />}
-            label="hi"
-          >
-            <MenuItem key={""} value={""}>
-              {"-"}
-            </MenuItem>
-            <MenuItem></MenuItem>
-            {genderList.map((gender) => (
-              <MenuItem key={gender} value={gender}>
-                {gender}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        <FormControl sx={{ m: 0, width: 180 }}>
-          <InputLabel sx={{ marginLeft: 0.2, marginY: -0.7 }}>
-            จังหวัด
-          </InputLabel>
-
-          <Select
-            value={filterProvince}
-            id="province"
-            name="province"
-            onSubmit={(e) => e.preventDefault()}
-            onChange={(e) => setFilterProvince(e.target.value)}
-            input={<StyleInput />}
-            label="hi"
-          >
-            <MenuItem key={""} value={""}>
-              {"-"}
-            </MenuItem>
-            {provinceList.map((province) => (
-              <MenuItem key={province} value={province}>
-                {province}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        <FormControl sx={{ m: 0, width: 200 }}>
-          <InputLabel sx={{ marginLeft: 0.2, marginY: -0.7 }}>
-            ช่วงอายุ(ปี)
-          </InputLabel>
-
-          <Select
-            value={filterAge}
-            id="age"
-            name="age"
-            onSubmit={(e) => e.preventDefault()}
-            onChange={(e) => setFilterAge(e.target.value)}
-            input={<StyleInput />}
-            label="hi"
-          >
-            <MenuItem key={""} value={""}>
-              {"-"}
-            </MenuItem>
-            {ageList.map((list) => (
-              <MenuItem key={list} value={list}>
-                {list}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </div>
-
-      {list.length === 0 ? (
-        <div className="pt-[40px] text-center mb-[565px]">ไม่พบข้อมูล</div>
-      ) : (
+      {isShown ? (
         <>
-          <div className="flexcontainer-mpall mb-[20px] items-stretch">
-            {list &&
-              list.map((content: IContent) => {
-                return <Content key={content.id} content={content} />;
-              })}
+          <div className="flex gap-[12px] mt-[16px] flex-wrap items-center justify-center">
+            <p className="text-center text-neutral-700 text-xl font-semibold leading-loose">
+              ค้นหา
+            </p>
+
+            <input
+              id="name"
+              type="text"
+              placeholder="ค้นหาชื่อ"
+              className="inputBox-user h-[42px] w-[350px]"
+              onSubmit={(e) => e.preventDefault()}
+              onChange={(e) => setFilterName(e.target.value)}
+              value={filterName}
+            />
+            <FormControl sx={{ m: 0, width: 80 }}>
+              <InputLabel sx={{ marginLeft: 0.2, marginY: -0.7 }}>
+                เพศ
+              </InputLabel>
+
+              <Select
+                value={filterGender}
+                id="gender"
+                name="gender"
+                onSubmit={(e) => e.preventDefault()}
+                onChange={(e) => {
+                  {
+                    setFilterGender(e.target.value);
+                  }
+                }}
+                input={<StyleInput />}
+                label="hi"
+              >
+                <MenuItem key={""} value={""}>
+                  {"-"}
+                </MenuItem>
+                <MenuItem></MenuItem>
+                {genderList.map((gender) => (
+                  <MenuItem key={gender} value={gender}>
+                    {gender}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            <FormControl sx={{ m: 0, width: 180 }}>
+              <InputLabel sx={{ marginLeft: 0.2, marginY: -0.7 }}>
+                จังหวัด
+              </InputLabel>
+
+              <Select
+                value={filterProvince}
+                id="province"
+                name="province"
+                onSubmit={(e) => e.preventDefault()}
+                onChange={(e) => setFilterProvince(e.target.value)}
+                input={<StyleInput />}
+                label="hi"
+              >
+                <MenuItem key={""} value={""}>
+                  {"-"}
+                </MenuItem>
+                {provinceList.map((province) => (
+                  <MenuItem key={province} value={province}>
+                    {province}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            <FormControl sx={{ m: 0, width: 200 }}>
+              <InputLabel sx={{ marginLeft: 0.2, marginY: -0.7 }}>
+                ช่วงอายุ(ปี)
+              </InputLabel>
+
+              <Select
+                value={filterAge}
+                id="age"
+                name="age"
+                onSubmit={(e) => e.preventDefault()}
+                onChange={(e) => setFilterAge(e.target.value)}
+                input={<StyleInput />}
+                label="hi"
+              >
+                <MenuItem key={""} value={""}>
+                  {"-"}
+                </MenuItem>
+                {ageList.map((list) => (
+                  <MenuItem key={list} value={list}>
+                    {list}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </div>
 
-          <div className={list.length <= 4 ? "mb-[190px]" : ""}>
-            <Box
-              justifyContent={"center"}
-              alignItems={"center"}
-              display={"flex"}
-              sx={{ margin: "20px 0px" }}
-            >
-              <Pagination
-                count={Math.ceil(pageCount / 12)}
-                onChange={(_, value) => setPage(value)}
-              />
-            </Box>
-          </div>
+          {list.length === 0 ? (
+            <div className="pt-[40px] text-center mb-[565px]">ไม่พบข้อมูล</div>
+          ) : (
+            <>
+              <div className="flexcontainer-mpall mb-[20px] items-stretch">
+                {list &&
+                  list.map((content: IContent) => {
+                    return <Content key={content.id} content={content} />;
+                  })}
+              </div>
+
+              <div className={list.length <= 4 ? "mb-[190px]" : ""}>
+                <Box
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  display={"flex"}
+                  sx={{ margin: "20px 0px" }}
+                >
+                  <Pagination
+                    count={Math.ceil(pageCount / 12)}
+                    onChange={(_, value) => setPage(value)}
+                  />
+                </Box>
+              </div>
+            </>
+          )}
         </>
+      ) : (
+        <Loading />
       )}
     </>
   );

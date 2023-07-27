@@ -38,6 +38,7 @@ const Comment = (props: IComment) => {
         method: "PATCH",
         body: JSON.stringify({
           isArchive: true,
+          img: comment.img,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -111,13 +112,13 @@ const Comment = (props: IComment) => {
           </p>
         </div>
         <div className="flex flex-row pl-[18px] gap-[4px] my-[10px]">
-          {imgs.map((img) => {
+          {comment.img!.map((img, i) => {
             return (
               <RModalImages
-                small={img.src}
-                large={img.src}
-                key={img.id}
-                alt=""
+                small={img}
+                large={img}
+                key={i}
+                alt="comment pic"
                 className="w-[100px] h-[100px] object-cover"
               />
             );

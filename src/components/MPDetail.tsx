@@ -60,10 +60,10 @@ const MPDetail = () => {
   };
 
   const handleNextSlide = () => {
-    setSlide(slide === imgs.length - 1 ? 0 : slide + 1);
+    setSlide(slide === content!.img!.length - 1 ? 0 : slide + 1);
   };
   const handlePrevSlide = () => {
-    setSlide(slide === 0 ? imgs.length - 1 : slide - 1);
+    setSlide(slide === 0 ? content!.img!.length - 1 : slide - 1);
   };
 
   return (
@@ -74,39 +74,47 @@ const MPDetail = () => {
           <div className="w-[auto] bg-white mt-10 ">
             <div className="flex flex-row justify-evenly gap-[10px] ">
               <div className="flex relative object-cover">
-                <IoIosArrowBack
-                  className="arrow left-1 top-[230px]"
-                  onClick={handlePrevSlide}
-                />
-                {imgs.map((img, i) => (
+                {content.img!.length === 1 ? null : (
+                  <IoIosArrowBack
+                    className="arrow left-1 top-[230px]"
+                    onClick={handlePrevSlide}
+                  />
+                )}
+
+                {content.img!.map((img, i) => (
                   <RModalImages
-                    small={img.src}
+                    small={img}
                     className={
                       slide === i
                         ? "thumbnail-mpdetail"
                         : "thumbnail-mpdetail-hidden"
                     }
-                    large={img.src}
+                    large={img}
                     key={i}
                   />
                 ))}
-                <IoIosArrowForward
-                  className="arrow right-1 top-[230px]"
-                  onClick={handleNextSlide}
-                />
-                <span className="flex absolute bottom-3 left-[42%]">
-                  {imgs.map((_, i) => {
-                    return (
-                      <button
-                        key={i}
-                        className={
-                          slide === i ? "indicator" : "indicator bg-slate-600"
-                        }
-                        onClick={() => setSlide(i)}
-                      ></button>
-                    );
-                  })}
-                </span>
+                {content.img!.length === 1 ? null : (
+                  <IoIosArrowForward
+                    className="arrow right-1 top-[230px]"
+                    onClick={handleNextSlide}
+                  />
+                )}
+
+                {content.img!.length === 1 ? null : (
+                  <span className="flex absolute bottom-3 left-[44%]">
+                    {content.img!.map((_, i) => {
+                      return (
+                        <button
+                          key={i}
+                          className={
+                            slide === i ? "indicator" : "indicator bg-slate-600"
+                          }
+                          onClick={() => setSlide(i)}
+                        ></button>
+                      );
+                    })}
+                  </span>
+                )}
               </div>
 
               <div className="flex flex-col gap-[2px] m-[16px]">

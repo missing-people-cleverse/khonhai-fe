@@ -47,7 +47,7 @@ const EditComment = ({ openComment, onClose, comment }: any) => {
           foundPlace: foundPlace,
           foundDatetime: foundDate,
           foundDetail: foundDetail,
-          img: "mp123",
+          img: comment.img,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -132,9 +132,6 @@ const EditComment = ({ openComment, onClose, comment }: any) => {
                     onChange={handleChangeFoundDetail}
                   />
                 </div>
-                <button className="bg-zinc-300 rounded-[5px] text-center text-xs pt-[4px] pb-[4px] pl-[4px] pr-[4px] hover:bg-zinc-500 hover:text-white w-[15%]">
-                  อัพโหลดรูปภาพ
-                </button>
               </div>
               <div className="flex flex-row justify-center gap-[50px]">
                 <button className="btn-pink w-[80px]" type="submit">

@@ -52,6 +52,7 @@ const EditContent = () => {
       setUpdateHeight(`${content.height}`);
       setUpdateRemark(content.remark);
       setUpdatePlace(content.place);
+
       setUpdateMissingDetail(content.missingDetail);
       setContentInfo({
         gender: content.gender,
@@ -86,7 +87,7 @@ const EditContent = () => {
         name: updateName,
         surname: updateSurname,
         nickname: updateNickname,
-        img: "image",
+        img: content?.img,
         nationality: contentInfo.nationality,
         ageLastSeen: Number(updateAgeLastSeen),
         dateOfBirth: `${dateOfBirth}`,

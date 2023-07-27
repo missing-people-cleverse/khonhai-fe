@@ -80,7 +80,6 @@ const CreateContent = () => {
       formData.append("place", inputPlace);
       formData.append("missingDatetime", `${lastseenDate}`);
       formData.append("missingDetail", inputMissingDetail);
-      // formData.append("photos", selectedFiles);
 
       console.log(selectedFiles);
 
@@ -88,7 +87,6 @@ const CreateContent = () => {
         method: "POST",
         body: formData,
         headers: {
-          // "Content-type": "multipart/form-data",
           ...getAuthHeader(),
         },
       });
