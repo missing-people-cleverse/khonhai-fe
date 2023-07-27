@@ -39,7 +39,7 @@ const CreateContent = () => {
     skin: "",
   });
 
-  const [selectedFiles, setSelectedFiles] = useState<FileList | File[]>([]);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
   const handleChange = (event: { target: { name: string; value: string } }) => {
     const value = event.target.value;
@@ -53,21 +53,20 @@ const CreateContent = () => {
   const handleChangeLastseen = (value: any) => {
     setLastseenDate(value);
   };
-  // console.log(selectedFiles);
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // TODO: edit image in body to be actual img url
     try {
       const formData: any = new FormData();
-      formData.append("isArchive", JSON.stringify(false));
+      // formData.append("isArchive", Boolean("false"));
       formData.append("name", inputName);
       formData.append("surname", inputSurname);
       formData.append("nickname", inputNickname);
-      // formData.append("files", selectedFiles);
-      // for (let i = 0; i < selectedFiles.length; i++) {
-      //   formData.append(`files${i + 1}`, selectedFiles[i]);
-      // }
+
+      for (let i = 0; i < selectedFiles.length; i++) {
+        formData.append("photos", selectedFiles[i]);
+      }
       formData.append("nationality", contentInfo.nationality);
       formData.append("ageLastSeen", Number(inputAgeLastSeen));
       formData.append("dateOfBirth", `${dateOfBirth}`);
@@ -81,24 +80,9 @@ const CreateContent = () => {
       formData.append("place", inputPlace);
       formData.append("missingDatetime", `${lastseenDate}`);
       formData.append("missingDetail", inputMissingDetail);
-      formData.append("img", selectedFiles);
+      // formData.append("photos", selectedFiles);
 
       console.log(selectedFiles);
-      // for (const file of Array.from(selectedFiles)) {
-      //   if (file instanceof File) {
-      //     // Read the file as a Blob using FileReader
-      //     const fileReader = new FileReader();
-      //     fileReader.readAsArrayBuffer(file);
-
-      //     // After the file is read, append it to the FormData
-      //     fileReader.onloadend = () => {
-      //       if (fileReader.result instanceof ArrayBuffer) {
-      //         const blob = new Blob([fileReader.result], { type: file.type });
-      //         formData.append("files", blob, file.name);
-      //       }
-      //     };
-      //   }
-      // }
 
       const res = await fetch(`${host}/content/create`, {
         method: "POST",
@@ -119,27 +103,6 @@ const CreateContent = () => {
       throw new Error(err.message);
     }
   };
-
-  // body: JSON.stringify({
-  //   isArchive: false,
-  //   name: inputName,
-  //   surname: inputSurname,
-  //   nickname: inputNickname,
-  //   img: selectedFiles,
-  //   nationality: contentInfo.nationality,
-  //   ageLastSeen: Number(inputAgeLastSeen),
-  //   dateOfBirth: `${dateOfBirth}`,
-  //   gender: contentInfo.gender,
-  //   weight: Number(inputWeight),
-  //   height: Number(inputHeight),
-  //   skin: contentInfo.skin,
-  //   remark: inputRemark,
-  //   status: "ยังไม่พบ",
-  //   province: contentInfo.province,
-  //   place: inputPlace,
-  //   missingDatetime: `${lastseenDate}`,
-  //   missingDetail: inputMissingDetail,
-  // })
 
   return (
     <>

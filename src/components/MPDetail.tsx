@@ -44,6 +44,7 @@ const MPDetail = () => {
         await fetch(`${host}/content/delete/${content.id}`, {
           method: "PATCH",
           body: JSON.stringify({
+            img: content.img,
             isArchive: true,
             status: content.status,
           }),

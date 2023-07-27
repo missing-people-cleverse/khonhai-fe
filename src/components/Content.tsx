@@ -39,7 +39,11 @@ const Content = ({ content }: IContentProps) => {
       />
       <div className="card-content h-[auto]" onClick={navigateToContent}>
         <div>
-          <img src="/mp.jpg" alt="" className="thumbnail-content" />
+          <img
+            src={`${content.img[0]}`}
+            alt="mp"
+            className="thumbnail-content"
+          />
           <div className="name-content">{`${content.name} ${content.surname}`}</div>
         </div>
         <div className="flex flex-col justify-evenly">
