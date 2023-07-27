@@ -15,7 +15,7 @@ const MPindividual = () => {
   }, 2000);
 
   return (
-    <>
+    <div className="min-h-[90vh]">
       <div className={comments.length === 0 ? "mb-[40px]" : ""}>
         <MPDetail />
       </div>
@@ -24,7 +24,7 @@ const MPindividual = () => {
           {isShown ? (
             <>
               <div className="flex flex-col ">
-                <p className="name-mpdetail pl-[23%]">
+                <p className="name-mpdetail pl-[24%] max-md:pl-[5%]">
                   เบาะแส{" "}
                   <span className="detail-mpdetail">{`(${
                     comments!.length
@@ -44,7 +44,7 @@ const MPindividual = () => {
           )}
         </>
       )}
-    </>
+    </div>
   );
 };
 

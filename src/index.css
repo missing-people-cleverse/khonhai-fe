@@ -47,6 +47,16 @@ body {
   }
 }
 
+/* .Toastify__toast--success {
+  width: 40px;
+} */
+
+/* @media screen and (max-width: 768px) {
+  .Toastify__toast-container {
+    width: 200px;
+  }
+} */
+
 @layer components {
   .btn-blue {
     padding: 8px 10px;
@@ -324,7 +334,7 @@ body {
   }
 
   .thumbnail-mpdetail {
-    width: 300px;
+    width: 350px;
     height: 100%;
     object-fit: cover;
   }
@@ -408,6 +418,7 @@ body {
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
+    overflow-wrap: break-word;
   }
 
   .li-mpdetail {

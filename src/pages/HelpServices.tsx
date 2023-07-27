@@ -4,9 +4,9 @@ import { serviceList } from "../data/HelpServicesData";
 
 const HelpServices = () => {
   return (
-    <>
+    <div className="min-h-[90vh]">
       <PageHeader name="ศูนย์ช่วยเหลือ" />
-      <div className="bg-white w-3/4 mx-auto mt-10 mb-[10rem]">
+      <div className="bg-white w-3/4 mx-auto mt-10 mb-10">
         <p className="text-primary font-semibold text-3xl pt-10 text-center">
           ศูนย์แจ้งข้่อมูลคนหาย และหน่วยงานภาครัฐ
         </p>
@@ -19,7 +19,7 @@ const HelpServices = () => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

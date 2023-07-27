@@ -68,7 +68,7 @@ const EditComment = ({ openComment, onClose, comment }: any) => {
     <>
       {openComment && (
         <div
-          className="z-[800] w-screen h-screen flex justify-center fixed mt-[-890px]"
+          className="z-[800] w-screen h-screen flex justify-center fixed mt-[-590px] max-lg:w-9/12 max-lg:ml-[100px] max-md:mt-[-68rem] max-md:ml-[75px]"
           onClick={(e) => {
             e.stopPropagation();
             onClose;
@@ -107,7 +107,7 @@ const EditComment = ({ openComment, onClose, comment }: any) => {
                     label="วันที่พบ"
                     value={foundDate}
                     onChange={handleChangeFoundDate}
-                    className="w-[30%] z-[9000]"
+                    className="w-[30%] z-[9000] max-md:w-[50%]"
                   />
                 </div>
                 <div className="form-user">

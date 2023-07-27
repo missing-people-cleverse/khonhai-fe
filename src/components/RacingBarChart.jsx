@@ -51,7 +51,7 @@ const RacingBarChart = ({ data }) => {
             (entry, index) => yScale(index) + yScale.bandwidth() / 2 + 5
           )
       )
-      .text((entry) => ` ${entry.title} ${entry.value}`)
+      .text((entry) => ` ${entry.title} (${entry.value})`)
       .attr("class", "label")
       .attr("x", 10)
       .transition()

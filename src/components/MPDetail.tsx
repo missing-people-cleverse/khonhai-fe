@@ -72,8 +72,8 @@ const MPDetail = () => {
       {content && (
         <div className="flex justify-center ">
           <div className="w-[auto] bg-white mt-10 ">
-            <div className="flex flex-row justify-evenly gap-[10px] ">
-              <div className="flex relative object-cover">
+            <div className="flex flex-row justify-evenly gap-[10px] max-md:flex-col ">
+              <div className="flex relative ">
                 {content.img!.length === 1 ? null : (
                   <IoIosArrowBack
                     className="arrow left-1 top-[230px]"
@@ -86,8 +86,8 @@ const MPDetail = () => {
                     small={img}
                     className={
                       slide === i
-                        ? "thumbnail-mpdetail"
-                        : "thumbnail-mpdetail-hidden"
+                        ? "thumbnail-mpdetail max-md:h-[30rem] max-md:w-[30rem]"
+                        : "thumbnail-mpdetail-hidden max-md:h-[30rem] max-md:w-[30rem]"
                     }
                     large={img}
                     key={i}
@@ -184,37 +184,38 @@ const MPDetail = () => {
                     {`${content.ageLastSeen} ปี`}
                   </span>
                 </p>
-                <ul className="subtopic-mpdetail">
-                  ลักษณะ
-                  <li className="detail-mpdetail li-mpdetail">{`ผิวสี${content.skin}`}</li>
-                  <li className="detail-mpdetail li-mpdetail">
-                    {`ส่วนสูง ${content.height} เซนติเมตร`}
-                  </li>
-                  <li className="detail-mpdetail li-mpdetail">
-                    {`น้ำหนัก ${content.weight} กิโลกรัม`}
-                  </li>
-                  <li className="detail-mpdetail li-mpdetail">
-                    {content.remark}
-                  </li>
-                </ul>
+                <div className="w-[400px]">
+                  <ul className="subtopic-mpdetail">
+                    ลักษณะ
+                    <li className="detail-mpdetail li-mpdetail">{`ผิวสี${content.skin}`}</li>
+                    <li className="detail-mpdetail li-mpdetail">
+                      {`ส่วนสูง ${content.height} เซนติเมตร`}
+                    </li>
+                    <li className="detail-mpdetail li-mpdetail">
+                      {`น้ำหนัก ${content.weight} กิโลกรัม`}
+                    </li>
+                  </ul>
+                  <div className="w-[400px]">
+                    <p className="subtopic-mpdetail">{"จุดสังเกต"}</p>
+                    <p className="detail-mpdetail ">{content.remark}</p>
+                  </div>
+                </div>
                 <p className="subtopic-mpdetail">
                   {"วันที่พบเห็นล่าสุด "}
                   <span className="detail-mpdetail">
                     {formatDate(content.missingDatetime)}
                   </span>
                 </p>
-                <p className="subtopic-mpdetail">
-                  {"สถานที่พบเห็นล่าสุด "}
-                  <span className="detail-mpdetail">
+                <div className="w-[400px]">
+                  <p className="subtopic-mpdetail">{"สถานที่พบเห็นล่าสุด "}</p>
+                  <p className="detail-mpdetail ">
                     {content.place} {content.province}
-                  </span>
-                </p>
-                <p className="subtopic-mpdetail">
-                  {"รายละเอียดเพิ่มเติม "}
-                  <span className="detail-mpdetail">
-                    {content.missingDetail}
-                  </span>
-                </p>
+                  </p>
+                </div>
+                <div className="w-[400px]">
+                  <p className="subtopic-mpdetail">{"รายละเอียดเพิ่มเติม "}</p>
+                  <p className="detail-mpdetail">{content.missingDetail}</p>
+                </div>
                 <p className="subtopic-mpdetail">
                   {"ใครพบเห็นติดต่อได้ที่ "}
                   <span className="detail-mpdetail">
@@ -235,7 +236,7 @@ const MPDetail = () => {
                   ) : null}
                 </div>
                 <button
-                  className="btn-pink w-[38%] ml-[auto] mr-[10px] mb-[10px] mt-[10px]"
+                  className="btn-pink w-[150px] ml-[auto] mr-[10px] mb-[10px] mt-[10px]"
                   onClick={handleComment}
                 >
                   แจ้งเบาะแส

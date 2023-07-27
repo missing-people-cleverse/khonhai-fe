@@ -97,14 +97,19 @@ const Story = () => {
               ตลอด 10 ปีที่ผ่านมา
             </p>
             <p className="text-2xl ">
-              <strong>35%</strong> สมัครใจหนีออกจากบ้าน
+              <strong className="text-primary">35%</strong> สมัครใจหนีออกจากบ้าน
             </p>
             <p className="text-2xl pl-10 max-md:text-center">
-              <strong>36%</strong> จากสาเหตุทางสุขภาพ{" "}
+              <strong className="text-secondary">36%</strong> จากสาเหตุทางสุขภาพ{" "}
               <span className="inline-block">ทางร่างกายและจิตใจ</span>
             </p>
           </figcaption>
         </div>
+      </section>
+      <section className="flex flex-col justify-center items-center">
+        <p className="text-5xl pt-14 text-center">
+          และ...<strong>อื่นๆ</strong>
+        </p>
       </section>
       <section className="flex flex-col justify-center items-center">
         <div className="flex flex-row gap-2">

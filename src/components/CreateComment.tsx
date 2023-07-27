@@ -56,8 +56,8 @@ const CreateComment = ({ openComment, onClose, content }: any) => {
         <div
           className={
             location.pathname === "/content"
-              ? "z-[800] flex justify-center fixed mt-[-50px] ml-[120px]"
-              : "z-[800] flex justify-center fixed mt-[20px] "
+              ? "z-[800] flex justify-center fixed mt-[-50px] ml-[120px] max-lg:ml-[0] max-lg:w-8/12 max-md:w-10/12 max-md:ml-[-80px] max-md:mt-[-100px]"
+              : "z-[800] flex justify-center fixed mt-[20px] max-lg:mt-[10px] max-lg:w-9/12 max-md:w-10/12"
           }
           onClick={(e) => {
             e.stopPropagation();
@@ -98,7 +98,7 @@ const CreateComment = ({ openComment, onClose, content }: any) => {
                     label="วันที่พบ"
                     value={foundDate}
                     onChange={handleChangeFoundDate}
-                    className="w-[30%] z-[9000]"
+                    className="w-[30%] z-[9000] max-md:w-[50%]"
                   />
                 </div>
 
