@@ -13,9 +13,10 @@ import {
 import { StyleInput } from "./Register";
 import { ageList, genderList, provinceList } from "../data/SelectableData";
 import { useEffect, useState } from "react";
+import Loading from "../components/Loading";
 
 const MPall = () => {
-  const { contents } = useContents();
+  const { contents, isLoading } = useContents();
   const [filterName, setFilterName] = useState("");
   const [filterProvince, setFilterProvince] = useState("");
   const [filterGender, setFilterGender] = useState("");
@@ -25,7 +26,9 @@ const MPall = () => {
   const [pageCount, setPageCount] = useState(0);
   const contentPerPage = 12;
   // const height = screen.height.toString();
+  //style footer min-height : 100vh - footer height
 
+  //useCallback
   const applyFilter = () => {
     let updatedContents = contents;
     let counting = updatedContents.length;
@@ -90,8 +93,10 @@ const MPall = () => {
 
   useEffect(
     () => applyFilter(),
-    [filterName, filterGender, filterProvince, contents]
+    [filterName, filterGender, filterProvince, filterAge, contents]
   );
+  console.log(isLoading);
+  if (isLoading) return <Loading />;
 
   return (
     <>
@@ -195,12 +200,7 @@ const MPall = () => {
       </div>
 
       {list.length === 0 ? (
-        <div
-          className="pt-[40px] text-center mb-[565px]"
-          // {`text-center pt-[40px] mb-[${height}px]`}
-        >
-          ไม่พบข้อมูล
-        </div>
+        <div className="pt-[40px] text-center mb-[565px]">ไม่พบข้อมูล</div>
       ) : (
         <>
           <div className="flexcontainer-mpall mb-[20px] items-stretch">
