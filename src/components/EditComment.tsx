@@ -87,7 +87,7 @@ const EditComment = ({ openComment, onClose, comment }: any) => {
                 />
               </div>
             </div>
-            <form onSubmit={handleEdit}>
+            <form onSubmit={handleEdit} encType="multipart/form-data">
               <div className="flex flex-col ml-[40px] mr-[40px] mt-[26px] gap-[12px]">
                 <p className="subtopic-mpdetail text-black">
                   {"ผู้พบเห็น "}

@@ -13,7 +13,6 @@ const CreateComment = ({ openComment, onClose, content }: any) => {
   const [foundDetail, setFoundDetail] = useState("");
   const [foundPlace, setFoundPlace] = useState("");
   const { userProfile } = useUserProfile();
-  console.log(location);
 
   const token = localStorage.getItem("token");
 
@@ -76,7 +75,7 @@ const CreateComment = ({ openComment, onClose, content }: any) => {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
               <div className="flex flex-col ml-[40px] mr-[40px] mt-[26px] gap-[12px]">
                 <p className="subtopic-mpdetail text-black">
                   {"ผู้พบเห็น "}

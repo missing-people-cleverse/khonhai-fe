@@ -39,6 +39,8 @@ const CreateContent = () => {
     skin: "",
   });
 
+  const [selectedFiles, setSelectedFiles] = useState<FileList | File[]>([]);
+
   const handleChange = (event: { target: { name: string; value: string } }) => {
     const value = event.target.value;
     setContentInfo({ ...contentInfo, [event.target.name]: value });
@@ -51,36 +53,58 @@ const CreateContent = () => {
   const handleChangeLastseen = (value: any) => {
     setLastseenDate(value);
   };
-
+  // console.log(selectedFiles);
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // TODO: edit image in body to be actual img url
     try {
+      const formData: any = new FormData();
+      formData.append("isArchive", JSON.stringify(false));
+      formData.append("name", inputName);
+      formData.append("surname", inputSurname);
+      formData.append("nickname", inputNickname);
+      // formData.append("files", selectedFiles);
+      // for (let i = 0; i < selectedFiles.length; i++) {
+      //   formData.append(`files${i + 1}`, selectedFiles[i]);
+      // }
+      formData.append("nationality", contentInfo.nationality);
+      formData.append("ageLastSeen", Number(inputAgeLastSeen));
+      formData.append("dateOfBirth", `${dateOfBirth}`);
+      formData.append("gender", contentInfo.gender);
+      formData.append("weight", Number(inputWeight));
+      formData.append("height", Number(inputHeight));
+      formData.append("skin", contentInfo.skin);
+      formData.append("remark", inputRemark);
+      formData.append("status", "ยังไม่พบ");
+      formData.append("province", contentInfo.province);
+      formData.append("place", inputPlace);
+      formData.append("missingDatetime", `${lastseenDate}`);
+      formData.append("missingDetail", inputMissingDetail);
+      formData.append("img", selectedFiles);
+
+      console.log(selectedFiles);
+      // for (const file of Array.from(selectedFiles)) {
+      //   if (file instanceof File) {
+      //     // Read the file as a Blob using FileReader
+      //     const fileReader = new FileReader();
+      //     fileReader.readAsArrayBuffer(file);
+
+      //     // After the file is read, append it to the FormData
+      //     fileReader.onloadend = () => {
+      //       if (fileReader.result instanceof ArrayBuffer) {
+      //         const blob = new Blob([fileReader.result], { type: file.type });
+      //         formData.append("files", blob, file.name);
+      //       }
+      //     };
+      //   }
+      // }
+
       const res = await fetch(`${host}/content/create`, {
         method: "POST",
-        body: JSON.stringify({
-          isArchive: false,
-          name: inputName,
-          surname: inputSurname,
-          nickname: inputNickname,
-          img: "image",
-          nationality: contentInfo.nationality,
-          ageLastSeen: Number(inputAgeLastSeen),
-          dateOfBirth: `${dateOfBirth}`,
-          gender: contentInfo.gender,
-          weight: Number(inputWeight),
-          height: Number(inputHeight),
-          skin: contentInfo.skin,
-          remark: inputRemark,
-          status: "ยังไม่พบ",
-          province: contentInfo.province,
-          place: inputPlace,
-          missingDatetime: `${lastseenDate}`,
-          missingDetail: inputMissingDetail,
-        }),
+        body: formData,
         headers: {
-          "Content-type": "application/json; charset=UTF-8",
+          // "Content-type": "multipart/form-data",
           ...getAuthHeader(),
         },
       });
@@ -88,11 +112,34 @@ const CreateContent = () => {
       const data = await res.json();
       toast.success("แจ้งคนหายสำเร็จ");
       navigate("/content");
+      console.log(data);
       return data;
     } catch (err: any) {
+      console.log(err);
       throw new Error(err.message);
     }
   };
+
+  // body: JSON.stringify({
+  //   isArchive: false,
+  //   name: inputName,
+  //   surname: inputSurname,
+  //   nickname: inputNickname,
+  //   img: selectedFiles,
+  //   nationality: contentInfo.nationality,
+  //   ageLastSeen: Number(inputAgeLastSeen),
+  //   dateOfBirth: `${dateOfBirth}`,
+  //   gender: contentInfo.gender,
+  //   weight: Number(inputWeight),
+  //   height: Number(inputHeight),
+  //   skin: contentInfo.skin,
+  //   remark: inputRemark,
+  //   status: "ยังไม่พบ",
+  //   province: contentInfo.province,
+  //   place: inputPlace,
+  //   missingDatetime: `${lastseenDate}`,
+  //   missingDetail: inputMissingDetail,
+  // })
 
   return (
     <>
@@ -128,6 +175,7 @@ const CreateContent = () => {
         <form
           className="flex flex-row gap-20 p-10 max-md:flex-col"
           onSubmit={handleSubmit}
+          encType="multipart/form-data"
         >
           <div className="flex flex-col gap-3 w-1/2">
             <section className="flex flex-row gap-6">
@@ -297,6 +345,26 @@ const CreateContent = () => {
               <p className="text-gray-400 text-xs">
                 *เลือกสีผิวที่ใกล้เคียงที่สุดของผู้สูญหาย
               </p>
+              <div>
+                <label className="flex flex-col mt-[10px] mb-[5px]">
+                  อัพโหลดรูปภาพ
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const files = e.target.files;
+                    if (files) {
+                      setSelectedFiles((prevSelectedFiles) => [
+                        ...prevSelectedFiles,
+                        ...Array.from(files),
+                      ]);
+                    }
+                  }}
+                  multiple
+                  required
+                />
+              </div>
             </div>
             <p className="text-primary font-semibold text-xl pt-10">
               สถานที่พบเห็นล่าสุด

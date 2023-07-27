@@ -29,6 +29,17 @@ body {
   background-color: var(--bg_light_grey);
 }
 
+::-webkit-file-upload-button {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  background-color: rgb(120, 120, 120);
+  color: var(--text_light);
+
+  border-radius: 5px;
+  border: none;
+  padding: 3px;
+}
+
 @media screen and (max-width: 768px) {
   svg {
     width: 550px;
