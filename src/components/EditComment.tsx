@@ -47,7 +47,7 @@ const EditComment = ({ openComment, onClose, comment }: any) => {
           foundPlace: foundPlace,
           foundDatetime: foundDate,
           foundDetail: foundDetail,
-          img: "mp123",
+          img: comment.img,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -87,7 +87,7 @@ const EditComment = ({ openComment, onClose, comment }: any) => {
                 />
               </div>
             </div>
-            <form onSubmit={handleEdit}>
+            <form onSubmit={handleEdit} encType="multipart/form-data">
               <div className="flex flex-col ml-[40px] mr-[40px] mt-[26px] gap-[12px]">
                 <p className="subtopic-mpdetail text-black">
                   {"ผู้พบเห็น "}
@@ -132,9 +132,6 @@ const EditComment = ({ openComment, onClose, comment }: any) => {
                     onChange={handleChangeFoundDetail}
                   />
                 </div>
-                <button className="bg-zinc-300 rounded-[5px] text-center text-xs p-[4px] hover:bg-zinc-500 hover:text-white w-[15%] max-lg:w-[25%] max-md:w-[30%]">
-                  อัพโหลดรูปภาพ
-                </button>
               </div>
               <div className="flex flex-row justify-center gap-[50px]">
                 <button className="btn-pink w-[80px]" type="submit">

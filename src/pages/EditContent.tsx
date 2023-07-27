@@ -52,6 +52,7 @@ const EditContent = () => {
       setUpdateHeight(`${content.height}`);
       setUpdateRemark(content.remark);
       setUpdatePlace(content.place);
+
       setUpdateMissingDetail(content.missingDetail);
       setContentInfo({
         gender: content.gender,
@@ -86,7 +87,7 @@ const EditContent = () => {
         name: updateName,
         surname: updateSurname,
         nickname: updateNickname,
-        img: "image",
+        img: content?.img,
         nationality: contentInfo.nationality,
         ageLastSeen: Number(updateAgeLastSeen),
         dateOfBirth: `${dateOfBirth}`,
@@ -115,6 +116,7 @@ const EditContent = () => {
         <p className="text-primary font-semibold text-xl px-10 pt-10">
           ข้อมูลส่วนตัวคนหาย
         </p>
+
         <div className="hidden max-lg:flex flex-col gap-3 px-10 pt-10  ">
           <p className="font-semibold text-xl">คำแนะนำในการแจ้งคนหาย</p>
           <ul style={{ listStyleType: "circle" }} className="pl-8">
@@ -139,7 +141,11 @@ const EditContent = () => {
             </li>
           </ul>
         </div>
-        <form className="flex flex-row gap-20 p-10" onSubmit={handleSubmit}>
+        <form
+          className="flex flex-row gap-20 p-10"
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+        >
           <div className="flex flex-col gap-3 w-1/2">
             <section className="flex flex-row gap-6">
               <div className="form-user">

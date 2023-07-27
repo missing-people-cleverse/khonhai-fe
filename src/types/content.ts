@@ -3,7 +3,7 @@ export interface IContentDto {
   name: string;
   surname: string;
   nickname: string;
-  img: string; //arr of str
+  img: string[]; //arr of str
   nationality: string;
   ageLastSeen: number;
   dateOfBirth: string;
@@ -39,7 +39,7 @@ export interface IContent extends IContentDto {
     foundPlace: string;
     foundDatetime: string;
     foundDetail: string;
-    img: string;
+    img: string[];
     isArchive: false;
   }[];
 }

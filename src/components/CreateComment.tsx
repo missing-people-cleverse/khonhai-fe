@@ -13,6 +13,7 @@ const CreateComment = ({ openComment, onClose, content }: any) => {
   const [foundDetail, setFoundDetail] = useState("");
   const [foundPlace, setFoundPlace] = useState("");
   const { userProfile } = useUserProfile();
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
   const token = localStorage.getItem("token");
 
@@ -23,16 +24,18 @@ const CreateComment = ({ openComment, onClose, content }: any) => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
+      const formData: any = new FormData();
+      formData.append("foundPlace", foundPlace);
+      formData.append("foundDatetime", foundDate);
+      formData.append("foundDetail", foundDetail);
+      for (let i = 0; i < selectedFiles.length; i++) {
+        formData.append("photos", selectedFiles[i]);
+      }
+
       await fetch(`${host}/comment/${content.id}`, {
         method: "POST",
-        body: JSON.stringify({
-          foundPlace: foundPlace,
-          foundDatetime: foundDate,
-          foundDetail: foundDetail,
-          img: "mp123",
-        }),
+        body: formData,
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
@@ -61,7 +64,7 @@ const CreateComment = ({ openComment, onClose, content }: any) => {
             onClose;
           }}
         >
-          <div className="bg-white h-[486px] w-[800px] rounded-[10px] shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
+          <div className="bg-white h-[512px] w-[800px] rounded-[10px] shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
             <div className="bg-primary rounded-t-[10px]">
               <div className="flex justify-between">
                 <div className="font-bold text-2xl text-text_light pt-[30px] pl-[40px] pb-[17px] ">
@@ -75,7 +78,7 @@ const CreateComment = ({ openComment, onClose, content }: any) => {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
               <div className="flex flex-col ml-[40px] mr-[40px] mt-[26px] gap-[12px]">
                 <p className="subtopic-mpdetail text-black">
                   {"ผู้พบเห็น "}
@@ -120,13 +123,27 @@ const CreateComment = ({ openComment, onClose, content }: any) => {
                     onChange={(e) => setFoundDetail(e.target.value)}
                     required
                   />
+                  <div>
+                    <label className="flex flex-col pt-[10px] ">
+                      อัพโหลดรูปภาพ
+                    </label>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const files = e.target.files;
+                        if (files) {
+                          setSelectedFiles((prevSelectedFiles) => [
+                            ...prevSelectedFiles,
+                            ...Array.from(files),
+                          ]);
+                        }
+                      }}
+                      multiple
+                      required
+                    />
+                  </div>
                 </div>
-                <button
-                  type="submit"
-                  className="bg-zinc-300 rounded-[5px] text-center text-xs p-[4px] hover:bg-zinc-500 hover:text-white w-[15%] max-lg:w-[25%] max-md:w-[30%]"
-                >
-                  อัพโหลดรูปภาพ
-                </button>
               </div>
               <div className="flex flex-row justify-center gap-[50px]">
                 <button className="btn-pink w-[80px]" type="submit">

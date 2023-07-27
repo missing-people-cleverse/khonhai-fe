@@ -15,7 +15,7 @@ const RandomMPCard = ({ content }: IContentProps) => {
         className="w-full h-auto flex flex-col rounded-[10px] bg-white border-b-[5px] border-b-white hover:cursor-pointer hover:border-b-secondary"
       >
         <img
-          src="/mp.jpg"
+          src={content.img![0]}
           alt="missing people"
           className="w-full h-48 object-cover rounded-t-[10px]"
         />
