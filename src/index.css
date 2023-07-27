@@ -36,6 +36,16 @@ body {
   }
 }
 
+/* .Toastify__toast--success {
+  width: 40px;
+} */
+
+/* @media screen and (max-width: 768px) {
+  .Toastify__toast-container {
+    width: 200px;
+  }
+} */
+
 @layer components {
   .btn-blue {
     padding: 8px 10px;

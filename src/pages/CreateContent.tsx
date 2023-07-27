@@ -95,7 +95,7 @@ const CreateContent = () => {
   };
 
   return (
-    <>
+    <div className="min-h-[90vh]">
       <PageHeader name="แจ้งคนหาย" />
       <div className="bg-white w-[60rem] mx-auto mt-10 mb-10 max-lg:w-2/3 max-md:w-11/12">
         <p className="text-primary font-semibold text-xl px-10 pt-10">
@@ -367,7 +367,7 @@ const CreateContent = () => {
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -94,7 +94,7 @@ const MPall = () => {
   );
 
   return (
-    <>
+    <div className="min-h-[90vh]">
       <PageHeader
         name="รายชื่อคนหายทั้งหมด"
         buttonName="แจ้งคนหาย"
@@ -224,7 +224,7 @@ const MPall = () => {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 };
 

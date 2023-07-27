@@ -12,7 +12,7 @@ const MPindividual = () => {
     return <Loading />;
   }
   return (
-    <>
+    <div className="min-h-[90vh]">
       <div className={comments.length === 0 ? "mb-[40px]" : ""}>
         <MPDetail />
       </div>
@@ -34,7 +34,7 @@ const MPindividual = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

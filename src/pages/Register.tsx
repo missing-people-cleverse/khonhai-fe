@@ -155,7 +155,7 @@ const Register = () => {
   };
 
   return (
-    <>
+    <div className="min-h-[90vh]">
       <PageHeader name="ลงทะเบียน" />
       <form
         className="bg-bg_white w-[50rem] mx-auto mt-10 mb-10 max-lg:w-10/12"
@@ -340,7 +340,7 @@ const Register = () => {
           </div>
         </section>
       </form>
-    </>
+    </div>
   );
 };
 

@@ -68,7 +68,7 @@ const EditComment = ({ openComment, onClose, comment }: any) => {
     <>
       {openComment && (
         <div
-          className="z-[800] w-screen h-screen flex justify-center fixed mt-[-890px]"
+          className="z-[800] w-screen h-screen flex justify-center fixed mt-[-590px] max-lg:w-9/12 max-lg:ml-[100px] max-md:mt-[-68rem] max-md:ml-[75px]"
           onClick={(e) => {
             e.stopPropagation();
             onClose;
@@ -107,7 +107,7 @@ const EditComment = ({ openComment, onClose, comment }: any) => {
                     label="วันที่พบ"
                     value={foundDate}
                     onChange={handleChangeFoundDate}
-                    className="w-[30%] z-[9000]"
+                    className="w-[30%] z-[9000] max-md:w-[50%]"
                   />
                 </div>
                 <div className="form-user">
@@ -132,7 +132,7 @@ const EditComment = ({ openComment, onClose, comment }: any) => {
                     onChange={handleChangeFoundDetail}
                   />
                 </div>
-                <button className="bg-zinc-300 rounded-[5px] text-center text-xs pt-[4px] pb-[4px] pl-[4px] pr-[4px] hover:bg-zinc-500 hover:text-white w-[15%]">
+                <button className="bg-zinc-300 rounded-[5px] text-center text-xs p-[4px] hover:bg-zinc-500 hover:text-white w-[15%] max-lg:w-[25%] max-md:w-[30%]">
                   อัพโหลดรูปภาพ
                 </button>
               </div>

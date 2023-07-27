@@ -23,9 +23,9 @@ const Login = () => {
 
   if (isLoggedIn) return <Navigate to="/" />;
   return (
-    <>
+    <div className="min-h-[90vh]">
       <PageHeader name="เข้าสู่ระบบ" />
-      <div className="bg-bg_white w-96 mx-auto mt-10 mb-[200px]">
+      <div className="bg-bg_white w-96 mx-auto mt-10">
         <form className="flex flex-col gap-4 p-8" onSubmit={handleSubmit}>
           <div className="form-user gap-[10px]">
             <label>ชื่อผู้ใช้</label>
@@ -47,6 +47,7 @@ const Login = () => {
               required
             />
           </div>
+
           <div className="flex flex-row justify-between">
             <div className="btn-pink w-[150px]">
               <button type="submit">เข้าสู่ระบบ</button>
@@ -55,16 +56,17 @@ const Login = () => {
               ลงทะเบียน
             </NavLink>
           </div>
-          <p className="hr-line">เข้าสู่ระบบผ่านวิธีอื่น</p>
+
+          {/* <p className="hr-line">เข้าสู่ระบบผ่านวิธีอื่น</p>
           <div className="btn-google">
             <button className="flex flex-row gap-2 items-center mx-auto">
               <img src="/google.svg" alt="google symbol" />
               เข้าสู่ระบบด้วยGoogle
             </button>
-          </div>
+          </div> */}
         </form>
       </div>
-    </>
+    </div>
   );
 };
 
