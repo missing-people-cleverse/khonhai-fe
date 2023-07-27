@@ -15,7 +15,7 @@ const Navbar = ({ children }: AuthProviderProps) => {
             <img src="/logo.svg" alt="Khonhai logo" />
           </Link>
 
-          <nav className="flex flex-row gap-10  max-md:hidden">
+          <nav className="flex flex-row gap-10  max-lg:hidden">
             <NavLink
               to="/"
               className={({ isActive }) =>

@@ -94,7 +94,7 @@ const MPall = () => {
   );
 
   return (
-    <>
+    <div className="min-h-[90vh]">
       <PageHeader
         name="รายชื่อคนหายทั้งหมด"
         buttonName="แจ้งคนหาย"
@@ -134,7 +134,6 @@ const MPall = () => {
             <MenuItem key={""} value={""}>
               {"-"}
             </MenuItem>
-            <MenuItem></MenuItem>
             {genderList.map((gender) => (
               <MenuItem key={gender} value={gender}>
                 {gender}
@@ -203,7 +202,7 @@ const MPall = () => {
         </div>
       ) : (
         <>
-          <div className="flexcontainer-mpall mb-[20px] items-stretch">
+          <div className="flexcontainer-mpall mb-[20px] items-stretch max-xl:ml-[8rem]">
             {list &&
               list.map((content: IContent) => {
                 return <Content key={content.id} content={content} />;
@@ -225,7 +224,7 @@ const MPall = () => {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 };
 

@@ -95,7 +95,7 @@ const CreateContent = () => {
   };
 
   return (
-    <>
+    <div className="min-h-[90vh]">
       <PageHeader name="แจ้งคนหาย" />
       <div className="bg-white w-[60rem] mx-auto mt-10 mb-10 max-lg:w-2/3 max-md:w-11/12">
         <p className="text-primary font-semibold text-xl px-10 pt-10">
@@ -158,7 +158,7 @@ const CreateContent = () => {
                 <input
                   type="text"
                   placeholder="ชื่อเล่น"
-                  className="inputBox-user"
+                  className="inputBox-user max-md:w-[8rem]"
                   onChange={(e) => setInputNickname(e.target.value)}
                   required
                 />
@@ -216,7 +216,7 @@ const CreateContent = () => {
                 <input
                   type="number"
                   placeholder="ส่วนสูง(เซนติเมตร)"
-                  className="inputBox-user w-[10rem]"
+                  className="inputBox-user w-[10rem] max-md:w-[8rem]"
                   onChange={(e) => setInputHeight(e.target.value)}
                   required
                 />
@@ -226,13 +226,13 @@ const CreateContent = () => {
                 <input
                   type="number"
                   placeholder="น้ำหนัก(กิโลกรัม)"
-                  className="inputBox-user w-[10rem]"
+                  className="inputBox-user w-[10rem] max-md:w-[8rem]"
                   onChange={(e) => setInputWeight(e.target.value)}
                   required
                 />
               </div>
             </section>
-            <section className="flex flex-row gap-6">
+            <section className="flex flex-row gap-6 max-lg:flex-col">
               <div className="form-user">
                 <label>วันเกิด</label>
                 <DatePicker
@@ -255,7 +255,7 @@ const CreateContent = () => {
               <input
                 type="text"
                 placeholder="จุดสังเกตของผู้สูญหาย"
-                className="inputBox-user w-[30rem] max-md:w-[20rem]"
+                className="inputBox-user w-[30rem] max-md:w-[25rem]"
                 onChange={(e) => setInputRemark(e.target.value)}
                 required
               />
@@ -269,7 +269,7 @@ const CreateContent = () => {
               <input
                 type="text"
                 placeholder="แจ้งข้อมูลที่เจอครั้งสุดท้าย ให้ชัดเจนที่สุด"
-                className="inputBox-user w-[30rem] max-md:w-[20rem]"
+                className="inputBox-user w-[30rem] max-md:w-[25rem]"
                 onChange={(e) => setInputMissingDetail(e.target.value)}
                 required
               />
@@ -324,7 +324,7 @@ const CreateContent = () => {
               <input
                 type="text"
                 placeholder="แจ้งพื้นที่ที่พบเห็นล่าสุด"
-                className="inputBox-user w-[30rem] max-md:w-[20rem]"
+                className="inputBox-user w-[30rem] max-md:w-[25rem]"
                 onChange={(e) => setInputPlace(e.target.value)}
                 required
               />
@@ -332,8 +332,8 @@ const CreateContent = () => {
                 *เช่น ชื่อหมู่บ้าน, อำเภอ, จังหวัด
               </p>
             </div>
-            <div className="flex flex-row gap-6 justify-around pt-5">
-              <div className="btn-pink w-[10rem]">
+            <div className="flex flex-row gap-2 justify-around pt-5">
+              <div className="btn-pink w-[10rem] max-md:w-[13rem]">
                 <button type="submit">แจ้งคนหาย</button>
               </div>
               <NavLink to="/" className="btn-disabled w-[10rem]">
@@ -367,7 +367,7 @@ const CreateContent = () => {
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 
