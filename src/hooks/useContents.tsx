@@ -25,23 +25,6 @@ const useContents = () => {
   }, []);
 
   useEffect(() => {
-    // const fetchData = async () => {
-    //   setIsLoading(true);
-    //   try {
-    //     const res = await fetch(`${host}/content`);
-    //     const data = await res.json();
-
-    //     const displayContents = data
-    //       .filter((obj: IContent) => obj.isArchive === false)
-    //       .reverse();
-    //     setContents(displayContents);
-    //   } catch (err) {
-    //     console.log(err);
-    //   } finally {
-    //     setIsLoading(false);
-    //   }
-    // };
-
     fetchData();
   }, []);
 
