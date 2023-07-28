@@ -71,7 +71,7 @@ const MPDetail = () => {
       <PageHeader name="ข้อมูลคนหาย" />
       {content && (
         <div className="flex justify-center ">
-          <div className="w-[auto] bg-white mt-10 ">
+          <div className="w-[auto] bg-white mt-10">
             <div className="flex flex-row justify-evenly gap-[10px] max-md:flex-col ">
               <div className="flex relative ">
                 {content.img!.length === 1 ? null : (
