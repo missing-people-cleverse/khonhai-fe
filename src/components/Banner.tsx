@@ -11,7 +11,7 @@ const Banner = () => {
           ยังมีคนที่รอคอยคนที่รักอย่างมีความหวัง
         </h1>
         <p className="text-lg">
-          ร่วมกันช่วยหาคนหายพร้อมแจ้งเบาะแสในเว็บไซท์ของเรา
+          ร่วมกันช่วยหาคนหายพร้อมแจ้งเบาะแสในเว็บไซต์ของเรา
         </p>
         <section className="flex flex-row gap-4">
           <NavLink to="/content" className="btn-blue">

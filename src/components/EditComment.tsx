@@ -1,15 +1,11 @@
 import { DatePicker } from "@mui/x-date-pickers";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
-import { useNavigate, useParams } from "react-router-dom";
 import { host } from "../constant";
 import useUserProfile from "../hooks/useUserProfile";
 import { toast } from "react-toastify";
 
 const EditComment = ({ openComment, onClose, comment }: any) => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-
   const { userProfile } = useUserProfile();
   const token = localStorage.getItem("token");
 

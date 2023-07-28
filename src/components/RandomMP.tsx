@@ -39,11 +39,12 @@ const RandomMP = () => {
           responsive={responsive}
           partialVisible={false}
         >
-          {contents.map((content: IContent) => (
-            <div className="mx-3 overflow-hidden">
-              <RandomMPCard key={content.id} content={content} />
-            </div>
-          ))}
+          {contents &&
+            contents.map((content: IContent) => (
+              <div className="mx-3 overflow-hidden">
+                <RandomMPCard key={content.id} content={content} />
+              </div>
+            ))}
         </Carousel>
         <div>
           <p className="font-bold text-3xl text-text_light max-lg:text-2xl">

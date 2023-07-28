@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 
 const MPall = () => {
-  const { contents, isLoading } = useContents();
+  const { contents } = useContents();
   const [filterName, setFilterName] = useState("");
   const [filterProvince, setFilterProvince] = useState("");
   const [filterGender, setFilterGender] = useState("");
