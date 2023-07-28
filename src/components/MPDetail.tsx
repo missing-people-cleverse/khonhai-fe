@@ -73,10 +73,10 @@ const MPDetail = () => {
         <div className="flex justify-center ">
           <div className="w-[auto] bg-white mt-10">
             <div className="flex flex-row justify-evenly gap-[10px] max-md:flex-col ">
-              <div className="flex relative ">
+              <div className="flex  relative ">
                 {content.img!.length === 1 ? null : (
                   <IoIosArrowBack
-                    className="arrow left-1 top-[230px]"
+                    className="arrow left-1 top-[260px] max-md:top-[230px]"
                     onClick={handlePrevSlide}
                   />
                 )}
@@ -95,7 +95,7 @@ const MPDetail = () => {
                 ))}
                 {content.img!.length === 1 ? null : (
                   <IoIosArrowForward
-                    className="arrow right-1 top-[230px]"
+                    className="arrow right-1 top-[260px] max-md:top-[230px]"
                     onClick={handleNextSlide}
                   />
                 )}
