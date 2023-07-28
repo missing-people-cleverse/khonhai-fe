@@ -10,13 +10,6 @@ import { host } from "../constant";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { RModalImages } from "react-modal-images";
 
-const imgs = [
-  { id: "1", src: "/mp.jpg" },
-  { id: "3", src: "/mp3.jpg" },
-  { id: "2", src: "/mp4.jpg" },
-  { id: "4", src: "/mp2.jpeg" },
-];
-
 const MPDetail = () => {
   const { id } = useParams();
   const { content } = useContent(Number(id));

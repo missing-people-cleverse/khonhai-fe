@@ -19,13 +19,6 @@ const Comment = (props: IComment) => {
 
   const token = localStorage.getItem("token");
 
-  const imgs = [
-    { id: "1", src: "/mp.jpg" },
-    { id: "3", src: "/mp3.jpg" },
-    { id: "2", src: "/mp4.jpg" },
-    { id: "4", src: "/mp2.jpeg" },
-  ];
-
   const handleComment = (e: any) => {
     e.stopPropagation();
     setOpenComment(true);

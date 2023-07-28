@@ -40,7 +40,7 @@ const Content = ({ content }: IContentProps) => {
       <div className="card-content h-[auto]" onClick={navigateToContent}>
         <div>
           <img
-            src={`${content.img[0]}`}
+            src={`${content.img![0]}`}
             alt="mp"
             className="thumbnail-content"
           />
