@@ -11,6 +11,7 @@ const ServiceCard = (props: IService) => {
         <a
           href={props.link}
           className="text-black text-center text-lg font-semibold mt-5 px-5 underline underline-offset-2 decoration-1"
+          target="_blank"
         >
           {props.name}
         </a>

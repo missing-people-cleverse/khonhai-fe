@@ -12,18 +12,21 @@ const HelpCard = () => {
           <a
             className="btn-pink w-[15rem] font-semibold"
             href="https://www.childlinethailand.org/th/"
+            target="_blank"
           >
             มูลนิธิสายเด็ก
           </a>
           <a
             className="btn-pink w-[15rem] font-semibold"
             href="https://1300thailand.m-society.go.th/"
+            target="_blank"
           >
             ศูนย์ช่วยเหลือสังคม
           </a>
           <a
             className="btn-pink w-[15rem] font-semibold"
             href="https://1323alltime.camri.go.th/"
+            target="_blank"
           >
             สายด่วนสุขภาพจิต
           </a>
@@ -44,12 +47,14 @@ const HelpCard = () => {
           <a
             className="btn-pink w-[15rem] font-semibold"
             href="http://web.backtohome.org/index.php?width=1470&height=956"
+            target="_blank"
           >
             มูลนิธิกระจกเงา
           </a>
           <a
             className="btn-pink w-[15rem] font-semibold"
             href="https://www.thaimissing.go.th/"
+            target="_blank"
           >
             สถาบันนิติวิทยาศาสตร์
           </a>
@@ -64,6 +69,7 @@ const HelpCard = () => {
           <a
             className="btn-pink w-[15rem] font-semibold"
             href="https://www.detectives.in.th/missing-people/"
+            target="_blank"
           >
             ขั้นตอนการแจ้งความ โดย นักสืบแห่งประเทศไทย
           </a>
