@@ -54,7 +54,26 @@ const Story = () => {
               alt="infographic shows the difference between the amount of missing people over 10 years"
             />
           </figure>
-          <figcaption className="flex flex-col gap-6 pb-[10rem] max-lg:pb-10">
+          <motion.figcaption
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: "some" }}
+            animate={{
+              x: 100,
+              scale: 1,
+            }}
+            transition={{
+              duration: 1,
+              type: "tween",
+              delay: 0.6,
+              ease: [0, 0.71, 0.2, 1.01],
+            }}
+            variants={{
+              hidden: { opacity: 0, x: -150 },
+              visible: { opacity: 1, x: 0 },
+            }}
+            className="flex flex-col gap-6 pb-[10rem] max-lg:pb-10"
+          >
             <div>
               <p className="text-2xl">
                 จากสถิติรับแจ้งคนหาย{" "}
@@ -67,7 +86,7 @@ const Story = () => {
             <p className="font-bold text-3xl pl-[10rem]">
               ตลอด 10 ปี<span className="inline-block">ที่ผ่านมา</span>
             </p>
-          </figcaption>
+          </motion.figcaption>
         </div>
       </section>
       <section className="flex flex-col justify-center items-center">
@@ -85,7 +104,26 @@ const Story = () => {
           <figure>
             <RacingBarChart data={data} />
           </figure>
-          <figcaption className="flex flex-col gap-5 max-lg:items-center">
+          <motion.figcaption
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: "some" }}
+            animate={{
+              x: 100,
+              scale: 1,
+            }}
+            transition={{
+              duration: 1,
+              type: "tween",
+              delay: 0.6,
+              ease: [0, 0.71, 0.2, 1.01],
+            }}
+            variants={{
+              hidden: { opacity: 0, x: -150 },
+              visible: { opacity: 1, x: 0 },
+            }}
+            className="flex flex-col gap-5 max-lg:items-center"
+          >
             <p className="text-4xl">ปีพ.ศ. {iteration + 2554}</p>
             <button
               onClick={handleClick}
@@ -103,7 +141,7 @@ const Story = () => {
               <strong className="text-secondary">36%</strong> จากสาเหตุทางสุขภาพ{" "}
               <span className="inline-block">ทางร่างกายและจิตใจ</span>
             </p>
-          </figcaption>
+          </motion.figcaption>
         </div>
       </section>
       <section className="flex flex-col justify-center items-center">
