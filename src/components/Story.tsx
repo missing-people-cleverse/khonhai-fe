@@ -81,7 +81,7 @@ const Story = () => {
             className="w-[5rem] h-[5rem] mt-[4rem] max-md:hidden"
           />
         </div>
-        <div className="flex flex-row gap-5 justify-between items-center pt-24 pb-24 w-11/12 max-lg:flex-col ">
+        <div className="flex flex-row gap-5 justify-between items-center pt-24 pb-10 w-10/12 max-lg:flex-col ">
           <figure>
             <RacingBarChart data={data} />
           </figure>
@@ -107,9 +107,11 @@ const Story = () => {
         </div>
       </section>
       <section className="flex flex-col justify-center items-center">
-        <p className="text-5xl pt-14 text-center">
-          และ...<strong>อื่นๆ</strong>
-        </p>
+        <img
+          src="/headline.svg"
+          alt="Headline news about missing people"
+          className="mt-16 w-10/12"
+        />
       </section>
       <section className="flex flex-col justify-center items-center">
         <div className="flex flex-row gap-2">

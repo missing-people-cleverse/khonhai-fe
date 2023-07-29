@@ -8,6 +8,8 @@ const RandomMPCard = ({ content }: IContentProps) => {
     navigate(`/content/${content.id}`);
   };
 
+  const shownPlace = content.place.slice(0, 10) + "...";
+
   return (
     <>
       <div
@@ -23,7 +25,7 @@ const RandomMPCard = ({ content }: IContentProps) => {
           {content.name} {content.nickname}
         </p>
         <p className="text-black text-center text-base not-italic font-normal mt-2">
-          {content.place} {content.province}
+          {shownPlace} {content.province}
         </p>
       </div>
     </>
