@@ -65,7 +65,7 @@ const Story = () => {
             transition={{
               duration: 1,
               type: "tween",
-              delay: 0.6,
+              delay: 1,
               ease: [0, 0.71, 0.2, 1.01],
             }}
             variants={{
