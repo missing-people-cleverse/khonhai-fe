@@ -25,14 +25,19 @@ const MPall = () => {
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
   const [isShown, setIsShown] = useState(false);
-  const contentPerPage = 12;
+  const [activePagination, setActivePagination] = useState(true);
+  let contentPerPage = 12;
   // const height = screen.height.toString();
   //style footer min-height : 100vh - footer height
 
   //useCallback
   const applyFilter = () => {
     let updatedContents = contents;
-    let counting = updatedContents.length;
+
+    if (!filterAge && !filterGender && !filterName && !filterProvince) {
+      setActivePagination(true);
+      updatedContents = updatedContents;
+    }
 
     if (filterName) {
       updatedContents = updatedContents.filter(
@@ -40,21 +45,21 @@ const MPall = () => {
           content.name.includes(filterName) ||
           content.surname.includes(filterName)
       );
-      counting = updatedContents.length;
+      setActivePagination(false);
     }
 
     if (filterGender) {
       updatedContents = updatedContents.filter((content) =>
         content.gender.includes(filterGender)
       );
-      counting = updatedContents.length;
+      setActivePagination(false);
     }
 
     if (filterProvince) {
       updatedContents = updatedContents.filter((content) =>
         content.province.includes(filterProvince)
       );
-      counting = updatedContents.length;
+      setActivePagination(false);
     }
 
     if (filterAge) {
@@ -64,54 +69,60 @@ const MPall = () => {
         updatedContents = updatedContents.filter(
           (content) => content.ageLastSeen >= 0 && content.ageLastSeen <= 10
         );
-        counting = updatedContents.length;
+        setActivePagination(false);
       } else if (filterAge === "วัยรุ่น (11 - 25 ปี)") {
         updatedContents = updatedContents.filter(
           (content) => content.ageLastSeen >= 11 && content.ageLastSeen <= 25
         );
-        counting = updatedContents.length;
+        setActivePagination(false);
       } else if (filterAge === "ผู้ใหญ่ (26 - 60 ปี)") {
         updatedContents = updatedContents.filter(
           (content) => content.ageLastSeen >= 26 && content.ageLastSeen <= 60
         );
-        counting = updatedContents.length;
+        setActivePagination(false);
       } else {
         updatedContents = updatedContents.filter(
           (content) => content.ageLastSeen >= 61 && content.ageLastSeen <= 200
         );
-        counting = updatedContents.length;
+        setActivePagination(false);
       }
     }
 
-    updatedContents = updatedContents.slice(
-      contentPerPage * page - 12,
-      contentPerPage * page
-    );
-
-    setList(updatedContents);
-    setPageCount(counting);
-  };
-
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
+    if (activePagination) {
+      setList(
+        updatedContents.slice(
+          (page - 1) * contentPerPage,
+          page * contentPerPage
+        )
+      );
+    } else {
+      setList(updatedContents);
+    }
+    setPageCount(updatedContents.length);
   };
 
   useEffect(
     () => applyFilter(),
     [
+      contents,
       filterName,
       filterGender,
       filterProvince,
       filterAge,
-      contents,
-      pageCount,
       page,
+      activePagination,
     ]
   );
 
-  setTimeout(() => {
-    setIsShown(true);
-  }, 2000);
+  const handleChangePage = (_: any, value: number) => {
+    setPage(value);
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsShown(true);
+    }, 2000);
+  });
 
   return (
     <div className="min-h-[90vh]">
@@ -228,20 +239,22 @@ const MPall = () => {
                   })}
               </div>
 
-              <div className={list.length <= 4 ? "mb-[190px]" : ""}>
-                <Box
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                  display={"flex"}
-                  sx={{ margin: "20px 0px" }}
-                >
-                  <Pagination
-                    count={Math.ceil(pageCount / 12)}
-                    page={page}
-                    onChange={handleChange}
-                  />
-                </Box>
-              </div>
+              {activePagination && (
+                <div className={list.length <= 4 ? "mb-[190px]" : ""}>
+                  <Box
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    display={"flex"}
+                    sx={{ margin: "20px 0px" }}
+                  >
+                    <Pagination
+                      count={Math.ceil(pageCount / contentPerPage)}
+                      page={page}
+                      onChange={handleChangePage}
+                    />
+                  </Box>
+                </div>
+              )}
             </>
           )}
         </>

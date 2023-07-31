@@ -1,19 +1,8 @@
-FROM node:latest
-
-WORKDIR /app
-
-COPY package.json package-lock.json ./
-
-RUN npm i
-
-COPY . .
-
-RUN npm run build
-
 FROM nginx:latest
 
-COPY dist khonhai:/var/www/app
+COPY ./dist /usr/share/nginx/html
 
-COPY nginx.conf /etc/nginx/nginx.conf
+RUN mkdir /etc/nginx/includes
 
-# CMD [ "nginx", "-g", "daemon off" ]
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx/includes/servers.conf /etc/nginx/includes/servers.conf
