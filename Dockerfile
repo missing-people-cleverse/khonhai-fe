@@ -8,8 +8,8 @@ RUN npm i
 
 COPY . .
 
-RUN npm build
+RUN npm run build
 
 CMD [ "npm", "run", "dev" ]
 
-EXPOSE 8000
+# EXPOSE 8000
