@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:latest
 
 WORKDIR /app
 
@@ -10,6 +10,10 @@ COPY . .
 
 RUN npm run build
 
-CMD [ "npm", "run", "dev" ]
+FROM nginx:latest
 
-# EXPOSE 8000
+COPY dist khonhai:/var/www/app
+
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# CMD [ "nginx", "-g", "daemon off" ]

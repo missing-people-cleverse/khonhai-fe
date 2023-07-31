@@ -81,8 +81,6 @@ const CreateContent = () => {
       formData.append("missingDatetime", `${lastseenDate}`);
       formData.append("missingDetail", inputMissingDetail);
 
-      console.log(selectedFiles);
-
       const res = await fetch(`${host}/content/create`, {
         method: "POST",
         body: formData,
@@ -94,7 +92,7 @@ const CreateContent = () => {
       const data = await res.json();
       toast.success("แจ้งคนหายสำเร็จ");
       navigate("/content");
-      console.log(data);
+      // console.log(data);
       return data;
     } catch (err: any) {
       console.log(err);

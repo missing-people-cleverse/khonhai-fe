@@ -92,9 +92,21 @@ const MPall = () => {
     setPageCount(counting);
   };
 
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+
   useEffect(
     () => applyFilter(),
-    [filterName, filterGender, filterProvince, filterAge, contents]
+    [
+      filterName,
+      filterGender,
+      filterProvince,
+      filterAge,
+      contents,
+      pageCount,
+      page,
+    ]
   );
 
   setTimeout(() => {
@@ -146,7 +158,6 @@ const MPall = () => {
                 <MenuItem key={""} value={""}>
                   {"-"}
                 </MenuItem>
-                <MenuItem></MenuItem>
                 {genderList.map((gender) => (
                   <MenuItem key={gender} value={gender}>
                     {gender}
@@ -226,7 +237,8 @@ const MPall = () => {
                 >
                   <Pagination
                     count={Math.ceil(pageCount / 12)}
-                    onChange={(_, value) => setPage(value)}
+                    page={page}
+                    onChange={handleChange}
                   />
                 </Box>
               </div>
