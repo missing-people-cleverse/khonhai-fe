@@ -77,12 +77,12 @@ const EditContent = () => {
     setLastseenDate(value);
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // TODO: edit image in body to be actual img url
     try {
-      await editContent({
+      editContent({
         isArchive: false,
         name: updateName,
         surname: updateSurname,
@@ -374,7 +374,9 @@ const EditContent = () => {
             </div>
             <div className="flex flex-row gap-6 justify-around pt-5">
               <div className="btn-pink w-[10rem]">
-                <button type="submit">แก้ไข</button>
+                <button type="submit" name="submit">
+                  แก้ไข
+                </button>
               </div>
               <NavLink to="/" className="btn-disabled w-[10rem]">
                 ยกเลิก

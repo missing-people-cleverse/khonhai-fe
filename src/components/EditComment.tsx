@@ -64,7 +64,7 @@ const EditComment = ({ openComment, onClose, comment }: any) => {
     <>
       {openComment && (
         <div
-          className="z-[800] w-screen h-screen flex justify-center fixed mt-[-700px] max-lg:w-9/12 max-lg:ml-[100px] max-md:mt-[-68rem] max-md:ml-[75px]"
+          className="modal-container"
           onClick={(e) => {
             e.stopPropagation();
             onClose;
