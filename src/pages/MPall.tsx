@@ -76,8 +76,10 @@ const MPall = () => {
         );
         setActivePagination(false);
       } else {
-        updatedContents = updatedContents.filter((content) =>
-          content.status.includes("ยังไม่พบ")
+        updatedContents = updatedContents.filter(
+          (content) =>
+            content.status.includes("ยังไม่พบ") ||
+            content.status.includes("ยังตามหาอยู่")
         );
         setActivePagination(false);
       }

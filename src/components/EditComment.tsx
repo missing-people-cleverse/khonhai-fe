@@ -64,7 +64,7 @@ const EditComment = ({ openComment, onClose, comment }: any) => {
     <>
       {openComment && (
         <div
-          className="z-[800] w-screen h-screen flex justify-center fixed mt-[-590px] max-lg:w-9/12 max-lg:ml-[100px] max-md:mt-[-68rem] max-md:ml-[75px]"
+          className="z-[800] w-screen h-screen flex justify-center fixed mt-[-700px] max-lg:w-9/12 max-lg:ml-[100px] max-md:mt-[-68rem] max-md:ml-[75px]"
           onClick={(e) => {
             e.stopPropagation();
             onClose;
@@ -129,7 +129,7 @@ const EditComment = ({ openComment, onClose, comment }: any) => {
                   />
                 </div>
               </div>
-              <div className="flex flex-row justify-center gap-[50px]">
+              <div className="flex flex-row justify-center gap-[50px] mt-[30px]">
                 <button className="btn-pink w-[80px]" type="submit">
                   แก้ไข
                 </button>

@@ -11,6 +11,10 @@ export default {
       lg: "1024px",
 
       xl: "1150px",
+
+      xxl: "1300px",
+
+      xxxl: "1600px",
     },
     extend: {
       colors: {

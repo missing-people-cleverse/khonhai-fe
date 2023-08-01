@@ -47,7 +47,7 @@ const Comment = (props: IComment) => {
 
   return (
     <>
-      <div className="w-[53%] bg-white mx-[auto] max-md:w-[90%]">
+      <div className="w-[800px] bg-white mx-[auto] max-md:w-[90%]">
         <div>
           <div className="flex flex-row justify-between">
             <p className="subtopic-mpdetail pl-[18px] pt-[18px]">

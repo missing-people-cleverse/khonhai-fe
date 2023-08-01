@@ -23,15 +23,14 @@ const MPindividual = () => {
         <>
           {isShown ? (
             <>
-              <div className="flex flex-col ">
-                <p className="name-mpdetail pl-[24%] max-md:pl-[5%]">
-                  เบาะแส{" "}
-                  <span className="detail-mpdetail">{`(${
-                    comments!.length
-                  } เบาะแส)`}</span>
-                </p>
-
+              <div className="w-[80%] mx-auto">
                 <div className="flex flex-col gap-[10px] mb-[12px]">
+                  <p className="name-mpdetail ml-[100px] max-md:pl-[5%] xxl:ml-[15%] xxxl:ml-[23%]">
+                    เบาะแส{" "}
+                    <span className="detail-mpdetail">{`(${
+                      comments!.length
+                    } เบาะแส)`}</span>
+                  </p>
                   {comments &&
                     comments.map((comment) => {
                       return <Comment key={comment.id} {...comment} />;
