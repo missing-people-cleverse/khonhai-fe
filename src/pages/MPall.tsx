@@ -11,7 +11,12 @@ import {
   Box,
 } from "@mui/material";
 import { StyleInput } from "./Register";
-import { ageList, genderList, provinceList } from "../data/SelectableData";
+import {
+  ageList,
+  genderList,
+  provinceList,
+  statusList,
+} from "../data/SelectableData";
 import { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 
@@ -21,6 +26,7 @@ const MPall = () => {
   const [filterProvince, setFilterProvince] = useState("");
   const [filterGender, setFilterGender] = useState("");
   const [filterAge, setFilterAge] = useState("");
+  const [filterStatus, setFilterStatus] = useState("");
   const [list, setList] = useState(contents);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
@@ -34,7 +40,13 @@ const MPall = () => {
   const applyFilter = () => {
     let updatedContents = contents;
 
-    if (!filterAge && !filterGender && !filterName && !filterProvince) {
+    if (
+      !filterAge &&
+      !filterGender &&
+      !filterName &&
+      !filterProvince &&
+      !filterStatus
+    ) {
       setActivePagination(true);
       updatedContents = updatedContents;
     }
@@ -53,6 +65,22 @@ const MPall = () => {
         content.gender.includes(filterGender)
       );
       setActivePagination(false);
+    }
+
+    if (filterStatus) {
+      if (!filterStatus) {
+        updatedContents = updatedContents;
+      } else if (filterStatus === "พบแล้ว") {
+        updatedContents = updatedContents.filter((content) =>
+          content.status.includes(filterStatus)
+        );
+        setActivePagination(false);
+      } else {
+        updatedContents = updatedContents.filter((content) =>
+          content.status.includes("ยังไม่พบ")
+        );
+        setActivePagination(false);
+      }
     }
 
     if (filterProvince) {
@@ -109,6 +137,7 @@ const MPall = () => {
       filterGender,
       filterProvince,
       filterAge,
+      filterStatus,
       page,
       activePagination,
     ]
@@ -164,7 +193,6 @@ const MPall = () => {
                   }
                 }}
                 input={<StyleInput />}
-                label="hi"
               >
                 <MenuItem key={""} value={""}>
                   {"-"}
@@ -189,7 +217,6 @@ const MPall = () => {
                 onSubmit={(e) => e.preventDefault()}
                 onChange={(e) => setFilterProvince(e.target.value)}
                 input={<StyleInput />}
-                label="hi"
               >
                 <MenuItem key={""} value={""}>
                   {"-"}
@@ -214,12 +241,35 @@ const MPall = () => {
                 onSubmit={(e) => e.preventDefault()}
                 onChange={(e) => setFilterAge(e.target.value)}
                 input={<StyleInput />}
-                label="hi"
               >
                 <MenuItem key={""} value={""}>
                   {"-"}
                 </MenuItem>
                 {ageList.map((list) => (
+                  <MenuItem key={list} value={list}>
+                    {list}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            <FormControl sx={{ m: 0, width: 140 }}>
+              <InputLabel sx={{ marginLeft: 0.2, marginY: -0.7 }}>
+                สถานะ
+              </InputLabel>
+
+              <Select
+                value={filterStatus}
+                id="status"
+                name="status"
+                onSubmit={(e) => e.preventDefault()}
+                onChange={(e) => setFilterStatus(e.target.value)}
+                input={<StyleInput />}
+              >
+                <MenuItem key={""} value={""}>
+                  {"-"}
+                </MenuItem>
+                {statusList.map((list) => (
                   <MenuItem key={list} value={list}>
                     {list}
                   </MenuItem>

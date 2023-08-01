@@ -91,7 +91,7 @@ export const skinList: string[] = [
   "ผิวสีดำ",
 ];
 
-export const statusList: string[] = ["พบแล้ว", "ยังไม่พบ"];
+export const statusList: string[] = ["ยังตามหาอยู่", "พบแล้ว"];
 
 export const ageList: string[] = [
   "เด็ก (น้อยกว่า 10 ปี)",

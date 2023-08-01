@@ -44,6 +44,13 @@ const Content = ({ content }: IContentProps) => {
             alt="mp"
             className="thumbnail-content"
           />
+
+          {content.status !== "พบแล้ว" ? (
+            <div className="unfounded-mpall">ยังตามหาอยู่</div>
+          ) : (
+            <div className="founded-mpall">พบแล้ว</div>
+          )}
+
           <div className="name-content">{`${content.name} ${content.surname}`}</div>
         </div>
         <div className="flex flex-col justify-evenly">

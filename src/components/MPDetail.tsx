@@ -60,10 +60,9 @@ const MPDetail = () => {
   };
 
   const scrollToBot = () => {
-    window.scrollTo({
-      top: 2000,
-      behavior: "smooth",
-    });
+    setTimeout(function () {
+      window.scrollTo({ top: 5000, behavior: "smooth" });
+    }, 2);
   };
 
   return (

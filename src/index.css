@@ -458,4 +458,29 @@ body {
     background: rgba(79, 79, 79, 0.61);
     border-radius: 50%;
   }
+
+  .unfounded-mpall {
+    text-align: center;
+    font-size: 10px;
+    font-style: normal;
+    border-radius: 13px;
+    background: #e0e0e0;
+    width: 60px;
+    height: 14px;
+    position: absolute;
+    margin-top: -195px;
+    margin-left: 185px;
+  }
+  .founded-mpall {
+    text-align: center;
+    font-size: 10px;
+    font-style: normal;
+    border-radius: 13px;
+    width: 60px;
+    height: 14px;
+    background: #21e54c;
+    position: absolute;
+    margin-top: -195px;
+    margin-left: 185px;
+  }
 }
