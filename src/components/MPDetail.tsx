@@ -59,6 +59,13 @@ const MPDetail = () => {
     setSlide(slide === 0 ? content!.img!.length - 1 : slide - 1);
   };
 
+  const scrollToBot = () => {
+    window.scrollTo({
+      top: 2000,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <>
       <PageHeader name="ข้อมูลคนหาย" />
@@ -138,7 +145,20 @@ const MPDetail = () => {
                           onClick={() => setIsHidden(!isHidden)}
                         />
                         {!isHidden && (
-                          <div className="w-[113px] h-[63px] bg-neutral-100 rounded-[-3px] mt-[0px] ml-[-68px] z-[100] absolute flex flex-col justify-evenly">
+                          <div className="w-[130px] h-[85px] bg-neutral-100 rounded-[-3px] mt-[0px] ml-[-80px] z-[100] absolute flex flex-col justify-evenly">
+                            <button
+                              className="flex ml-[2px]"
+                              onClick={() => {
+                                navigate(`/content/${id}/edit`);
+                                scrollToBot();
+                              }}
+                            >
+                              <img src="/updatestatus.svg" />
+                              <p className="ml-[5px] ">อัพเดทสถานะ</p>
+                            </button>
+
+                            <hr />
+
                             <button
                               className="flex ml-[2px]"
                               onClick={() => {
@@ -146,15 +166,17 @@ const MPDetail = () => {
                               }}
                             >
                               <img src="/pencil.svg" />
-                              <p className="ml-[5px]">แก้ไขข้อมูล</p>
+                              <p className="ml-[5px] ">แก้ไขข้อมูล</p>
                             </button>
+
                             <hr />
+
                             <button
                               className="flex ml-[2px]"
                               onClick={handleDeleteContent}
                             >
                               <img src="/trash.svg" />
-                              <p className="ml-[5px]">ลบข้อมูล</p>
+                              <p className="ml-[5px] ">ลบข้อมูล</p>
                             </button>
                           </div>
                         )}
