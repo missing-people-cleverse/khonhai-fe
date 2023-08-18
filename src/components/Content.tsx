@@ -67,7 +67,7 @@ const Content = ({ content }: IContentProps) => {
             </p>
 
             <p className="contenttopic-content">
-              วันที่หาย{" "}
+              วันที่หาย
               <span className="contentdetail-content">
                 {formatDate(content.missingDatetime)}
               </span>
