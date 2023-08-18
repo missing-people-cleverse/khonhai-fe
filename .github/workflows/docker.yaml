@@ -5,14 +5,10 @@ on:
   push:
     tags: "**"
     branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  #   test:
-  #     name: Running test workflow on ubuntu-latest
-  #     uses: ./.github/workflows/test-template.yaml
-  #     with:
-  #       runs-on: ubuntu-latest
-
   docker:
     runs-on: ubuntu-latest
     steps:
@@ -33,5 +29,5 @@ jobs:
           push: true
           file: ./Dockerfile
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/khonhai-fe:${{ github.ref_name }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/khonhai-fe:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/khonhai-frontend:${{ github.ref_name }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/khonhai-frontend:latest
