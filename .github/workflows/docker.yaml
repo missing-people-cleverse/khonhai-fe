@@ -29,13 +29,9 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
-        env:
-          VITE_BE_URL: https://api.khonhai.cleverse.academy
         with:
           push: true
           file: ./Dockerfile
-          build-args: |
-            BE_URL="https://api.khonhai.cleverse.academy"
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/missing-people-cleverse/khonhai-fe:${{ github.ref_name }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/missing-people-cleverse/khonhai-fe:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/khonhai-fe:${{ github.ref_name }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/khonhai-fe:latest
