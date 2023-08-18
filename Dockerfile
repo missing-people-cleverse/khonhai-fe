@@ -14,6 +14,7 @@ RUN npm run build
 FROM nginx:latest
 
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx/includes/servers.conf /etc/nginx/includes/servers.conf
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 
 
@@ -24,4 +25,4 @@ COPY --from=build-stage /app/dist /usr/share/nginx/html
 # RUN mkdir /etc/nginx/includes
 
 # COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
-# COPY ./nginx/includes/servers.conf /etc/nginx/includes/servers.conf
+
